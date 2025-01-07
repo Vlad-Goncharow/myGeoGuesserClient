@@ -1,0 +1,115 @@
+@use './reset.scss';
+@use './buttons.scss';
+@use './modals.scss';
+@use './auth.scss';
+
+
+@font-face {
+  font-family: 'TypeMates';
+  font-display: swap;
+  src:
+    url('./fonts/TypeMatesCeraRoundProBold.woff') format('woff'),
+    url('./fonts/TypeMatesCeraRoundProBold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TypeMates';
+  font-display: swap;
+  src:
+    url('./fonts/TypeMatesCeraRoundProMedium.woff') format('woff'),
+    url('./fonts/TypeMatesCeraRoundProMedium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TypeMates';
+  font-display: swap;
+  src:
+    url('./fonts/TypeMatesCeraRoundProRegular.woff') format('woff'),
+    url('./fonts/TypeMatesCeraRoundProRegular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  outline: none;
+  text-decoration: none;
+  font-family: TypeMates, sans-serif !important;
+  text-decoration: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: var(--font);
+  color: var(--text-color);
+  overflow-x: hidden;
+  background: var(--bg-color);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#app{
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+}
+
+:root {
+  --roundness: 0.5rem;
+  --bg-color: #cdabd5;
+  --main-color: #02315E;
+  --sub-color: #646669;
+  --sub-alt-color: #2c2e31;
+  --text-color: #d1d0c5;
+  --error-color: #ca4754;
+  --error-extra-color: #7e2a33;
+  --colorful-error-color: #ca4754;
+  --colorful-error-extra-color: #7e2a33;
+}
+
+
+.hover-label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: white;
+  font-size: 16px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.selected-label {
+  position: absolute;
+  top: 40px;
+  left: 10px;
+  color: yellow;
+  font-size: 18px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+
+#background-video{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -11;
+  object-fit: cover;
+}

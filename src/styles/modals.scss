@@ -1,0 +1,28 @@
+.dialogWrapper {
+  min-width: 400px;
+  background: #fff;
+  overflow: hidden;
+
+  &__header {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__icon{
+    font-size: 18px;
+    color:var(--main-color);
+    font-weight: 600;
+
+    span{
+      margin-left: 10px;
+    }
+  }
+
+  &__close {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+}

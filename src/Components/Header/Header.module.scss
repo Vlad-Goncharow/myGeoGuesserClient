@@ -1,0 +1,33 @@
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  position: relative;
+}
+
+.logo{
+  color: #fff;
+  font-weight: 900;
+  font-size: 24px;
+
+  span{
+    margin-left: 10px;
+  }
+}
+
+.controlls{
+  display: flex;
+  align-items: center;
+
+  button {
+    margin-right: 20px;
+    font-size: 16px;
+    color: #fff;
+    background: var(--main-color);
+    
+    &:last-child{
+      margin: 0;
+    }
+  }
+}

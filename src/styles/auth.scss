@@ -1,0 +1,39 @@
+.auth-form{
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+
+  &__error{
+    color:red;
+  }
+
+  &__item{
+    display: grid;
+    gap:10px;
+
+    label {
+      color: var(--main-color);
+      font-weight: 700;
+      font-size: 20px;
+    }
+  }
+
+  &__input {
+    padding: 10px 20px;
+    font-weight: 500;
+    font-size: 14px;
+
+    &::placeholder {
+      font-weight: 500;
+    }
+  }
+
+  &__submit{
+    font-size: 18px;
+
+    &_disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
