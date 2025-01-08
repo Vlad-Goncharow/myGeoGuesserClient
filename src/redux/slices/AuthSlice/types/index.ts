@@ -3,6 +3,7 @@ export interface IUser {
   nickname:string
   avatar:string
   playedGames:number
+  id:number
 }
 
 export interface InitStateType {
