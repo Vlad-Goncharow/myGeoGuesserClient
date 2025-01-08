@@ -1,10 +1,9 @@
-
 import { createSlice } from '@reduxjs/toolkit'
 import { InitModalState } from '../types'
 
-const initialState:InitModalState = {
-  loginModaL:false,
-  registerModal:false
+const initialState: InitModalState = {
+  loginModaL: false,
+  registerModal: false,
 }
 
 const modalsSlice = createSlice({
@@ -13,13 +12,12 @@ const modalsSlice = createSlice({
   reducers: {
     toggleRegisterModal(state) {
       state.registerModal = !state.registerModal
-    }, 
-    toggleLoginModal(state){
+    },
+    toggleLoginModal(state) {
       state.loginModaL = !state.loginModaL
-    }
+    },
   },
 })
-
 
 export const { actions: modalsActions } = modalsSlice
 export const { reducer: modalsReducer } = modalsSlice

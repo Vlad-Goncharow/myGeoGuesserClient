@@ -8,13 +8,13 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import useRegister from '../../utils/hooks/useRegister'
 import { RegisterInputs } from '../../utils/types'
 
-interface RegisterProps{
-  closeModal:() => void
+interface RegisterProps {
+  closeModal: () => void
 }
 
-const Register:React.FC<RegisterProps> = ({closeModal}) => {
-  const {registerModal} = useAppSelector(getModals)
-  
+const Register: React.FC<RegisterProps> = ({ closeModal }) => {
+  const { registerModal } = useAppSelector(getModals)
+
   const {
     register,
     handleSubmit,
@@ -23,13 +23,13 @@ const Register:React.FC<RegisterProps> = ({closeModal}) => {
     formState: { errors },
   } = useForm<RegisterInputs>()
 
-  const {data, error, isSuccess, registerSubmit} = useRegister()
-  
+  const { data, error, isSuccess, registerSubmit } = useRegister()
+
   const myHandleSubmit: SubmitHandler<RegisterInputs> = (data) => {
     registerSubmit({
-      email:data.email,
-      nickname:data.nickname,
-      password:data.password,
+      email: data.email,
+      nickname: data.nickname,
+      password: data.password,
     })
   }
 
@@ -40,7 +40,7 @@ const Register:React.FC<RegisterProps> = ({closeModal}) => {
     }
 
     if (!isSuccess && error) {
-      setError(error.param, { message: error.message})
+      setError(error.param, { message: error.message })
 
       return
     }
@@ -54,13 +54,13 @@ const Register:React.FC<RegisterProps> = ({closeModal}) => {
 
   //animation start
   React.useEffect(() => {
-    if(registerModal){
+    if (registerModal) {
       regApi.start({
         from: { x: '100%' },
         to: { x: '0%' },
       })
-    } 
-  },[registerModal])
+    }
+  }, [registerModal])
 
   return (
     <OverlayWrapper closeModal={closeModal}>
@@ -71,11 +71,13 @@ const Register:React.FC<RegisterProps> = ({closeModal}) => {
       >
         <form onSubmit={handleSubmit(myHandleSubmit)} className='auth-form'>
           <div className='auth-form__item'>
-            {errors?.email && <span className='auth-form__error'>{errors?.email.message}</span>}
+            {errors?.email && (
+              <span className='auth-form__error'>{errors?.email.message}</span>
+            )}
 
-            <label htmlFor="email">Email</label>
+            <label htmlFor='email'>Email</label>
             <input
-              id='email' 
+              id='email'
               className='auth-form__input'
               placeholder='Your email'
               {...register('email', {
@@ -89,13 +91,17 @@ const Register:React.FC<RegisterProps> = ({closeModal}) => {
             />
           </div>
           <div className='auth-form__item'>
-            {errors?.nickname && <span className='auth-form__error'>{errors?.nickname.message}</span>}
+            {errors?.nickname && (
+              <span className='auth-form__error'>
+                {errors?.nickname.message}
+              </span>
+            )}
 
-            <label htmlFor="nickname">Nickname</label>
+            <label htmlFor='nickname'>Nickname</label>
             <input
-              id='nickname' 
+              id='nickname'
               className='auth-form__input'
-              placeholder='Your nickname' 
+              placeholder='Your nickname'
               {...register('nickname', {
                 required: 'Required field',
                 minLength: {
@@ -110,11 +116,15 @@ const Register:React.FC<RegisterProps> = ({closeModal}) => {
             />
           </div>
           <div className='auth-form__item'>
-            {errors?.password && <span className='auth-form__error'>{errors?.password.message}</span>}
+            {errors?.password && (
+              <span className='auth-form__error'>
+                {errors?.password.message}
+              </span>
+            )}
 
-            <label htmlFor="password">Password</label>
+            <label htmlFor='password'>Password</label>
             <input
-              id='password' 
+              id='password'
               className='auth-form__input'
               placeholder='Your Password'
               {...register('password', {
@@ -131,11 +141,15 @@ const Register:React.FC<RegisterProps> = ({closeModal}) => {
             />
           </div>
           <div className='auth-form__item'>
-            {errors?.passwordEqual && <span className='auth-form__error'>{errors?.passwordEqual.message}</span>}
+            {errors?.passwordEqual && (
+              <span className='auth-form__error'>
+                {errors?.passwordEqual.message}
+              </span>
+            )}
 
-            <label htmlFor="passwordEqual">Repeat password</label>
+            <label htmlFor='passwordEqual'>Repeat password</label>
             <input
-              id='passwordEqual' 
+              id='passwordEqual'
               className='auth-form__input'
               placeholder='Repeat your password'
               {...register('passwordEqual', {
@@ -158,7 +172,7 @@ const Register:React.FC<RegisterProps> = ({closeModal}) => {
           </div>
           <button
             onClick={handleSubmit(myHandleSubmit)}
-            className={classNames('auth-form__submit','btn', {
+            className={classNames('auth-form__submit', 'btn', {
               'auth-form__submit_disabled': Object.keys(errors).length !== 0,
             })}
           >

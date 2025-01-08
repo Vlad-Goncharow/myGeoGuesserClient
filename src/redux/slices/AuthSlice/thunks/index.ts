@@ -1,6 +1,12 @@
-import axios from "@/axios"
-import { createAsyncThunk } from "@reduxjs/toolkit"
-import { AuthLoginError, AuthRegisterError, AuthResponse, FormLogin, FormRegister } from "../types"
+import axios from '@/axios'
+import { createAsyncThunk } from '@reduxjs/toolkit'
+import {
+  AuthLoginError,
+  AuthRegisterError,
+  AuthResponse,
+  FormLogin,
+  FormRegister,
+} from '../types'
 
 export const fetchAuth = createAsyncThunk('auth/fetchAuth', async () => {
   const { data } = await axios.post('/auth/refresh')

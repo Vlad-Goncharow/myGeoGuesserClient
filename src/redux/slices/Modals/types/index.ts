@@ -1,4 +1,4 @@
 export interface InitModalState {
-  registerModal:boolean
-  loginModaL:Boolean
+  registerModal: boolean
+  loginModaL: Boolean
 }

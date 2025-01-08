@@ -12,7 +12,7 @@ import Register from './modals/Register/Register'
 function AuthModals() {
   const dispatch = useAppDispatch()
 
-  const {registerModal, loginModaL} = useAppSelector(getModals)
+  const { registerModal, loginModaL } = useAppSelector(getModals)
 
   //animation init
   const [springs, api] = useSpring(() => ({
@@ -20,19 +20,19 @@ function AuthModals() {
     to: { scale: '0%' },
     config: {
       duration: 150,
-      easing: easings.easeInOutQuad, 
+      easing: easings.easeInOutQuad,
     },
   }))
 
   //start animation
   React.useEffect(() => {
-    if(registerModal || loginModaL){
+    if (registerModal || loginModaL) {
       api.start({
         from: { scale: '0%' },
         to: { scale: '100%' },
       })
-    } 
-  },[registerModal, loginModaL])
+    }
+  }, [registerModal, loginModaL])
 
   //close modal
   const closeModal = () => {
@@ -40,41 +40,35 @@ function AuthModals() {
       from: { scale: '100%' },
       to: { scale: '0%' },
     })
-    
-    if(registerModal) {
+
+    if (registerModal) {
       setTimeout(() => {
         dispatch(modalsActions.toggleRegisterModal())
-      },300)
+      }, 300)
     }
 
-    if(loginModaL) {
+    if (loginModaL) {
       setTimeout(() => {
         dispatch(modalsActions.toggleLoginModal())
-      },300)
+      }, 300)
     }
   }
 
   return (
-    <div 
+    <div
       className={classNames(s.dialog, {
-        [s.active]:registerModal || loginModaL
+        [s.active]: registerModal || loginModaL,
       })}
       onClick={closeModal}
     >
       <animated.div
-        onClick={(e) => e.stopPropagation()} 
+        onClick={(e) => e.stopPropagation()}
         style={{
           ...springs,
         }}
       >
-        {
-          registerModal &&
-          <Register closeModal={closeModal} />
-        }
-        {
-          loginModaL &&
-          <Login closeModal={closeModal} />
-        }
+        {registerModal && <Register closeModal={closeModal} />}
+        {loginModaL && <Login closeModal={closeModal} />}
       </animated.div>
     </div>
   )

@@ -1,15 +1,15 @@
-.user{
+.user {
   position: relative;
   cursor: pointer;
 
-  &__icon{
+  &__icon {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     overflow: hidden;
     position: relative;
 
-    img{
+    img {
       position: absolute;
       top: 0;
       left: 0;
@@ -22,48 +22,47 @@
   }
 }
 
-.popup{
+.popup {
   position: absolute;
   right: 0;
   top: 100%;
   background: #393939;
-  border-radius:10px;
+  border-radius: 10px;
   min-width: 300px;
   overflow: hidden;
 
-  &__header{
+  &__header {
     padding: 15px;
     display: flex;
     align-items: center;
   }
 
-  &__nickname{
+  &__nickname {
     margin-left: 15px;
   }
 
-  &__userid{
+  &__userid {
     padding: 15px;
     display: flex;
     align-items: center;
 
-    svg{
+    svg {
       margin-right: 10px;
     }
 
-    span{
+    span {
       cursor: pointer;
       margin-left: 10px;
       background: #000;
-      color:#fff;
+      color: #fff;
       padding: 10px;
       width: 100%;
       display: block;
-      border-radius:5px;
+      border-radius: 5px;
     }
   }
 
-  &__ctrontrols{
-
+  &__ctrontrols {
   }
 
   &__item {
@@ -72,19 +71,19 @@
     align-items: center;
     cursor: pointer;
 
-    &:hover{
+    &:hover {
       background: #2d2d2d;
       transition: all 0.3s ease-in-out;
     }
   }
 }
 
-.icon{
+.icon {
   width: 20px;
   height: 20px;
   margin-right: 20px;
 }
 
-.name{
+.name {
   font-size: 16px;
 }

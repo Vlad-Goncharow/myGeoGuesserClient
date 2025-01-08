@@ -1,16 +1,16 @@
 export interface IUser {
   email: string
-  nickname:string
-  avatar:string
-  playedGames:number
-  id:number
+  nickname: string
+  avatar: string
+  playedGames: number
+  id: number
 }
 
 export interface InitStateType {
   user: IUser | null
 }
 
-//auth 
+//auth
 export interface FormRegister {
   email: string
   password: string
@@ -22,10 +22,7 @@ export interface FormLogin {
   password: string
 }
 
-export type FormRegisterFields =
-  | 'email'
-  | 'password'
-  | 'nickname'
+export type FormRegisterFields = 'email' | 'password' | 'nickname'
 export type FormLoginFields = 'email' | 'password'
 
 export interface AuthRegisterError {

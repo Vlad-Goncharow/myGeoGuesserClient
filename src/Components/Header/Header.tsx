@@ -1,22 +1,20 @@
 import React from 'react'
 import s from './Header.module.scss'
 import { Link } from 'react-router-dom'
-import { useAppDispatch } from '@/hooks/useAppDispatch';
-import { modalsActions } from '@/redux/slices/Modals/slice/modalsSlice';
-import { useAppSelector } from '@/hooks/useAppSelector';
-import { getModals } from '@/redux/slices/Modals/selectors/modalsSelectors';
-import Register from '../Modals/AuthModals/modals/Register/Register';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEarthEurope } from '@fortawesome/free-solid-svg-icons';
-import { getAuth } from '@/redux/slices/AuthSlice/selectors/authSelectors';
-import HeaderUser from './components/HeaderUser/HeaderUser';
-
-
+import { useAppDispatch } from '@/hooks/useAppDispatch'
+import { modalsActions } from '@/redux/slices/Modals/slice/modalsSlice'
+import { useAppSelector } from '@/hooks/useAppSelector'
+import { getModals } from '@/redux/slices/Modals/selectors/modalsSelectors'
+import Register from '../Modals/AuthModals/modals/Register/Register'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEarthEurope } from '@fortawesome/free-solid-svg-icons'
+import { getAuth } from '@/redux/slices/AuthSlice/selectors/authSelectors'
+import HeaderUser from './components/HeaderUser/HeaderUser'
 
 function Header() {
   const dispatch = useAppDispatch()
-  const {user} = useAppSelector(getAuth)
-  
+  const { user } = useAppSelector(getAuth)
+
   const toggleLoginModal = () => {
     dispatch(modalsActions.toggleLoginModal())
   }
@@ -32,22 +30,19 @@ function Header() {
         <span>GeoGuessr</span>
       </Link>
       <div className={s.controlls}>
-        {
-          user !== null ?
-            <HeaderUser />
-          :
+        {user !== null ? (
+          <HeaderUser />
+        ) : (
           <>
-            <button className="btn" onClick={toggleLoginModal}>
+            <button className='btn' onClick={toggleLoginModal}>
               Login
             </button>
-            <button className="btn" onClick={toggleRegisterModal}>
+            <button className='btn' onClick={toggleRegisterModal}>
               Sing In
             </button>
           </>
-        }
-        
+        )}
       </div>
-
     </header>
   )
 }

@@ -1,6 +1,10 @@
 import { useAppDispatch } from '@/hooks/useAppDispatch'
 import { fetchLogin } from '@/redux/slices/AuthSlice/thunks'
-import { AuthLoginError, AuthResponse, FormLogin } from '@/redux/slices/AuthSlice/types'
+import {
+  AuthLoginError,
+  AuthResponse,
+  FormLogin,
+} from '@/redux/slices/AuthSlice/types'
 import { unwrapResult } from '@reduxjs/toolkit'
 import React from 'react'
 

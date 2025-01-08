@@ -27,14 +27,14 @@ function App() {
       <Header />
 
       <main id='main'>
-        <video id="background-video" autoPlay muted loop>
-          <source src={ErthSpin} type="video/mp4" />
+        <video id='background-video' autoPlay muted loop>
+          <source src={ErthSpin} type='video/mp4' />
         </video>
         <Outlet />
       </main>
 
       <AuthModals />
-      
+
       <Footer />
     </div>
   )

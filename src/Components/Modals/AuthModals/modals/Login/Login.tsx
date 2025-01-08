@@ -8,14 +8,13 @@ import { useForm } from 'react-hook-form'
 import UseLogin from '../../utils/hooks/UseLogin'
 import { LoginInputs } from '../../utils/types'
 
-
-interface LoginProps{
-  closeModal:() => void
+interface LoginProps {
+  closeModal: () => void
 }
 
-const Login:React.FC<LoginProps> = ({closeModal}) => {
-  const {loginModaL} = useAppSelector(getModals)
-  
+const Login: React.FC<LoginProps> = ({ closeModal }) => {
+  const { loginModaL } = useAppSelector(getModals)
+
   const {
     register,
     handleSubmit,
@@ -32,7 +31,7 @@ const Login:React.FC<LoginProps> = ({closeModal}) => {
     }
 
     if (!isSuccess && error) {
-      setError(error.param, { message: error.message})
+      setError(error.param, { message: error.message })
 
       return
     }
@@ -46,13 +45,13 @@ const Login:React.FC<LoginProps> = ({closeModal}) => {
 
   //srart animation
   React.useEffect(() => {
-    if(loginModaL){
+    if (loginModaL) {
       loginApi.start({
         from: { x: '-100%' },
         to: { x: '0%' },
       })
-    } 
-  },[loginModaL])
+    }
+  }, [loginModaL])
 
   return (
     <OverlayWrapper closeModal={closeModal}>
@@ -63,11 +62,13 @@ const Login:React.FC<LoginProps> = ({closeModal}) => {
       >
         <form onSubmit={handleSubmit(loginSubmit)} className='auth-form'>
           <div className='auth-form__item'>
-            {errors?.email && <span className='auth-form__error'>{errors?.email.message}</span>}
+            {errors?.email && (
+              <span className='auth-form__error'>{errors?.email.message}</span>
+            )}
 
-            <label htmlFor="email">Email</label>
+            <label htmlFor='email'>Email</label>
             <input
-              id='email' 
+              id='email'
               className='auth-form__input'
               placeholder='Your email'
               {...register('email', {
@@ -81,11 +82,15 @@ const Login:React.FC<LoginProps> = ({closeModal}) => {
             />
           </div>
           <div className='auth-form__item'>
-            {errors?.password && <span className='auth-form__error'>{errors?.password.message}</span>}
+            {errors?.password && (
+              <span className='auth-form__error'>
+                {errors?.password.message}
+              </span>
+            )}
 
-            <label htmlFor="password">Password</label>
+            <label htmlFor='password'>Password</label>
             <input
-              id='password' 
+              id='password'
               className='auth-form__input'
               placeholder='Your Password'
               {...register('password', {
@@ -103,7 +108,7 @@ const Login:React.FC<LoginProps> = ({closeModal}) => {
           </div>
           <button
             onClick={handleSubmit(loginSubmit)}
-            className={classNames('auth-form__submit','btn', {
+            className={classNames('auth-form__submit', 'btn', {
               'auth-form__submit_disabled': Object.keys(errors).length !== 0,
             })}
           >

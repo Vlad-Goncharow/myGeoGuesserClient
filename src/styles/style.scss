@@ -3,7 +3,6 @@
 @use './modals.scss';
 @use './auth.scss';
 
-
 @font-face {
   font-family: 'TypeMates';
   font-display: swap;
@@ -58,7 +57,7 @@ html {
   scroll-behavior: smooth;
 }
 
-#app{
+#app {
   display: grid;
   grid-template-rows: auto 1fr auto;
   grid-template-columns: 1fr;
@@ -68,7 +67,7 @@ html {
 :root {
   --roundness: 0.5rem;
   --bg-color: #cdabd5;
-  --main-color: #02315E;
+  --main-color: #02315e;
   --sub-color: #646669;
   --sub-alt-color: #2c2e31;
   --text-color: #d1d0c5;
@@ -77,7 +76,6 @@ html {
   --colorful-error-color: #ca4754;
   --colorful-error-extra-color: #7e2a33;
 }
-
 
 .hover-label {
   position: absolute;
@@ -101,8 +99,7 @@ html {
   border-radius: 5px;
 }
 
-
-#background-video{
+#background-video {
   position: fixed;
   width: 100%;
   height: 100%;

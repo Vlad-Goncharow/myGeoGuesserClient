@@ -1,6 +1,10 @@
 import { useAppDispatch } from '@/hooks/useAppDispatch'
 import { fetchRegister } from '@/redux/slices/AuthSlice/thunks'
-import { AuthRegisterError, AuthResponse, FormRegister } from '@/redux/slices/AuthSlice/types'
+import {
+  AuthRegisterError,
+  AuthResponse,
+  FormRegister,
+} from '@/redux/slices/AuthSlice/types'
 import { unwrapResult } from '@reduxjs/toolkit'
 import React from 'react'
 

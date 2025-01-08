@@ -1,6 +1,12 @@
 import React from 'react'
 import s from './HeaderUser.module.scss'
-import { faCircleUser, faCopy, faRightFromBracket, faTrophy, faUser } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCircleUser,
+  faCopy,
+  faRightFromBracket,
+  faTrophy,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
 import { fetchLogout } from '@/redux/slices/AuthSlice/thunks'
@@ -10,7 +16,7 @@ import { UseClickOutside } from '@/hooks/useCliclOutside'
 import { animated, easings, useSpring } from '@react-spring/web'
 
 function HeaderUser() {
-  const {user} = useAppSelector(getAuth)
+  const { user } = useAppSelector(getAuth)
   const dispatch = useAppDispatch()
 
   const userRef = React.useRef<HTMLDivElement | null>(null)
@@ -19,22 +25,20 @@ function HeaderUser() {
   const logout = async () => {
     try {
       dispatch(fetchLogout())
-    } catch(e) {
-
-    }
+    } catch (e) {}
   }
 
   //animation init
   const [springs, api] = useSpring(() => ({
     config: {
       duration: 300,
-      easing: easings.easeInOutQuad, 
+      easing: easings.easeInOutQuad,
     },
   }))
 
   //animation handle
   React.useEffect(() => {
-    if(popupIsOpen){
+    if (popupIsOpen) {
       api.start({
         from: { x: '150%' },
         to: { x: '0%' },
@@ -45,9 +49,8 @@ function HeaderUser() {
         to: { x: '150%' },
       })
     }
-  },[popupIsOpen])
+  }, [popupIsOpen])
 
- 
   UseClickOutside(userRef, () => setPopupIsOpen(false))
 
   const copyUserIdHandle = () => {
@@ -56,8 +59,14 @@ function HeaderUser() {
 
   return (
     <div ref={userRef} className={s.user}>
-      <div onClick={() => setPopupIsOpen(prev => !prev)} className={s.user__icon}>
-        <img src={`${import.meta.env.VITE_SERVER_URL}/uploads/avatars/${user?.avatar}`} alt=""/>
+      <div
+        onClick={() => setPopupIsOpen((prev) => !prev)}
+        className={s.user__icon}
+      >
+        <img
+          src={`${import.meta.env.VITE_SERVER_URL}/uploads/avatars/${user?.avatar}`}
+          alt=''
+        />
       </div>
 
       {
@@ -68,16 +77,19 @@ function HeaderUser() {
           }}
         >
           <div className={s.popup__header}>
-            <div onClick={() => setPopupIsOpen(prev => !prev)} className={s.user__icon}>
-              <img src={`${import.meta.env.VITE_SERVER_URL}/uploads/avatars/${user?.avatar}`} alt=""/>
+            <div
+              onClick={() => setPopupIsOpen((prev) => !prev)}
+              className={s.user__icon}
+            >
+              <img
+                src={`${import.meta.env.VITE_SERVER_URL}/uploads/avatars/${user?.avatar}`}
+                alt=''
+              />
             </div>
-            <div className={s.popup__nickname}>
-              {user?.nickname}
-            </div>
+            <div className={s.popup__nickname}>{user?.nickname}</div>
           </div>
           <div className={s.popup__userid}>
-            userId 
-            
+            userId
             <span onClick={copyUserIdHandle}>
               <FontAwesomeIcon icon={faCopy} />
               {user?.id}
@@ -97,7 +109,7 @@ function HeaderUser() {
               <span className={s.name}>logout</span>
             </div>
           </div>
-        </animated.div>        
+        </animated.div>
       }
     </div>
   )

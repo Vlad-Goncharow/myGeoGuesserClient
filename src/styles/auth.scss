@@ -1,15 +1,15 @@
-.auth-form{
+.auth-form {
   display: grid;
   gap: 20px;
   padding: 20px;
 
-  &__error{
-    color:red;
+  &__error {
+    color: red;
   }
 
-  &__item{
+  &__item {
     display: grid;
-    gap:10px;
+    gap: 10px;
 
     label {
       color: var(--main-color);
@@ -28,7 +28,7 @@
     }
   }
 
-  &__submit{
+  &__submit {
     font-size: 18px;
 
     &_disabled {

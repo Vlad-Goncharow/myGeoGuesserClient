@@ -1,3 +1,3 @@
-import { RootState } from "@/redux";
+import { RootState } from '@/redux'
 
-export const getAuth = (state:RootState) => state.auth
+export const getAuth = (state: RootState) => state.auth

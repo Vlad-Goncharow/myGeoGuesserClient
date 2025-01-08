@@ -1,4 +1,4 @@
-.header{
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -6,17 +6,17 @@
   position: relative;
 }
 
-.logo{
+.logo {
   color: #fff;
   font-weight: 900;
   font-size: 24px;
 
-  span{
+  span {
     margin-left: 10px;
   }
 }
 
-.controlls{
+.controlls {
   display: flex;
   align-items: center;
 
@@ -25,8 +25,8 @@
     font-size: 16px;
     color: #fff;
     background: var(--main-color);
-    
-    &:last-child{
+
+    &:last-child {
       margin: 0;
     }
   }
