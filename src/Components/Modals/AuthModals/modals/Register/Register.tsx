@@ -124,6 +124,7 @@ const Register: React.FC<RegisterProps> = ({ closeModal }) => {
 
             <label htmlFor='password'>Password</label>
             <input
+              type='password'
               id='password'
               className='auth-form__input'
               placeholder='Your Password'
@@ -149,6 +150,7 @@ const Register: React.FC<RegisterProps> = ({ closeModal }) => {
 
             <label htmlFor='passwordEqual'>Repeat password</label>
             <input
+              type='password'
               id='passwordEqual'
               className='auth-form__input'
               placeholder='Repeat your password'

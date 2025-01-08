@@ -4,6 +4,7 @@ export interface IUser {
   avatar: string
   playedGames: number
   id: number
+  isActive:boolean
 }
 
 export interface InitStateType {
