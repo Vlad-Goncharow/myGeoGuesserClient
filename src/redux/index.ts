@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { modalsReducer } from './slices/Modals/slice/modalsSlice'
 import { authReducer } from './slices/AuthSlice/slice/authSlice'
+import { gameConfigReducer } from './slices/GameConfig/slice/GameConfigSlice'
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     modals: modalsReducer,
+    gameConfig: gameConfigReducer,
   },
 })
 

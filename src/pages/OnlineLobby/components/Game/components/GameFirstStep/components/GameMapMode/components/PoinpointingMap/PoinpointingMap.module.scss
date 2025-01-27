@@ -1,0 +1,95 @@
+.panorama {
+  z-index: 9;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.minimap {
+  z-index: 9;
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  width: 260px;
+
+  height: 200px;
+  opacity: 0.5;
+  transition: all 0.2s ease-in;
+  background: #000;
+
+  &__map {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__controls {
+    opacity: 0;
+    z-index: 10;
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    transition: all 0.1s ease-out;
+  }
+
+  &:hover {
+    opacity: 1;
+    width: 640px;
+    height: 480px;
+
+    .minimap__controls {
+      opacity: 1;
+      transition: all 0.1s ease-out;
+    }
+  }
+}
+
+.miniControls {
+  &__btn {
+    padding: 10px;
+    background: rgb(34, 34, 34);
+    border-radius: 50%;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      color: #fff;
+    }
+
+    &:hover {
+      background: rgb(49, 49, 49);
+    }
+  }
+
+  &__zoom {
+    display: flex;
+    flex-direction: column;
+    background: rgb(34, 34, 34);
+    margin-top: 15px;
+  }
+
+  &__zoomItem {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+
+    font-size: 27px;
+    font-weight: 700;
+
+    &:hover {
+      background: rgb(49, 49, 49);
+    }
+  }
+}

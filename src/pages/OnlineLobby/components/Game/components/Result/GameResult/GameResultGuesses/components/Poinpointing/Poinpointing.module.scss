@@ -1,0 +1,28 @@
+.users {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: auto;
+  padding: 15px;
+
+  &__user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+}
+
+.stats {
+  color: #000;
+  font-weight: 700;
+  padding: 0 15px;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  span {
+    margin-right: 10px;
+  }
+}

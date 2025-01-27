@@ -1,22 +1,22 @@
-import React from 'react'
-import s from './HeaderUser.module.scss'
+import FullUserItem from '@/Components/FullUserItem/FullUserItem'
+import { useAppDispatch } from '@/hooks/useAppDispatch'
+import { UseClickOutside } from '@/hooks/useCliclOutside'
+import { fetchLogout } from '@/redux/slices/AuthSlice/thunks'
+import { IUser } from '@/redux/slices/AuthSlice/types'
 import {
   faCircleUser,
-  faCopy,
   faRightFromBracket,
-  faTrophy,
-  faUser,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useAppDispatch } from '@/hooks/useAppDispatch'
-import { fetchLogout } from '@/redux/slices/AuthSlice/thunks'
-import { useAppSelector } from '@/hooks/useAppSelector'
-import { getAuth } from '@/redux/slices/AuthSlice/selectors/authSelectors'
-import { UseClickOutside } from '@/hooks/useCliclOutside'
 import { animated, easings, useSpring } from '@react-spring/web'
+import React from 'react'
+import s from './HeaderUser.module.scss'
 
-function HeaderUser() {
-  const { user } = useAppSelector(getAuth)
+interface HeaderUserProps {
+  user: IUser
+}
+
+const HeaderUser: React.FC<HeaderUserProps> = ({ user }) => {
   const dispatch = useAppDispatch()
 
   const userRef = React.useRef<HTMLDivElement | null>(null)
@@ -29,27 +29,12 @@ function HeaderUser() {
   }
 
   //animation init
-  const [springs, api] = useSpring(() => ({
-    config: {
-      duration: 300,
-      easing: easings.easeInOutQuad,
-    },
-  }))
-
-  //animation handle
-  React.useEffect(() => {
-    if (popupIsOpen) {
-      api.start({
-        from: { x: '150%' },
-        to: { x: '0%' },
-      })
-    } else {
-      api.start({
-        from: { x: '0' },
-        to: { x: '150%' },
-      })
-    }
-  }, [popupIsOpen])
+  const { right } = useSpring({
+    from: { right: '-200%' },
+    right: popupIsOpen ? '0' : '-200%',
+    duration: 300,
+    easing: easings.easeInOutQuad,
+  })
 
   UseClickOutside(userRef, () => setPopupIsOpen(false))
 
@@ -59,53 +44,31 @@ function HeaderUser() {
 
   return (
     <div ref={userRef} className={s.user}>
-      <div
-        onClick={() => setPopupIsOpen((prev) => !prev)}
-        className={s.user__icon}
-      >
-        <img
-          src={`${import.meta.env.VITE_SERVER_URL}/uploads/avatars/${user?.avatar}`}
-          alt=''
-        />
+      <div onClick={() => setPopupIsOpen((prev) => !prev)}>
+        <FullUserItem user={user} />
       </div>
 
       {
         <animated.div
           className={s.popup}
           style={{
-            ...springs,
+            right: right,
           }}
         >
           <div className={s.popup__header}>
-            <div
-              onClick={() => setPopupIsOpen((prev) => !prev)}
-              className={s.user__icon}
-            >
-              <img
-                src={`${import.meta.env.VITE_SERVER_URL}/uploads/avatars/${user?.avatar}`}
-                alt=''
-              />
-            </div>
-            <div className={s.popup__nickname}>{user?.nickname}</div>
+            <FullUserItem user={user} />
           </div>
           <div className={s.popup__userid}>
             userId
-            <span onClick={copyUserIdHandle}>
-              <FontAwesomeIcon icon={faCopy} />
-              {user?.id}
-            </span>
+            <span onClick={copyUserIdHandle}>{user?.id}</span>
           </div>
           <div className={s.popup__controlls}>
             <div className={s.popup__item}>
-              <div className={s.icon}>
-                <FontAwesomeIcon icon={faCircleUser} />
-              </div>
+              <FontAwesomeIcon icon={faCircleUser} className={s.icon} />
               <span className={s.name}>Account</span>
             </div>
             <div onClick={logout} className={s.popup__item}>
-              <div className={s.icon}>
-                <FontAwesomeIcon icon={faRightFromBracket} />
-              </div>
+              <FontAwesomeIcon icon={faRightFromBracket} className={s.icon} />
               <span className={s.name}>logout</span>
             </div>
           </div>

@@ -1,6 +1,6 @@
-import ErthSpin from '@/assets/video/earthSpin.webm'
 import React from 'react'
 import { Outlet } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 import Footer from './Components/Footer/Footer'
 import Header from './Components/Header/Header'
 import AuthModals from './Components/Modals/AuthModals/AuthModals'
@@ -27,15 +27,13 @@ function App() {
       <Header />
 
       <main id='main'>
-        <video id='background-video' autoPlay muted loop>
-          <source src={ErthSpin} type='video/mp4' />
-        </video>
         <Outlet />
       </main>
 
       <AuthModals />
 
       <Footer />
+      <ToastContainer />
     </div>
   )
 }

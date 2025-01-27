@@ -26,10 +26,12 @@
   position: absolute;
   right: 0;
   top: 100%;
-  background: #393939;
+  background: #ffffff;
   border-radius: 10px;
   min-width: 300px;
   overflow: hidden;
+  color: #000;
+  z-index: 100;
 
   &__header {
     padding: 15px;
@@ -42,9 +44,11 @@
   }
 
   &__userid {
-    padding: 15px;
+    padding: 5px 15px;
     display: flex;
     align-items: center;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
 
     svg {
       margin-right: 10px;
@@ -53,16 +57,14 @@
     span {
       cursor: pointer;
       margin-left: 10px;
-      background: #000;
+      background: #272727;
       color: #fff;
-      padding: 10px;
+      padding: 5px;
       width: 100%;
       display: block;
       border-radius: 5px;
+      text-align: center;
     }
-  }
-
-  &__ctrontrols {
   }
 
   &__item {
@@ -72,7 +74,7 @@
     cursor: pointer;
 
     &:hover {
-      background: #2d2d2d;
+      background: #e3e3e3;
       transition: all 0.3s ease-in-out;
     }
   }
