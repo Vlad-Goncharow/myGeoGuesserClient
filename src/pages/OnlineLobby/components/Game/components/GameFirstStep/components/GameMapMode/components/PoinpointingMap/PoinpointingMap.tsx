@@ -92,6 +92,7 @@ function PoinpointingMap() {
           mapTypeControl: false,
           fullscreenControl: false,
           gestureHandling: 'greedy',
+          draggableCursor: 'crosshair',
         }
       )
 

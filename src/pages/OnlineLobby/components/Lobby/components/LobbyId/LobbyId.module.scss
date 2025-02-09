@@ -1,0 +1,39 @@
+.id {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+
+    label {
+      padding: 0 4px;
+      position: absolute;
+      top: -7px;
+      left: 15px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+  }
+
+  &__icon {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+  &__value {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    text-wrap: wrap;
+    padding: 8px;
+    background: #6f6f6f;
+    border-radius: 4px;
+  }
+}

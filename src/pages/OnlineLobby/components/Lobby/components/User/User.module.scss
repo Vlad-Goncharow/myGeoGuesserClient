@@ -1,0 +1,38 @@
+.user {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 15px;
+
+  &__menu {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    color: #000;
+    cursor: pointer;
+  }
+
+  &__profile {
+    position: absolute;
+    padding: 10px;
+    background: #1e1e1e;
+    color: #fff;
+    right: 0;
+    bottom: -20px;
+    border-radius: 4px;
+  }
+
+  &:hover {
+    .user__menu {
+      opacity: 1;
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

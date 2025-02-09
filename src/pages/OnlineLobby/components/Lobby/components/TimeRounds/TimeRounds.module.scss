@@ -1,0 +1,45 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: #000;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  position: relative;
+
+  &__label {
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  &__value {
+    overflow: hidden;
+    padding: 10px 15px;
+    background: transparent;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    p {
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    span {
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+}

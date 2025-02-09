@@ -1,0 +1,23 @@
+.controls {
+  display: flex;
+  flex-direction: column;
+
+  &__start {
+    margin: 0;
+    background-color: #8cefe9;
+    border-color: #8cefe9;
+    width: 100%;
+    height: 45px;
+  }
+
+  &__wait {
+    margin: 0;
+    width: 100%;
+    background: #fff;
+    margin-bottom: 15px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

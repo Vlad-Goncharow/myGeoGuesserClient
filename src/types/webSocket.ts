@@ -1,4 +1,5 @@
 import { IUser } from '@/redux/slices/AuthSlice/types'
+import { GameSettingsType } from '@/redux/slices/GameConfig/types'
 
 export type WebSocketEvent =
   | { event: 'newUserJoined'; payload: NewUserJoinedPayloadType }
@@ -11,16 +12,17 @@ export type WebSocketEvent =
   | { event: 'backUsersToRoom'; payload: BackUsersToRoomPayloadType }
   | { event: 'playerFinishGuess'; payload: PlayerFinishGuessPayloadType }
   | { event: 'playerUnFinishGuess'; payload: PlayerUnFinishGuessPayloadType }
+  | { event: 'settingsUpdated'; payload: SettingsUpdatePayloadType }
   | { event: 'roomClosed' }
 
 export type NewUserJoinedPayloadType = {
   isGameStarted: boolean
-  rounds: number
   admin: number
   roundsPlayed: number
   users: IUser[]
   user: IUser
   targetCoordinates: Coordinates[]
+  settings: GameSettingsType
 }
 export type RoundsUpdatePayloadType = {
   rounds: number
@@ -48,6 +50,10 @@ export type PlayerFinishGuessPayloadType = {
 }
 export type PlayerUnFinishGuessPayloadType = {
   userId: number
+}
+
+export type SettingsUpdatePayloadType = {
+  settings: GameSettingsType
 }
 
 export type Coordinates = {

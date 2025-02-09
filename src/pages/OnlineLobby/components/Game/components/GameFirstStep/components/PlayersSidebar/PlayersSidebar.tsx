@@ -1,11 +1,12 @@
 import React from 'react'
-import Controls from './components/Controls'
+import Controls from './components/Controls/Controls'
 import CurrentRoundPlayers from './components/CurrentRoundPlayers'
-import RoundInfo from './components/RoundInfo'
+import RoundInfo from './components/RoundInfo/RoundInfo'
+import s from './PlayersSidebar.module.scss'
 
 function PlayersSidebar() {
   return (
-    <div className='current-round-players-sidebar'>
+    <div className={s.wrapper}>
       <RoundInfo />
       <CurrentRoundPlayers />
       <Controls />

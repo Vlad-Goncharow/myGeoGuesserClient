@@ -7,8 +7,13 @@ import AuthModals from './Components/Modals/AuthModals/AuthModals'
 import { useAppDispatch } from './hooks/useAppDispatch'
 import { fetchAuth } from './redux/slices/AuthSlice/thunks'
 import './styles/style.scss'
+import GameSettingsModals from './Components/Modals/GameSettingsModals/GameSettingsModals'
+import ApiKeyModal from './Components/Modals/ApiKeyModal/ApiKeyModal'
+import UseLoadGoogleMaps from './hooks/UseLoadGoogleMaps'
 
 function App() {
+  UseLoadGoogleMaps()
+
   const dispatch = useAppDispatch()
   const auth = async () => {
     const data = await dispatch(fetchAuth())
@@ -30,6 +35,8 @@ function App() {
         <Outlet />
       </main>
 
+      <ApiKeyModal />
+      <GameSettingsModals />
       <AuthModals />
 
       <Footer />

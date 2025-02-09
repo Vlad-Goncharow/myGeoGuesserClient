@@ -3,19 +3,20 @@ import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSel
 import React from 'react'
 import GameResultMap from './GameResult/GameResultMap/GameResultMap'
 import RoundResultsMap from './RoundResult/RoundResultsMap/RoundResultsMap'
-import RoundResultsHeader from './RoundResult/RoundResultsHeader'
+import RoundResultsHeader from './RoundResultsHeader/RoundResultsHeader'
 import RoundResultsGuesses from './RoundResult/RoundResultsGuesses/RoundResultsGuesses'
-import RoundResultsFooter from './RoundResult/RoundResultsFooter'
+import RoundResultsFooter from './ResultsFooter/ResultsFooter'
 import GameResultGuesses from './GameResult/GameResultGuesses/GameResultGuesses'
+import s from './Result.module.scss'
 
 function Result() {
   const { isGameEnd } = useAppSelector(getGameConfig)
   return (
-    <div className='round-result'>
-      <div className='round-result__left'>
+    <div className={s.wrapper}>
+      <div className={s.wrapper__left}>
         {isGameEnd ? <GameResultMap /> : <RoundResultsMap />}
       </div>
-      <div className='round-result__right'>
+      <div className={s.wrapper__right}>
         <RoundResultsHeader />
         {isGameEnd ? <GameResultGuesses /> : <RoundResultsGuesses />}
         <RoundResultsFooter />

@@ -1,0 +1,16 @@
+.left {
+  display: flex;
+  flex: 1;
+  position: relative;
+}
+
+.right {
+  flex: 0 340px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #232121;
+  box-shadow: -4px 0px 5px 0px rgb(32 27 32);
+  z-index: 3;
+}

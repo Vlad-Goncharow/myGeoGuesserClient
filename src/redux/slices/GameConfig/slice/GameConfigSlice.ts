@@ -1,13 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { GameConfigType } from '../types'
 import { IUser } from '../../AuthSlice/types'
+import { GameConfigType, RoundTimeType } from '../types'
 
 const initialState: GameConfigType = {
   players: [],
   roomId: null,
   roomAdminId: null,
   isConnected: false,
-  rounds: 0,
   isGameStart: false,
   isGameEnd: false,
   isRoundEnd: false,
@@ -19,6 +18,13 @@ const initialState: GameConfigType = {
   playersGuesses: [],
   roundsTargets: [],
   finishedGuessPlayersIds: [],
+  settings: {
+    rounds: 0,
+    gameMode: '',
+    gameDiffcult: '',
+    roundTime: 0,
+    maxPlayers: 10,
+  },
 }
 
 const gameConfigSlice = createSlice({
@@ -42,9 +48,6 @@ const gameConfigSlice = createSlice({
     },
     setRoundsPlayed: (state, action) => {
       state.roundsPlayed = action.payload
-    },
-    setGameRounds: (state, action) => {
-      state.rounds = action.payload
     },
     setIsRoundEnd: (state, action) => {
       state.isRoundEnd = action.payload
@@ -81,6 +84,9 @@ const gameConfigSlice = createSlice({
     clearFinishedGuessPlayersIds: (state) => {
       state.finishedGuessPlayersIds = []
     },
+    updateSettings: (state, action) => {
+      state.settings = action.payload
+    },
     clearAll: (state) => {
       state.isConnected = false
       state.isGameEnd = false
@@ -93,7 +99,11 @@ const gameConfigSlice = createSlice({
       state.roomAdminId = null
       state.roomId = null
       state.roundPlayersGuesses = []
-      state.rounds = 0
+      state.settings.rounds = 0
+      state.settings.gameDiffcult = null
+      state.settings.gameMode = ''
+      state.settings.maxPlayers = 10
+      state.settings.roundTime = 180
       state.roundsPlayed = 0
       state.roundsTargets = []
       state.targetCoordinates = null

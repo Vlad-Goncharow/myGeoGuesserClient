@@ -1,5 +1,5 @@
 import React from 'react'
-import PoinpointingPlayers from './PoinpointingPlayers'
+import PoinpointingPlayers from './PoinpointingPlayers/PoinpointingPlayers'
 
 function CurrentRoundPlayers() {
   return <PoinpointingPlayers />

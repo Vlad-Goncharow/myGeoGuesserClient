@@ -1,7 +1,7 @@
 import { useAppSelector } from '@/hooks/useAppSelector'
 import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
 import React from 'react'
-import MapComponent from '../../../../MapComponent'
+import MapComponent from '../../../../MapComponent/MapComponent'
 
 function PoinpointingMapResult() {
   const { roundsTargets, playersGuesses, players } =

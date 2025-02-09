@@ -5,7 +5,7 @@ import { modalsActions } from '@/redux/slices/Modals/slice/modalsSlice'
 import { faEarthEurope } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import PlateBtn from '../PlateBtn/PlateBtn'
 import HeaderUser from './components/HeaderUser/HeaderUser'
 import s from './Header.module.scss'
@@ -24,8 +24,10 @@ function Header() {
     dispatch(modalsActions.toggleRegisterModal())
   }
 
-  if (isGameStart) {
-    return null
+  const location = useLocation()
+
+  if (isGameStart || location.pathname.includes('/online-lobby/')) {
+    return <div></div>
   }
 
   return (

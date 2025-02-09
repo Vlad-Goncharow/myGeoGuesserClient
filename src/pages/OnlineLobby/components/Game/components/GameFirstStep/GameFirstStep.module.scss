@@ -1,0 +1,10 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+
+  &__game {
+    flex: 1;
+    position: relative;
+  }
+}

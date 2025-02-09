@@ -4,6 +4,9 @@ import { InitModalState } from '../types'
 const initialState: InitModalState = {
   loginModaL: false,
   registerModal: false,
+  gameSettingsModal: false,
+  gameCountriesModal: false,
+  apiKeyModal: false,
 }
 
 const modalsSlice = createSlice({
@@ -15,6 +18,19 @@ const modalsSlice = createSlice({
     },
     toggleLoginModal(state) {
       state.loginModaL = !state.loginModaL
+    },
+    toggleGameSettingsModal(state) {
+      state.gameSettingsModal = !state.gameSettingsModal
+    },
+    toggleGameCountriesModal(state) {
+      state.gameCountriesModal = !state.gameCountriesModal
+    },
+    toggleApiKeyModal(state) {
+      state.apiKeyModal = !state.apiKeyModal
+    },
+    closeSettingsModals(state) {
+      state.gameSettingsModal = false
+      state.gameCountriesModal = false
     },
   },
 })

@@ -1,16 +1,19 @@
 import React from 'react'
-import TimeRounds from './components/TimeRounds'
-import LobbyId from './components/LobbyId'
-import Controls from './components/Controls'
-import RoomUsers from './components/RoomUsers'
+import LobbyId from './components/LobbyId/LobbyId'
+import Controls from './components/Controls/Controls'
+import RoomUsers from './components/RoomUsers/RoomUsers'
+import GameSettings from './components/GameSettings/GameSettings'
+import MiniGame from './components/MiniGame/MiniGame'
+import s from './Lobby.module.scss'
 
 function Lobby() {
   return (
     <>
-      <div className='lobby__left'>
-        <TimeRounds />
+      <div className={s.left}>
+        <GameSettings />
+        <MiniGame />
       </div>
-      <div className='lobby__right'>
+      <div className={s.right}>
         <LobbyId />
         <RoomUsers />
         <Controls />

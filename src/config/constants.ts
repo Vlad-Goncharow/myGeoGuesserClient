@@ -1,0 +1,6 @@
+export enum GAMESETTINGS {
+  MINROUNDS = 1,
+  MAXROUNDS = 50,
+  MAXTIME = 600,
+  MINTIME = 5,
+}

@@ -24,10 +24,7 @@ function useRandomCords() {
     west: -10.0,
   }
 
-  const [targetCords, setTargetCords] = React.useState<{
-    lat: number
-    lng: number
-  }>()
+  const [targetCords, setTargetCords] = React.useState<coordinatesType>()
   const checkStreetViewAvailability = (location: coordinatesType) => {
     const streetViewService = new window.google.maps.StreetViewService()
 

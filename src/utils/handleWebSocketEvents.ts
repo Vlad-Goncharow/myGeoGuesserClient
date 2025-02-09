@@ -15,13 +15,14 @@ export function handleWebSocketEvents(
   switch (data.event) {
     case 'newUserJoined':
       dispatch(gameConfigActions.setIsGameStarted(data.payload.isGameStarted))
-      dispatch(gameConfigActions.setGameRounds(data.payload.rounds))
       dispatch(gameConfigActions.setRoomAdminId(data.payload.admin))
       dispatch(gameConfigActions.setPlayers(data.payload.users))
       dispatch(
         gameConfigActions.setTargetCoortdinates(data.payload.targetCoordinates)
       )
       dispatch(gameConfigActions.setRoundsPlayed(data.payload.roundsPlayed))
+
+      dispatch(gameConfigActions.updateSettings(data.payload.settings))
 
       if (
         data.payload.user.id !== data.payload.admin &&
@@ -40,11 +41,6 @@ export function handleWebSocketEvents(
       }
 
       break
-
-    case 'roundsUpdate':
-      dispatch(gameConfigActions.setGameRounds(data.payload.rounds))
-      break
-
     case 'gameStarted':
       dispatch(gameConfigActions.setIsGameStarted(true))
       dispatch(gameConfigActions.setIsRoundStart(true))
@@ -114,6 +110,9 @@ export function handleWebSocketEvents(
       dispatch(
         gameConfigActions.deleteFinishedGuessPlayersIds(data.payload.userId)
       )
+      break
+    case 'settingsUpdated':
+      dispatch(gameConfigActions.updateSettings(data.payload.settings))
       break
 
     case 'roomClosed':

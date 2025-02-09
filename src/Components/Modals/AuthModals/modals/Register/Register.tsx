@@ -1,4 +1,4 @@
-import OverlayWrapper from '@/Components/Modals/OverlayWrapper/OverlayWrapper'
+import OverlayWrapper from '../../components/OverlayWrapper/OverlayWrapper'
 import { useAppSelector } from '@/hooks/useAppSelector'
 import { getModals } from '@/redux/slices/Modals/selectors/modalsSelectors'
 import { animated, useSpring } from '@react-spring/web'

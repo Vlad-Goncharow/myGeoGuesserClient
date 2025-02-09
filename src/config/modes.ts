@@ -1,16 +1,18 @@
 import AdvancedPointpointing from '@/assets/svgs/advancedPointpointing.svg'
 import StandartPointpointing from '@/assets/svgs/standartPoinpoining.svg'
 import UltraPoinpointing from '@/assets/svgs/ultraPoinpointing.svg'
-import SityGuessr from '@/assets/svgs/sityguessr.svg'
-import { GameModeType } from '../types/gameModes'
+import Sityguessr from '@/assets/svgs/sityguessr.svg'
+import CountryBattle from '@/assets/svgs/countryBattle.svg'
+import Flags from '@/assets/svgs/flags.svg'
+import { GameModeType } from '../types/gameMods'
 
 export const modes: GameModeType[] = [
   {
-    modes: [
+    difficulties: [
       {
         name: 'Standard Pinpointing',
         description:
-          "Step up the pinpointing difficulty. You can't move. Let your intuition guide you!",
+          'Try to pinpoint the exact drop location as close as possible to earn points.',
         icon: StandartPointpointing,
         difficulty: 'Standard Pinpointing Casual',
       },
@@ -30,36 +32,31 @@ export const modes: GameModeType[] = [
       },
     ],
     name: 'Pinpointing',
+    description:
+      'Try to pinpoint the exact drop location as close as possible to earn points.',
+    icon: StandartPointpointing,
   },
   {
-    modes: [
-      {
-        name: 'City Guesser',
-        description:
-          "Try to guess the correct city in these worldwide urban drops. Large full score radius, so don't bother pinpointing. Be quick!",
-        icon: SityGuessr,
-        difficulty: null,
-      },
-    ],
     name: 'City Guesser',
+    description:
+      "Try to guess the correct city in these worldwide urban drops. Large full score radius, so don't bother pinpointing. Be quick!",
+    icon: Sityguessr,
   },
   {
-    modes: [
-      {
-        name: 'Popular Landmarks',
-        description:
-          'Pinpoint the location of the most famous landmarks. Earn points with good guesses.',
-        difficulty: 'Popular Landmarks Casual',
-        icon: SityGuessr,
-      },
-      {
-        name: 'Worldwide Landmarks',
-        description:
-          'Pinpoint the location of various landmarks around the world. Earn points with good guesses.',
-        difficulty: 'Wordlwide Landmarks Demanding',
-        icon: SityGuessr,
-      },
-    ],
-    name: 'Popular Landmarks',
+    name: 'Country gueessr',
+    description:
+      'Try to identify the target country faster than your opponents!',
+    icon: CountryBattle,
+  },
+  {
+    name: 'Flags',
+    description:
+      'Can you casually identify the flag of all countries in the world? Take your time, but you only have one guess!',
+    icon: Flags,
+  },
+  {
+    name: 'States',
+    description: 'Try to identify the target state faster than your opponents!',
+    icon: CountryBattle,
   },
 ]

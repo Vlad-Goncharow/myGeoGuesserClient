@@ -2,11 +2,7 @@
 @use './buttons.scss';
 @use './modals.scss';
 @use './auth.scss';
-@use './roundResults.scss';
 @use './fullUser.scss';
-@use './poinpointingPlayersRound.scss';
-@use './currentRound.scss';
-@use './lobby.scss';
 
 @font-face {
   font-family: 'TypeMates';
@@ -41,11 +37,17 @@
 * {
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
+  box-sizing: border-box !important;
   outline: none;
   text-decoration: none;
   font-family: TypeMates, sans-serif !important;
   text-decoration: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box !important;
 }
 
 body {

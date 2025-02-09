@@ -13,8 +13,6 @@ dist-ssr
 *.local
 .env
 
-src/utils/loadGoogleMaps.ts
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

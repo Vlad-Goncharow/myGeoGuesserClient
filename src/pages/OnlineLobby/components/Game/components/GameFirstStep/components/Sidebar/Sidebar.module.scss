@@ -1,0 +1,49 @@
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 300px;
+  background: #363636;
+  z-index: 11;
+  padding: 15px;
+
+  &__btn {
+    width: 100%;
+    font-size: 12px;
+
+    &_leave {
+      color: red;
+      border: 2px solid red;
+      margin-bottom: 10px;
+    }
+
+    &_back {
+      color: #fff;
+      border: 2px solid #fff;
+    }
+  }
+}
+
+.controls {
+  z-index: 10;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  display: flex;
+  align-items: center;
+
+  &__item {
+    cursor: pointer;
+    margin-right: 20px;
+    width: 30px;
+    height: 30px;
+    background: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+  }
+}

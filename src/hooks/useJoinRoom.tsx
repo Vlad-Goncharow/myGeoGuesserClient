@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom'
 import { useAppDispatch } from './useAppDispatch'
 import { useAppSelector } from './useAppSelector'
 
-function useJoinRoom() {
+function UseJoinRoom() {
   const dispatch = useAppDispatch()
   const wsRef = React.useContext(WebSocketContext)
   const { roomId } = useParams()
@@ -16,16 +16,30 @@ function useJoinRoom() {
   const hasJoinedRoom = React.useRef(false)
 
   React.useEffect(() => {
-    if (isConnected && wsRef && roomId && user && !hasJoinedRoom.current) {
-      wsRef.joinRoom(roomId, user)
-      hasJoinedRoom.current = true
-    }
+    if (!wsRef) return
 
-    if (!isConnected && wsRef) {
+    if (!isConnected) {
       wsRef.connect()
       dispatch(gameConfigActions.setIsConnected(true))
+    }
+
+    const handleOpen = () => {
+      if (roomId && user && !hasJoinedRoom.current) {
+        wsRef.joinRoom(roomId, user)
+        hasJoinedRoom.current = true
+      }
+    }
+
+    if (wsRef.socket?.readyState === WebSocket.OPEN) {
+      handleOpen()
+    } else {
+      wsRef.socket?.addEventListener('open', handleOpen, { once: true })
+    }
+
+    return () => {
+      wsRef.socket?.removeEventListener('open', handleOpen)
     }
   }, [isConnected, wsRef, roomId, user, dispatch])
 }
 
-export default useJoinRoom
+export default UseJoinRoom

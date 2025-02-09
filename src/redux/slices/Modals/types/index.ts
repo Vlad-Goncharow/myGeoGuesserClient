@@ -1,4 +1,7 @@
 export interface InitModalState {
   registerModal: boolean
-  loginModaL: Boolean
+  loginModaL: boolean
+  gameSettingsModal: boolean
+  gameCountriesModal: boolean
+  apiKeyModal: boolean
 }

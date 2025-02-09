@@ -1,16 +1,18 @@
 import FullUserItem from '@/Components/FullUserItem/FullUserItem'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
-import { UseClickOutside } from '@/hooks/useCliclOutside'
+import { UseClickOutside } from '../../../../hooks/UseClickOutside'
 import { fetchLogout } from '@/redux/slices/AuthSlice/thunks'
 import { IUser } from '@/redux/slices/AuthSlice/types'
 import {
   faCircleUser,
+  faKey,
   faRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { animated, easings, useSpring } from '@react-spring/web'
 import React from 'react'
 import s from './HeaderUser.module.scss'
+import { modalsActions } from '@/redux/slices/Modals/slice/modalsSlice'
 
 interface HeaderUserProps {
   user: IUser
@@ -42,6 +44,11 @@ const HeaderUser: React.FC<HeaderUserProps> = ({ user }) => {
     navigator.clipboard.writeText(`${user?.id}`)
   }
 
+  const openApiModal = async () => {
+    dispatch(modalsActions.toggleApiKeyModal())
+    setPopupIsOpen(false)
+  }
+
   return (
     <div ref={userRef} className={s.user}>
       <div onClick={() => setPopupIsOpen((prev) => !prev)}>
@@ -70,6 +77,10 @@ const HeaderUser: React.FC<HeaderUserProps> = ({ user }) => {
             <div onClick={logout} className={s.popup__item}>
               <FontAwesomeIcon icon={faRightFromBracket} className={s.icon} />
               <span className={s.name}>logout</span>
+            </div>
+            <div onClick={openApiModal} className={s.popup__item}>
+              <FontAwesomeIcon icon={faKey} className={s.icon} />
+              <span className={s.name}>Your Google API KEY</span>
             </div>
           </div>
         </animated.div>

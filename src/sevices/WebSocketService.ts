@@ -1,4 +1,9 @@
 import { IUser } from '@/redux/slices/AuthSlice/types'
+import {
+  coordinatesType,
+  GameSettingsType,
+  playersCoordinatesGuessType,
+} from '@/redux/slices/GameConfig/types'
 
 type ServerMessage = {
   event: string
@@ -52,6 +57,93 @@ export class WebSocketService {
       )
     }
   }
+
+  startGame(roomId: string) {
+    if (this.socket && roomId) {
+      this.socket.send(
+        JSON.stringify({
+          event: 'startGame',
+          payload: {
+            roomId,
+          },
+        })
+      )
+    }
+  }
+  updateRoomSetttings(roomId: string, settings: GameSettingsType) {
+    if (this.socket && roomId) {
+      this.socket.send(
+        JSON.stringify({
+          event: 'updateSettings',
+          payload: {
+            roomId,
+            settings: { ...settings },
+          },
+        })
+      )
+    }
+  }
+  handleGuess(
+    roomId: string,
+    type: string,
+    userId: number,
+    coordinates: coordinatesType,
+    round: number
+  ) {
+    if (this.socket && roomId) {
+      this.socket.send(
+        JSON.stringify({
+          event: 'finishGuess',
+          payload: {
+            roomId,
+            type,
+            userId,
+            coordinates,
+            round,
+          },
+        })
+      )
+    }
+  }
+  backToRoom(roomId: string) {
+    if (this.socket && roomId) {
+      this.socket.send(
+        JSON.stringify({
+          event: 'backToRoom',
+          payload: {
+            roomId,
+          },
+        })
+      )
+    }
+  }
+  setTargetCords(roomId: string, round: number, cords: coordinatesType) {
+    if (this.socket && roomId) {
+      this.socket.send(
+        JSON.stringify({
+          event: 'setTargetCords',
+          payload: {
+            roomId,
+            round,
+            cords,
+          },
+        })
+      )
+    }
+  }
+  gameEnd(roomId: string) {
+    if (this.socket && roomId) {
+      this.socket.send(
+        JSON.stringify({
+          event: 'gameEnd',
+          payload: {
+            roomId,
+          },
+        })
+      )
+    }
+  }
+
   getMessages() {
     return this.messages
   }
