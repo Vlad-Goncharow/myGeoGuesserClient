@@ -11,8 +11,15 @@ export const countriesList = countries110.features.map((el) => {
   }
 })
 
-export const countriesListNames = countries50.features.map((el) => {
-  return {
-    name: el.properties.NAME,
-  }
-})
+export type countriesListNamesType = {
+  name: string
+  nameLong: string
+}
+
+export const countriesListNames: countriesListNamesType[] =
+  countries50.features.map((el) => {
+    return {
+      name: el.properties.NAME,
+      nameLong: el.properties.NAME_LONG,
+    }
+  })

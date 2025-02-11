@@ -10,8 +10,13 @@ import Globe from 'react-globe.gl'
 import * as THREE from 'three'
 import s from './GlobeComp.module.scss'
 
-function GlobeComp() {
-  const { selectedCounty } = useAppSelector(getMiniGame)
+interface GlobeCompProps {
+  globeGlobeRed: any
+}
+
+const GlobeComp: React.FC<GlobeCompProps> = ({ globeGlobeRed }) => {
+  const { selectedCounty, isMiniGameStart, currentRound } =
+    useAppSelector(getMiniGame)
   const dispatch = useAppDispatch()
 
   const [countries, setCountries] = React.useState<any>({ features: [] })
@@ -22,14 +27,34 @@ function GlobeComp() {
     setCountries(subCountries)
   }, [])
 
-  const handleCountryClick = (country: any) => {
-    dispatch(
-      miniGamegActions.setSelectedCounty({
-        name: country.properties.NAME,
-        nameLong: country.properties.NAME_LONG,
-      })
-    )
-  }
+  const [avaible, setAbaible] = React.useState(true)
+  const handleCountryClick = React.useCallback(
+    (country: any) => {
+      if (isMiniGameStart && currentRound <= 5 && avaible) {
+        setTimeout(() => {
+          dispatch(miniGamegActions.setSelectedCounty(null))
+          dispatch(miniGamegActions.incrementCurrentRound())
+          setAbaible(true)
+        }, 1000)
+
+        setAbaible(false)
+
+        dispatch(
+          miniGamegActions.setSelectedCounty({
+            name: country.properties.NAME,
+            nameLong: country.properties.NAME_LONG,
+          })
+        )
+        dispatch(
+          miniGamegActions.setChoosenCountries({
+            name: country.properties.NAME,
+            nameLong: country.properties.NAME_LONG,
+          })
+        )
+      }
+    },
+    [isMiniGameStart, currentRound, avaible]
+  )
 
   const colorScale = scaleSequentialSqrt(interpolateYlOrRd)
   const getVal = (feat: any) =>
@@ -38,6 +63,7 @@ function GlobeComp() {
   return (
     <div ref={globeRef} className={s.globe}>
       <Globe
+        ref={globeGlobeRed}
         width={Number(globeRef.current?.offsetWidth)}
         height={Number(globeRef.current?.clientHeight)}
         backgroundImageUrl={'//unpkg.com/three-globe/example/img/night-sky.png'}
@@ -46,9 +72,6 @@ function GlobeComp() {
         polygonCapColor={(d) => colorScale(getVal(d))}
         polygonSideColor={() => 'rgba(0, 100, 0, 0.15)'}
         polygonStrokeColor={() => '#111'}
-        polygonLabel={({ properties }: any) => `
-          <b>${properties.ADMIN}</b>
-        `}
         onPolygonClick={handleCountryClick}
         polygonsTransitionDuration={300}
         polygonCapMaterial={(country: any) => {

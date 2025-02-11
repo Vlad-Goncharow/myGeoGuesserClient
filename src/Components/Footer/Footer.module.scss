@@ -2,3 +2,45 @@
   background: #000;
   padding: 15px;
 }
+
+.logo {
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 24px;
+
+  span {
+    margin-left: 10px;
+  }
+}
+
+.info {
+  padding: 15px 0;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.socials {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      color: #fff;
+      fill: #fff;
+    }
+  }
+
+  &__name {
+    margin-left: 15px;
+    font-size: 12px;
+    color: #fff;
+    font-weight: 700;
+  }
+}

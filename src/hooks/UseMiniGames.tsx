@@ -6,12 +6,31 @@ import { useAppDispatch } from './useAppDispatch'
 import { miniGamegActions } from '@/redux/slices/MiniGame/slice/MiniGame'
 
 function UseMiniGames() {
-  const { isMiniGameEnd, isMiniGameStart, currentRound, selectedCounty } =
-    useAppSelector(getMiniGame)
+  const {
+    isMiniGameEnd,
+    isMiniGameStart,
+    currentRound,
+    selectedCounty,
+    randomCountries,
+  } = useAppSelector(getMiniGame)
   const dispatch = useAppDispatch()
 
-  React.useEffect(() => {
+  const checkCountryGuess = React.useMemo(() => {
     if (isMiniGameStart && !isMiniGameEnd) {
+      if (randomCountries !== null && selectedCounty !== null) {
+        if (randomCountries[currentRound]?.name === selectedCounty.name) {
+          return true
+        } else {
+          return false
+        }
+      } else {
+        return null
+      }
+    }
+  }, [randomCountries, selectedCounty])
+
+  React.useEffect(() => {
+    if (isMiniGameStart && !isMiniGameEnd && currentRound < 5) {
       dispatch(
         miniGamegActions.setRandomCountry(
           countriesListNames[
@@ -20,19 +39,17 @@ function UseMiniGames() {
         )
       )
     }
-  }, [currentRound, isMiniGameStart, isMiniGameEnd])
+  }, [currentRound, isMiniGameStart])
 
   React.useEffect(() => {
-    let timer: any
-
-    if (currentRound === 6) {
+    if (currentRound === 5) {
       dispatch(miniGamegActions.setIsMiniGameEnd(true))
     }
+  }, [currentRound])
 
-    return () => {
-      clearInterval(timer)
-    }
-  }, [isMiniGameEnd, isMiniGameStart, currentRound, selectedCounty])
+  return {
+    checkCountryGuess,
+  }
 }
 
 export default UseMiniGames

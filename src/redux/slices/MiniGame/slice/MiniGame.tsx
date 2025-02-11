@@ -5,8 +5,9 @@ const initialState: MiniGameType = {
   isMiniGameEnd: false,
   isMiniGameStart: false,
   currentRound: 0,
-  randomCountry: null,
+  randomCountries: [],
   selectedCounty: null,
+  choosenCountries: [],
 }
 
 const MiniGame = createSlice({
@@ -14,20 +15,21 @@ const MiniGame = createSlice({
   initialState: initialState,
   reducers: {
     setIsMiniGameStart: (state, action) => {
-      state.currentRound = 1
       state.isMiniGameEnd = false
       state.isMiniGameStart = action.payload
     },
     setIsMiniGameEnd: (state, action) => {
-      state.currentRound = 0
       state.isMiniGameStart = false
       state.isMiniGameEnd = action.payload
     },
     setRandomCountry: (state, action) => {
-      state.randomCountry = action.payload
+      state.randomCountries.push(action.payload)
     },
     setSelectedCounty: (state, action) => {
       state.selectedCounty = action.payload
+    },
+    setChoosenCountries: (state, action) => {
+      state.choosenCountries.push(action.payload)
     },
     setCurrentRound: (state, action: PayloadAction<number>) => {
       state.currentRound = action.payload
@@ -35,15 +37,12 @@ const MiniGame = createSlice({
     incrementCurrentRound: (state) => {
       state.currentRound = state.currentRound + 1
     },
-    decrementCurrentRound: (state) => {
-      state.currentRound = state.currentRound - 1
-    },
     resetMiniGame: (state) => {
       state.isMiniGameEnd = false
-      state.isMiniGamePaused = false
       state.isMiniGameStart = false
       state.currentRound = 0
-      state.randomCountry = null
+      state.randomCountries = []
+      state.choosenCountries = []
       state.selectedCounty = null
     },
   },

@@ -1,0 +1,43 @@
+.wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #232121;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  overflow: hidden;
+  box-shadow: 0 0 20px 4px #74747459;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  cursor: pointer;
+
+  span {
+    margin-right: 10px;
+  }
+}
+
+.list {
+  padding: 15px;
+}
+
+.item {
+  font-size: 14px;
+  margin-bottom: 5px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  span {
+    font-weight: 700;
+    font-size: 12px;
+    color: #fff;
+    cursor: pointer;
+  }
+}
