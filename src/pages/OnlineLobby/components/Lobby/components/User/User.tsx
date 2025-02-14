@@ -20,15 +20,19 @@ const User: React.FC<UserProps> = ({ userItem }) => {
   return (
     <div className={s.user}>
       <FullUserItem user={userItem} />
-      <FontAwesomeIcon
-        icon={faEllipsisVertical}
-        onClick={() => setMenuIsOpen(true)}
-        className={s.user__menu}
-      />
-      {menuIsOpen && (
-        <div ref={menuRef} className={s.user__profile}>
-          <Link to={`/profile/${userItem.id}`}>View profile</Link>
-        </div>
+      {!userItem.id.toString().includes('temp-') && (
+        <>
+          <FontAwesomeIcon
+            icon={faEllipsisVertical}
+            onClick={() => setMenuIsOpen(true)}
+            className={s.user__menu}
+          />
+          {menuIsOpen && (
+            <div ref={menuRef} className={s.user__profile}>
+              <Link to={`/user-page/${userItem.id}`}>View profile</Link>
+            </div>
+          )}
+        </>
       )}
     </div>
   )

@@ -6,6 +6,7 @@ import React from 'react'
 import Game from './components/Game/Game'
 import Lobby from './components/Lobby/Lobby'
 import s from './OnlineLobby.module.scss'
+import CreateTempUser from './components/CreateTempUser/CreateTempUser'
 
 function OnlineLobby() {
   const { isConnected, isGameStart } = useAppSelector(getGameConfig)
@@ -14,7 +15,7 @@ function OnlineLobby() {
   UseJoinRoom()
 
   if (!isConnected) {
-    return <div>not connected</div>
+    return <CreateTempUser />
   }
 
   return <div className={s.wrapper}>{isGameStart ? <Game /> : <Lobby />}</div>

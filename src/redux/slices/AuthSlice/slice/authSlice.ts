@@ -1,6 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { AuthResponse, InitStateType } from '../types'
-import { fetchAuth, fetchLogin, fetchLogout, fetchRegister } from '../thunks'
+import {
+  AuthResponse,
+  InitStateType,
+  IUser,
+  UpdateUserFieldsResponse,
+} from '../types'
+import {
+  fetchAuth,
+  fetchLogin,
+  fetchLogout,
+  fetchRegister,
+  updateAvatar,
+  updateNickname,
+  updatePatch,
+} from '../thunks'
 
 const initialState: InitStateType = {
   user: null,
@@ -34,6 +47,24 @@ const authSlice = createSlice({
           state.user = null
         }
       })
+    builder.addCase(
+      updatePatch.fulfilled,
+      (state, action: PayloadAction<UpdateUserFieldsResponse>) => {
+        state.user = action.payload.user
+      }
+    )
+    builder.addCase(
+      updateNickname.fulfilled,
+      (state, action: PayloadAction<UpdateUserFieldsResponse>) => {
+        state.user = action.payload.user
+      }
+    )
+    builder.addCase(
+      updateAvatar.fulfilled,
+      (state, action: PayloadAction<UpdateUserFieldsResponse>) => {
+        state.user = action.payload.user
+      }
+    )
   },
 })
 

@@ -7,6 +7,7 @@ import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import useRegister from '../../utils/hooks/useRegister'
 import { RegisterInputs } from '../../utils/types'
+import { USERFIELDSCONSTS } from '@/config/constants'
 
 interface RegisterProps {
   closeModal: () => void
@@ -105,12 +106,12 @@ const Register: React.FC<RegisterProps> = ({ closeModal }) => {
               {...register('nickname', {
                 required: 'Required field',
                 minLength: {
-                  value: 10,
-                  message: 'Min length 10',
+                  value: USERFIELDSCONSTS.MIN_NICKNAME_LENGTH,
+                  message: `Min length ${USERFIELDSCONSTS.MIN_NICKNAME_LENGTH}`,
                 },
                 maxLength: {
-                  value: 20,
-                  message: 'Max length 20',
+                  value: USERFIELDSCONSTS.MAX_NICKNAME_LENGTH,
+                  message: `Max length ${USERFIELDSCONSTS.MAX_NICKNAME_LENGTH}`,
                 },
               })}
             />
@@ -131,12 +132,12 @@ const Register: React.FC<RegisterProps> = ({ closeModal }) => {
               {...register('password', {
                 required: 'Required field',
                 minLength: {
-                  value: 10,
-                  message: 'Min length 10',
+                  value: USERFIELDSCONSTS.MIN_PASSWORD_LENGTH,
+                  message: `Min length ${USERFIELDSCONSTS.MIN_PASSWORD_LENGTH}`,
                 },
                 maxLength: {
-                  value: 50,
-                  message: 'Max length 50',
+                  value: USERFIELDSCONSTS.MAX_PASSWORD_LENGTH,
+                  message: `Max length ${USERFIELDSCONSTS.MAX_PASSWORD_LENGTH}`,
                 },
               })}
             />
@@ -157,12 +158,12 @@ const Register: React.FC<RegisterProps> = ({ closeModal }) => {
               {...register('passwordEqual', {
                 required: "The passwords don't match",
                 minLength: {
-                  value: 10,
-                  message: 'Min length 10',
+                  value: USERFIELDSCONSTS.MIN_PASSWORD_LENGTH,
+                  message: `Min length ${USERFIELDSCONSTS.MIN_PASSWORD_LENGTH}`,
                 },
                 maxLength: {
-                  value: 50,
-                  message: 'Max length 50',
+                  value: USERFIELDSCONSTS.MAX_PASSWORD_LENGTH,
+                  message: `Max length ${USERFIELDSCONSTS.MAX_PASSWORD_LENGTH}`,
                 },
                 validate: (val) => {
                   if (watch('password') !== val) {

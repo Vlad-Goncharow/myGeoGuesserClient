@@ -1,0 +1,34 @@
+.sidebar {
+  width: 300px;
+  margin-right: 15px;
+  background: #262626;
+  border-radius: 7px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  width: 100%;
+  padding: 15px;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 6px;
+
+  &__icon {
+    margin-right: 15px;
+  }
+
+  &:hover {
+    background: #000;
+
+    .item__icon {
+      transform: scale(1.2);
+      transition: all 0.3s;
+    }
+  }
+}

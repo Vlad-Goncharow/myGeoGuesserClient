@@ -7,6 +7,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import UseLogin from '../../utils/hooks/UseLogin'
 import { LoginInputs } from '../../utils/types'
+import { USERFIELDSCONSTS } from '@/config/constants'
 
 interface LoginProps {
   closeModal: () => void
@@ -96,12 +97,12 @@ const Login: React.FC<LoginProps> = ({ closeModal }) => {
               placeholder='Your Password'
               {...register('password', {
                 minLength: {
-                  value: 10,
-                  message: 'Min length 10',
+                  value: USERFIELDSCONSTS.MIN_PASSWORD_LENGTH,
+                  message: `Password min length is ${USERFIELDSCONSTS.MIN_PASSWORD_LENGTH}`,
                 },
                 maxLength: {
-                  value: 50,
-                  message: 'Max length 50',
+                  value: USERFIELDSCONSTS.MAX_PASSWORD_LENGTH,
+                  message: `Password max length is ${USERFIELDSCONSTS.MAX_PASSWORD_LENGTH}`,
                 },
                 required: 'Required field',
               })}

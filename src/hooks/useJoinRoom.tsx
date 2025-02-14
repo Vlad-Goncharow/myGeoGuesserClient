@@ -6,27 +6,31 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useAppDispatch } from './useAppDispatch'
 import { useAppSelector } from './useAppSelector'
+import { getTemporaryUser } from '@/redux/slices/TemporaryUserSlice/selectors/TemporaryUserSelectors'
 
 function UseJoinRoom() {
   const dispatch = useAppDispatch()
   const wsRef = React.useContext(WebSocketContext)
   const { roomId } = useParams()
   const { user } = useAppSelector(getAuth)
+  const { temporaryUser } = useAppSelector(getTemporaryUser)
   const { isConnected } = useAppSelector(getGameConfig)
   const hasJoinedRoom = React.useRef(false)
 
   React.useEffect(() => {
-    if (!wsRef) return
+    if (!wsRef || !roomId) return
 
     if (!isConnected) {
       wsRef.connect()
-      dispatch(gameConfigActions.setIsConnected(true))
     }
 
+    const currentUser = user || temporaryUser
+
     const handleOpen = () => {
-      if (roomId && user && !hasJoinedRoom.current) {
-        wsRef.joinRoom(roomId, user)
+      if (currentUser && !hasJoinedRoom.current) {
+        wsRef.joinRoom(roomId, currentUser)
         hasJoinedRoom.current = true
+        dispatch(gameConfigActions.setIsConnected(true))
       }
     }
 
@@ -39,7 +43,7 @@ function UseJoinRoom() {
     return () => {
       wsRef.socket?.removeEventListener('open', handleOpen)
     }
-  }, [isConnected, wsRef, roomId, user, dispatch])
+  }, [isConnected, wsRef, roomId, user, temporaryUser, dispatch])
 }
 
 export default UseJoinRoom

@@ -7,9 +7,11 @@ import classNames from 'classnames'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import s from './Controls.module.scss'
+import { getTemporaryUser } from '@/redux/slices/TemporaryUserSlice/selectors/TemporaryUserSelectors'
 
 function Controls() {
   const { user } = useAppSelector(getAuth)
+  const { temporaryUser } = useAppSelector(getTemporaryUser)
   const { roundsPlayed, playerCoordinatesGuess } = useAppSelector(getGameConfig)
   const wsRef = React.useContext(WebSocketContext)
 
@@ -18,10 +20,11 @@ function Controls() {
   const [isFinish, setIsFinish] = React.useState<boolean>(false)
 
   const handleGuess = (type: string) => {
+    const currentUser = user || temporaryUser
     if (
       wsRef &&
       wsRef.socket &&
-      user &&
+      currentUser &&
       roomId &&
       playerCoordinatesGuess?.lat &&
       playerCoordinatesGuess.lng
@@ -29,7 +32,7 @@ function Controls() {
       wsRef.handleGuess(
         roomId,
         type,
-        user.id,
+        currentUser.id,
         playerCoordinatesGuess,
         roundsPlayed + 1
       )

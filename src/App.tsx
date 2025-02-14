@@ -10,6 +10,7 @@ import './styles/style.scss'
 import GameSettingsModals from './Components/Modals/GameSettingsModals/GameSettingsModals'
 import ApiKeyModal from './Components/Modals/ApiKeyModal/ApiKeyModal'
 import UseLoadGoogleMaps from './hooks/UseLoadGoogleMaps'
+import Modals from './Components/Modals/Modals'
 
 function App() {
   UseLoadGoogleMaps()
@@ -35,9 +36,7 @@ function App() {
         <Outlet />
       </main>
 
-      <ApiKeyModal />
-      <GameSettingsModals />
-      <AuthModals />
+      <Modals />
 
       <Footer />
       <ToastContainer />

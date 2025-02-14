@@ -1,0 +1,34 @@
+.patch {
+  width: 33.3333%;
+  height: 50px;
+  padding: 5px;
+  cursor: pointer;
+
+  &__wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: all 0.2s ease-out;
+
+    &_active {
+      box-shadow: 0 0 5px 2px var(--update-profile-btn);
+    }
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+      z-index: 10;
+      background-color: #0006;
+    }
+  }
+}

@@ -6,6 +6,7 @@ import { useAppSelector } from './useAppSelector'
 import { getAuth } from '@/redux/slices/AuthSlice/selectors/authSelectors'
 import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
 import { useAppDispatch } from './useAppDispatch'
+import { getTemporaryUser } from '@/redux/slices/TemporaryUserSlice/selectors/TemporaryUserSelectors'
 
 function useWebSocketHandler() {
   const dispatch = useAppDispatch()
@@ -13,13 +14,16 @@ function useWebSocketHandler() {
 
   const { isConnected, isGameEnd } = useAppSelector(getGameConfig)
   const { user } = useAppSelector(getAuth)
+  const { temporaryUser } = useAppSelector(getTemporaryUser)
 
   const wsRef = React.useContext(WebSocketContext)
 
   const { roomId } = useParams()
 
   React.useEffect(() => {
-    if (isConnected && roomId && wsRef && user && wsRef.socket) {
+    const currentUser = user || temporaryUser
+
+    if (isConnected && roomId && wsRef && currentUser && wsRef.socket) {
       wsRef.socket.onmessage = (e: any) => {
         handleWebSocketEvents(e, dispatch, navigate, isGameEnd)
       }

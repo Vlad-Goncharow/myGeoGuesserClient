@@ -11,6 +11,7 @@ interface PlateBtnProps {
   url: string | null
   handleClick: () => void
   className?: string
+  type?: 'button' | 'submit' | 'reset'
 }
 
 const PlateBtn: React.FC<PlateBtnProps> = ({
@@ -19,6 +20,7 @@ const PlateBtn: React.FC<PlateBtnProps> = ({
   plate,
   className,
   handleClick,
+  type = 'button',
 }) => {
   return url !== null ? (
     <Link to={url} className={classNames(s.btn, className)}>
@@ -28,7 +30,11 @@ const PlateBtn: React.FC<PlateBtnProps> = ({
       <FontAwesomeIcon icon={faEarthEurope} className={s.btn_icon} />
     </Link>
   ) : (
-    <button className={classNames(s.btn, className)} onClick={handleClick}>
+    <button
+      type={type}
+      className={classNames(s.btn, className)}
+      onClick={handleClick}
+    >
       {text}
 
       <div className={s.btn_plate}>{plate}</div>

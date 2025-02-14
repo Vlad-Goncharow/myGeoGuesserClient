@@ -5,6 +5,7 @@ export interface IUser {
   playedGames: number
   id: number
   isActive: boolean
+  patch: string
 }
 
 export interface InitStateType {
@@ -39,4 +40,9 @@ export interface AuthResponse {
   user: IUser
   accessToken: string
   refreshToken: string
+}
+
+export interface UpdateUserFieldsResponse {
+  success: boolean
+  user: IUser
 }

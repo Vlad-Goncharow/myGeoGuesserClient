@@ -5,6 +5,7 @@ import { fetchLogout } from '@/redux/slices/AuthSlice/thunks'
 import { IUser } from '@/redux/slices/AuthSlice/types'
 import {
   faCircleUser,
+  faGear,
   faKey,
   faRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons'
@@ -13,6 +14,7 @@ import { animated, easings, useSpring } from '@react-spring/web'
 import React from 'react'
 import s from './HeaderUser.module.scss'
 import { modalsActions } from '@/redux/slices/Modals/slice/modalsSlice'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 interface HeaderUserProps {
   user: IUser
@@ -23,10 +25,11 @@ const HeaderUser: React.FC<HeaderUserProps> = ({ user }) => {
 
   const userRef = React.useRef<HTMLDivElement | null>(null)
   const [popupIsOpen, setPopupIsOpen] = React.useState<boolean>(false)
-
+  const navigate = useNavigate()
   const logout = async () => {
     try {
       dispatch(fetchLogout())
+      navigate('/')
     } catch (e) {}
   }
 
@@ -49,6 +52,11 @@ const HeaderUser: React.FC<HeaderUserProps> = ({ user }) => {
     setPopupIsOpen(false)
   }
 
+  const location = useLocation()
+  React.useEffect(() => {
+    setPopupIsOpen(false)
+  }, [location])
+
   return (
     <div ref={userRef} className={s.user}>
       <div onClick={() => setPopupIsOpen((prev) => !prev)}>
@@ -66,14 +74,17 @@ const HeaderUser: React.FC<HeaderUserProps> = ({ user }) => {
             <FullUserItem user={user} />
           </div>
           <div className={s.popup__userid}>
-            userId
-            <span onClick={copyUserIdHandle}>{user?.id}</span>
+            #<span onClick={copyUserIdHandle}>{user?.id}</span>
           </div>
           <div className={s.popup__controlls}>
-            <div className={s.popup__item}>
+            <Link to={`/user-page/${user.id}`} className={s.popup__item}>
               <FontAwesomeIcon icon={faCircleUser} className={s.icon} />
               <span className={s.name}>Account</span>
-            </div>
+            </Link>
+            <Link to={`/settings/profile`} className={s.popup__item}>
+              <FontAwesomeIcon icon={faGear} className={s.icon} />
+              <span className={s.name}>Settings</span>
+            </Link>
             <div onClick={logout} className={s.popup__item}>
               <FontAwesomeIcon icon={faRightFromBracket} className={s.icon} />
               <span className={s.name}>logout</span>

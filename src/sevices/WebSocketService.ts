@@ -4,6 +4,7 @@ import {
   GameSettingsType,
   playersCoordinatesGuessType,
 } from '@/redux/slices/GameConfig/types'
+import { TemporaryUserType } from '@/redux/slices/TemporaryUserSlice/types/TemporaryUserTypes'
 
 type ServerMessage = {
   event: string
@@ -47,7 +48,7 @@ export class WebSocketService {
     }
   }
 
-  joinRoom(roomId: string, user: IUser) {
+  joinRoom(roomId: string, user: IUser | TemporaryUserType) {
     if (this.socket && roomId) {
       this.socket.send(
         JSON.stringify({
@@ -86,7 +87,7 @@ export class WebSocketService {
   handleGuess(
     roomId: string,
     type: string,
-    userId: number,
+    userId: number | string,
     coordinates: coordinatesType,
     round: number
   ) {

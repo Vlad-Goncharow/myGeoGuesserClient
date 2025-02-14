@@ -54,3 +54,37 @@ export const fetchLogout = createAsyncThunk('auth/fetchLogout', async () => {
     throw e
   }
 })
+
+export const updatePatch = createAsyncThunk(
+  'auth/updatePatch',
+  async (params: { patch: string }) => {
+    try {
+      const { data } = await axios.put('/users/update-patch', params)
+      return data
+    } catch (e) {
+      throw e
+    }
+  }
+)
+export const updateNickname = createAsyncThunk(
+  'auth/updateNickname',
+  async (params: { nickname: string }) => {
+    try {
+      const { data } = await axios.put('/users/update-nickname', params)
+      return data
+    } catch (e) {
+      throw e
+    }
+  }
+)
+export const updateAvatar = createAsyncThunk(
+  'auth/updateAvatar',
+  async (params: { avatar: string }) => {
+    try {
+      const { data } = await axios.put('/users/update-avatar', params)
+      return data
+    } catch (e) {
+      throw e
+    }
+  }
+)

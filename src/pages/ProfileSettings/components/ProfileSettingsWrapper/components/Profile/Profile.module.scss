@@ -1,0 +1,40 @@
+.user {
+  width: min-content;
+  margin-bottom: 15px;
+}
+
+.form {
+  margin-bottom: 15px;
+  padding-top: 25px;
+  position: relative;
+
+  &__error {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: red;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  &__input {
+    padding: 15px;
+    font-size: 14px;
+    color: #fff;
+    background: transparent;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+
+    &:hover {
+      border-color: #fff;
+      transition: all 0.4s;
+    }
+  }
+}
+
+.btn {
+  color: #000;
+  background: #fff;
+  border-color: #fff;
+}
