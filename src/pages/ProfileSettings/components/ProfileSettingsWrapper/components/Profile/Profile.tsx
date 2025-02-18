@@ -24,6 +24,7 @@ function Profile() {
           id='nickname'
           className={s.form__input}
           placeholder='Your nickname'
+          maxLength={USERFIELDSCONSTS.MAX_NICKNAME_LENGTH}
           {...register('nickname', {
             required: 'Required field',
             minLength: {

@@ -17,6 +17,8 @@ import {
 
 const initialState: InitStateType = {
   user: null,
+  isLoading: false,
+  isUserLoaded: false,
 }
 
 const authSlice = createSlice({
@@ -24,12 +26,21 @@ const authSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(
-      fetchAuth.fulfilled,
-      (state, action: PayloadAction<AuthResponse>) => {
-        state.user = action.payload.user
-      }
-    ),
+    builder.addCase(fetchAuth.pending, (state) => {
+      state.isLoading = true
+    }),
+      builder.addCase(
+        fetchAuth.fulfilled,
+        (state, action: PayloadAction<AuthResponse>) => {
+          state.user = action.payload.user
+          state.isLoading = false
+          state.isUserLoaded = true
+        }
+      ),
+      builder.addCase(fetchAuth.rejected, (state) => {
+        state.isLoading = false
+        state.isUserLoaded = true
+      }),
       builder.addCase(
         fetchRegister.fulfilled,
         (state, action: PayloadAction<AuthResponse>) => {

@@ -9,7 +9,7 @@ function LobbyId() {
 
   const copyLobbyId = () => {
     navigator.clipboard.writeText(
-      `${import.meta.env.VITE_CLIENT_URL}${window.location.pathname}`
+      `${import.meta.env.VITE_CLIENT_URL}/join/${roomId}`
     )
   }
 

@@ -10,6 +10,8 @@ export interface IUser {
 
 export interface InitStateType {
   user: IUser | null
+  isLoading: boolean
+  isUserLoaded: boolean
 }
 
 //auth

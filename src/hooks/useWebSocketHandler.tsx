@@ -28,7 +28,7 @@ function useWebSocketHandler() {
         handleWebSocketEvents(e, dispatch, navigate, isGameEnd)
       }
     }
-  }, [wsRef, roomId, user, isConnected])
+  }, [wsRef, roomId, user, isConnected, temporaryUser])
 }
 
 export default useWebSocketHandler

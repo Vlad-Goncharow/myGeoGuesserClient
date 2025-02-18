@@ -3,14 +3,11 @@ import { Outlet } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import Footer from './Components/Footer/Footer'
 import Header from './Components/Header/Header'
-import AuthModals from './Components/Modals/AuthModals/AuthModals'
+import Modals from './Components/Modals/Modals'
 import { useAppDispatch } from './hooks/useAppDispatch'
+import UseLoadGoogleMaps from './hooks/UseLoadGoogleMaps'
 import { fetchAuth } from './redux/slices/AuthSlice/thunks'
 import './styles/style.scss'
-import GameSettingsModals from './Components/Modals/GameSettingsModals/GameSettingsModals'
-import ApiKeyModal from './Components/Modals/ApiKeyModal/ApiKeyModal'
-import UseLoadGoogleMaps from './hooks/UseLoadGoogleMaps'
-import Modals from './Components/Modals/Modals'
 
 function App() {
   UseLoadGoogleMaps()

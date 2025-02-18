@@ -13,7 +13,7 @@ export type WebSocketEvent =
   | { event: 'playerFinishGuess'; payload: PlayerFinishGuessPayloadType }
   | { event: 'playerUnFinishGuess'; payload: PlayerUnFinishGuessPayloadType }
   | { event: 'settingsUpdated'; payload: SettingsUpdatePayloadType }
-  | { event: 'roomClosed' }
+  | { event: 'roomClosed'; payload: RoomClosedPayload }
 
 export type NewUserJoinedPayloadType = {
   isGameStarted: boolean
@@ -50,6 +50,10 @@ export type PlayerFinishGuessPayloadType = {
 }
 export type PlayerUnFinishGuessPayloadType = {
   userId: number
+}
+
+export type RoomClosedPayload = {
+  message: string
 }
 
 export type SettingsUpdatePayloadType = {

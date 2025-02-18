@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom'
 import OnlineLobby from '@/pages/OnlineLobby/OnlineLobby'
 import ProfileSettings from '@/pages/ProfileSettings/ProfileSettings'
+import JoinLobby from '@/pages/JoinLobby/JoinLobby'
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -15,6 +16,7 @@ export const router = createBrowserRouter(
       <Route path='/' element={<Home />} />
       <Route path='/online-lobby/:roomId' element={<OnlineLobby />} />
       <Route path='/settings/:type' element={<ProfileSettings />} />
+      <Route path='/join/:lobbyId' element={<JoinLobby />} />
     </Route>
   )
 )
