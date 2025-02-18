@@ -11,3 +11,17 @@ export enum USERFIELDSCONSTS {
   MAX_PASSWORD_LENGTH = 50,
   MIN_PASSWORD_LENGTH = 10,
 }
+
+export enum GAMEMODS {
+  POINPOINTING = 'Pinpointing',
+  CITYGUESSER = 'City Guesser',
+  COUNTRYGUESSR = 'Country guessr',
+  FLAGS = 'Flags',
+  STATES = 'States',
+}
+
+export enum POINPOINTINGDIFFICULTIES {
+  STANDART = 'Standard Pinpointing',
+  MEDIUM = 'Advanced Pinpointing',
+  HARD = 'Ultra Instinct Pinpointing',
+}

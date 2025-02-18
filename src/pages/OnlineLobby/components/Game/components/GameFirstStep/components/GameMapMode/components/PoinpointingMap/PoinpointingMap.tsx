@@ -5,11 +5,18 @@ import { faMountainSun } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { gameConfigActions } from '@/redux/slices/GameConfig/slice/GameConfigSlice'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
-import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
+import {
+  checkIsPoinpointingHard,
+  checkIsPoinpointingMedium,
+  getGameConfig,
+} from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
 import { useAppSelector } from '@/hooks/useAppSelector'
 
 function PoinpointingMap() {
   const { targetCoordinates } = useAppSelector(getGameConfig)
+
+  const isMediumtDiff = useAppSelector(checkIsPoinpointingMedium)
+  const isHardtDiff = useAppSelector(checkIsPoinpointingHard)
 
   const dispatch = useAppDispatch()
 
@@ -33,6 +40,9 @@ function PoinpointingMap() {
           pov: { heading: 165, pitch: 0 },
           zoom: 1,
           disableDefaultUI: true,
+          clickToGo: isMediumtDiff || isHardtDiff ? false : true,
+          scrollwheel: isHardtDiff ? false : true,
+          showRoadLabels: false,
         }
       )
     }
@@ -96,6 +106,70 @@ function PoinpointingMap() {
         }
       )
 
+      if (isHardtDiff) {
+        mapInstance.setOptions({
+          styles: [
+            {
+              elementType: 'labels',
+              stylers: [
+                {
+                  visibility: 'off',
+                },
+              ],
+            },
+            {
+              featureType: 'administrative',
+              elementType: 'geometry',
+              stylers: [
+                {
+                  visibility: 'off',
+                },
+              ],
+            },
+            {
+              featureType: 'administrative.land_parcel',
+              stylers: [
+                {
+                  visibility: 'off',
+                },
+              ],
+            },
+            {
+              featureType: 'administrative.neighborhood',
+              stylers: [
+                {
+                  visibility: 'off',
+                },
+              ],
+            },
+            {
+              featureType: 'poi',
+              stylers: [
+                {
+                  visibility: 'off',
+                },
+              ],
+            },
+            {
+              featureType: 'road',
+              elementType: 'labels.icon',
+              stylers: [
+                {
+                  visibility: 'off',
+                },
+              ],
+            },
+            {
+              featureType: 'transit',
+              stylers: [
+                {
+                  visibility: 'off',
+                },
+              ],
+            },
+          ],
+        })
+      }
       setMap(mapInstance)
     }
 

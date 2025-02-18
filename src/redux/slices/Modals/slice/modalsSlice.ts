@@ -32,6 +32,13 @@ const modalsSlice = createSlice({
       state.gameSettingsModal = false
       state.gameCountriesModal = false
     },
+    closeAllModals(state) {
+      state.gameSettingsModal = false
+      state.gameCountriesModal = false
+      state.registerModal = false
+      state.loginModaL = false
+      state.apiKeyModal = false
+    },
   },
 })
 
