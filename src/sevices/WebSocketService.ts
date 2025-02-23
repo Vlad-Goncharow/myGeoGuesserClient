@@ -1,3 +1,4 @@
+import { GAMEMODS } from '@/config/constants'
 import { IUser } from '@/redux/slices/AuthSlice/types'
 import {
   coordinatesType,
@@ -106,6 +107,43 @@ export class WebSocketService {
       )
     }
   }
+  addCountryGuess(
+    roomId: string,
+    userId: number | string,
+    country: string,
+    code: string,
+    round: number,
+    time: number | null
+  ) {
+    if (this.socket && roomId) {
+      this.socket.send(
+        JSON.stringify({
+          event: 'addCountryGuess',
+          payload: {
+            roomId,
+            userId,
+            country,
+            code,
+            round,
+            time,
+          },
+        })
+      )
+    }
+  }
+  endCountryModeRound(roomId: string, round: number) {
+    if (this.socket && roomId) {
+      this.socket.send(
+        JSON.stringify({
+          event: 'endCountryModeRound',
+          payload: {
+            roomId,
+            round,
+          },
+        })
+      )
+    }
+  }
   backToRoom(roomId: string) {
     if (this.socket && roomId) {
       this.socket.send(
@@ -132,7 +170,41 @@ export class WebSocketService {
       )
     }
   }
-  gameEnd(roomId: string) {
+  setTargetCountry(
+    roomId: string,
+    round: number,
+    country: string,
+    code: string
+  ) {
+    if (this.socket && roomId) {
+      this.socket.send(
+        JSON.stringify({
+          event: 'setTargetCountry',
+          payload: {
+            roomId,
+            round,
+            country,
+            code,
+          },
+        })
+      )
+    }
+  }
+  gameEnd(roomId: string, mode: string) {
+    if (mode === GAMEMODS.COUNTRYGUESSR) {
+      if (this.socket && roomId) {
+        this.socket.send(
+          JSON.stringify({
+            event: 'endCountyModeGame',
+            payload: {
+              roomId,
+            },
+          })
+        )
+      }
+
+      return
+    }
     if (this.socket && roomId) {
       this.socket.send(
         JSON.stringify({

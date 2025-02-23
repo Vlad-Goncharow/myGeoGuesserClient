@@ -15,7 +15,7 @@ function RoundInfo() {
       <div className={s.wrapper__item}>
         <div className={s.wrapper__title}>ROUND</div>
         <div className={s.wrapper__info}>
-          {roundsPlayed} / {settings.rounds}
+          {roundsPlayed + 1} / {settings.rounds}
         </div>
       </div>
     </div>

@@ -1,5 +1,11 @@
-import { coordinatesType } from '@/redux/slices/GameConfig/types'
+import { isGameModeCountries } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
+import {
+  coordinatesType,
+  countryPlayerGuessesType,
+} from '@/redux/slices/GameConfig/types'
 import React from 'react'
+import { useAppSelector } from './useAppSelector'
+import countries50m from '@/config/countries50.json'
 
 function useRandomCords() {
   const [isPanoActive, setIsPanoActive] = React.useState<boolean>(false)
@@ -24,13 +30,17 @@ function useRandomCords() {
     west: -10.0,
   }
 
+  const isModeCountries = useAppSelector(isGameModeCountries)
+  const [targetCountry, setTargetCountry] =
+    React.useState<countryPlayerGuessesType>()
+
   const [targetCords, setTargetCords] = React.useState<coordinatesType>()
   const checkStreetViewAvailability = (location: coordinatesType) => {
     const streetViewService = new window.google.maps.StreetViewService()
 
     streetViewService.getPanorama(
       { location, radius: 500 },
-      (result, status) => {
+      async (result, status) => {
         if (status === 'OK') {
           if (result && result.location && result.location.latLng) {
             setIsPanoActive(true)
@@ -39,11 +49,27 @@ function useRandomCords() {
               lng: result.location.latLng.lng(),
             }
 
+            if (isModeCountries) {
+              const geocoder = new window.google.maps.Geocoder()
+              const data = await geocoder.geocode({
+                location: result.location.latLng,
+                language: 'USA',
+              })
+
+              const geoCodeCountryName =
+                data.results[data.results.length - 1].formatted_address
+              setTargetCountry({
+                country: geoCodeCountryName,
+                code: data.results[data.results.length - 1]
+                  .address_components[0].short_name,
+              })
+            }
             setTargetCords(serializedCoordinates)
           }
         } else {
-          setIsPanoActive(false)
-          setRandomLocation(getRandomCoordinates(europeBounds))
+          const newRandomLocation = getRandomCoordinates(europeBounds)
+          setRandomLocation(newRandomLocation)
+          checkStreetViewAvailability(newRandomLocation)
         }
       }
     )
@@ -56,6 +82,7 @@ function useRandomCords() {
     checkStreetViewAvailability,
     getRandomCoordinates: getRandomCoordinates(europeBounds),
     targetCords,
+    targetCountry,
   }
 }
 

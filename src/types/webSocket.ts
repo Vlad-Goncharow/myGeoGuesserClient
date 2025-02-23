@@ -1,5 +1,10 @@
 import { IUser } from '@/redux/slices/AuthSlice/types'
-import { GameSettingsType } from '@/redux/slices/GameConfig/types'
+import {
+  countryModePlayersGuessesType,
+  countryPlayerGuessesType,
+  GameSettingsType,
+  targetCountriesType,
+} from '@/redux/slices/GameConfig/types'
 
 export type WebSocketEvent =
   | { event: 'newUserJoined'; payload: NewUserJoinedPayloadType }
@@ -14,6 +19,11 @@ export type WebSocketEvent =
   | { event: 'playerUnFinishGuess'; payload: PlayerUnFinishGuessPayloadType }
   | { event: 'settingsUpdated'; payload: SettingsUpdatePayloadType }
   | { event: 'roomClosed'; payload: RoomClosedPayload }
+  | { event: 'setedTargetCountry'; payload: SetedTargetCountryPayloadType }
+  | { event: 'addedCountryGuess'; payload: AddedCountryGuessPayloadType }
+  | { event: 'endCountryModeRound'; payload: EndCountryModeRoundPayloadType }
+  | { event: 'startedNewRound' }
+  | { event: 'endedCountryModeGame'; payload: EndedCountryModeGamePayloadType }
 
 export type NewUserJoinedPayloadType = {
   isGameStarted: boolean
@@ -30,6 +40,21 @@ export type RoundsUpdatePayloadType = {
 export type SetedTargetCordsPayloadType = {
   targetCoordinates: Coordinates[]
 }
+export type SetedTargetCountryPayloadType = {
+  targetCountries: targetCountriesType
+}
+export type AddedCountryGuessPayloadType = {
+  selectedCountries: countryModePlayersGuessesType[]
+}
+export type EndCountryModeRoundPayloadType = {
+  selectedCountries: countryModePlayersGuessesType[]
+  roundsPlayed: number
+}
+export type EndedCountryModeGamePayloadType = {
+  selectedCountries: countryModePlayersGuessesType[]
+  targetCountries: targetCountriesType[]
+}
+
 export type AllPlayersFinishedPayloadType = {
   roundsPlayed: number
   guesses: Guess[]

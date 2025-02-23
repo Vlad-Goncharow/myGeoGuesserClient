@@ -1,6 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { IUser } from '../../AuthSlice/types'
-import { GameConfigType, RoundTimeType } from '../types'
+import {
+  countryModePlayersGuessesType,
+  countryPlayerGuessesType,
+  GameConfigType,
+  RoundTimeType,
+  targetCountriesType,
+} from '../types'
 
 const initialState: GameConfigType = {
   players: [],
@@ -18,6 +24,18 @@ const initialState: GameConfigType = {
   playersGuesses: [],
   roundsTargets: [],
   finishedGuessPlayersIds: [],
+  countriesMode: {
+    local: {
+      playerGuesses: null,
+      tempSelectedCountries: null,
+      tempTargetCountry: null,
+    },
+    global: {
+      targetCountry: null,
+      selectedCountries: [],
+      targetCountries: [],
+    },
+  },
   settings: {
     rounds: 0,
     gameMode: '',
@@ -87,6 +105,59 @@ const gameConfigSlice = createSlice({
     updateSettings: (state, action) => {
       state.settings = action.payload
     },
+
+    setTargetCountry: (state, action: PayloadAction<targetCountriesType>) => {
+      state.countriesMode.global.targetCountry = {
+        country: action.payload.country,
+        code: action.payload.code,
+        round: action.payload.round,
+      }
+    },
+    setTargetCountries: (
+      state,
+      action: PayloadAction<targetCountriesType[]>
+    ) => {
+      state.countriesMode.global.targetCountries = action.payload
+    },
+
+    setSelectedCountries: (state, action) => {
+      state.countriesMode.global.selectedCountries = action.payload
+    },
+    setCountryPlayerGuesses: (
+      state,
+      action: PayloadAction<countryPlayerGuessesType>
+    ) => {
+      state.countriesMode.local.playerGuesses = {
+        country: action.payload.country,
+        code: action.payload.code,
+      }
+    },
+    clearCountryPlayerGuesses: (state) => {
+      state.countriesMode.local.playerGuesses = null
+    },
+    setTempSelectedCountries: (
+      state,
+      action: PayloadAction<countryModePlayersGuessesType[] | null>
+    ) => {
+      state.countriesMode.local.tempSelectedCountries = action.payload
+    },
+    setTempTargetCountry: (
+      state,
+      action: PayloadAction<targetCountriesType | null>
+    ) => {
+      state.countriesMode.local.tempTargetCountry = action.payload
+    },
+
+    clearCountyMode: (state) => {
+      state.countriesMode.local.playerGuesses = null
+      state.countriesMode.local.tempSelectedCountries = null
+      state.countriesMode.local.tempTargetCountry = null
+
+      state.countriesMode.global.selectedCountries = []
+      state.countriesMode.global.targetCountries = []
+      state.countriesMode.global.targetCountry = null
+    },
+
     clearAll: (state) => {
       state.isConnected = false
       state.isGameEnd = false

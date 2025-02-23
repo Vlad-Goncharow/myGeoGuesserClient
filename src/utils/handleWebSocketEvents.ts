@@ -53,6 +53,38 @@ export function handleWebSocketEvents(
         gameConfigActions.setTargetCoortdinates(data.payload.targetCoordinates)
       )
       break
+    case 'setedTargetCountry':
+      dispatch(gameConfigActions.setTargetCountry(data.payload.targetCountries))
+      break
+    case 'addedCountryGuess':
+      dispatch(
+        gameConfigActions.setSelectedCountries(data.payload.selectedCountries)
+      )
+      break
+    case 'endCountryModeRound':
+      dispatch(
+        gameConfigActions.setSelectedCountries(data.payload.selectedCountries)
+      )
+      dispatch(gameConfigActions.setRoundsPlayed(data.payload.roundsPlayed))
+      dispatch(gameConfigActions.setIsRoundEnd(true))
+      dispatch(gameConfigActions.setIsRoundStart(false))
+      break
+    case 'startedNewRound':
+      dispatch(gameConfigActions.setSelectedCountries([]))
+      dispatch(gameConfigActions.clearCountryPlayerGuesses())
+      dispatch(gameConfigActions.setIsRoundEnd(false))
+      dispatch(gameConfigActions.setIsRoundStart(true))
+      break
+    case 'endedCountryModeGame':
+      dispatch(
+        gameConfigActions.setSelectedCountries(data.payload.selectedCountries)
+      )
+      dispatch(
+        gameConfigActions.setTargetCountries(data.payload.targetCountries)
+      )
+
+      dispatch(gameConfigActions.setIsGameEnd(true))
+      break
 
     case 'allPlayersFinished':
       dispatch(gameConfigActions.setIsRoundEnd(true))
@@ -98,6 +130,7 @@ export function handleWebSocketEvents(
       dispatch(
         gameConfigActions.setRoundsPlayed(data.payload.room.roundsPlayed)
       )
+      dispatch(gameConfigActions.clearCountyMode())
       break
 
     case 'playerFinishGuess':

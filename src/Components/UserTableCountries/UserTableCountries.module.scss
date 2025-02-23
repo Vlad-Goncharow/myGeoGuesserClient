@@ -1,0 +1,38 @@
+.playerCell {
+  min-width: 100px;
+
+  &__wrapper {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  &__country {
+    width: 22px;
+    height: 22px;
+    position: relative;
+    overflow: hidden;
+
+    border-radius: 50%;
+    margin: 0 auto;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.time {
+  font-size: 12px;
+  color: #fff;
+  font-weight: 700;
+  margin-top: 5px;
+}

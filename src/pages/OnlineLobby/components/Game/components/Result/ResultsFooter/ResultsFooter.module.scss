@@ -4,6 +4,20 @@
   justify-content: center;
   flex-direction: column;
   padding: 15px;
+
+  &_countryMode {
+    flex-direction: row;
+    background: #1c1b1b;
+
+    .btn {
+      margin: 0 15px;
+    }
+
+    .btn:not(.btn_leave, .btn_waitHost, .btn_next) {
+      border-color: #fff;
+      color: #fff;
+    }
+  }
 }
 
 .btn {
@@ -20,5 +34,17 @@
     &:before {
       background: rgb(255 20 20 / 75%);
     }
+  }
+
+  &_next {
+    background: #00ccc0;
+    border-color: #00ccc0;
+    color: #fff;
+  }
+
+  &_waitHost {
+    background: #37acf1;
+    border-color: #37acf1;
+    color: #fff;
   }
 }

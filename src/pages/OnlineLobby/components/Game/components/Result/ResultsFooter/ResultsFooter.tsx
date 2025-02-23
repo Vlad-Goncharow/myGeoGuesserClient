@@ -8,6 +8,7 @@ import classNames from 'classnames'
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import s from './ResultsFooter.module.scss'
+import { GAMEMODS } from '@/config/constants'
 
 function ResultsFooter() {
   const { user } = useAppSelector(getAuth)
@@ -27,6 +28,7 @@ function ResultsFooter() {
     randomLocation,
     setRandomLocation,
     targetCords,
+    targetCountry,
   } = useRandomCords()
 
   const handleGuess = () => {
@@ -43,11 +45,20 @@ function ResultsFooter() {
         wsRef.setTargetCords(roomId, roundsPlayed + 1, targetCords)
       }
     }
+
+    if (wsRef && wsRef.socket && roomId && targetCountry) {
+      wsRef.setTargetCountry(
+        roomId,
+        roundsPlayed + 1,
+        targetCountry.country,
+        targetCountry.code
+      )
+    }
   }, [targetCords, randomLocation])
 
   const handleViewResults = () => {
     if (wsRef && wsRef.socket && roomId) {
-      wsRef.gameEnd(roomId)
+      wsRef.gameEnd(roomId, settings.gameMode)
     }
   }
 
@@ -64,7 +75,11 @@ function ResultsFooter() {
     }
   }
   return (
-    <div className={s.footer}>
+    <div
+      className={classNames(s.footer, {
+        [s.footer_countryMode]: settings.gameMode === GAMEMODS.COUNTRYGUESSR,
+      })}
+    >
       {!isGameEnd ? (
         settings.rounds === roundsPlayed ? (
           user &&
@@ -83,7 +98,7 @@ function ResultsFooter() {
             text='next round'
             url={null}
             handleClick={handleGuess}
-            className={s.btn}
+            className={classNames(s.btn, s.btn_next)}
           />
         ) : (
           <PlateBtn
@@ -91,6 +106,7 @@ function ResultsFooter() {
             plate='WH'
             text='Wait Host'
             url={null}
+            className={classNames(s.btn, s.btn_waitHost)}
           />
         )
       ) : (

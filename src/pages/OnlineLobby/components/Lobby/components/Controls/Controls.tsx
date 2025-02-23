@@ -23,6 +23,7 @@ function Controls() {
     isPanoActive,
     setRandomLocation,
     targetCords,
+    targetCountry,
   } = useRandomCords()
 
   const startGame = () => {
@@ -39,6 +40,15 @@ function Controls() {
         wsRef.startGame(roomId)
         wsRef.setTargetCords(roomId, 1, targetCords)
       }
+    }
+
+    if (wsRef && wsRef.socket && roomId && targetCountry) {
+      wsRef.setTargetCountry(
+        roomId,
+        1,
+        targetCountry.country,
+        targetCountry.code
+      )
     }
   }, [targetCords, randomLocation])
 

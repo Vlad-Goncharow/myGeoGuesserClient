@@ -4,6 +4,11 @@ import { createSelector } from '@reduxjs/toolkit'
 
 export const getGameConfig = (state: RootState) => state.gameConfig
 
+export const isGameModeCountries = createSelector(
+  [getGameConfig],
+  (config) => config.settings.gameMode === GAMEMODS.COUNTRYGUESSR
+)
+
 export const checkIsPoinpointingMedium = createSelector(
   [getGameConfig],
   (config) =>
