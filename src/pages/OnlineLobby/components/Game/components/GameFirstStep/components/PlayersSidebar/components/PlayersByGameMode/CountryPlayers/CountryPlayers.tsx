@@ -29,7 +29,7 @@ function CountryPlayers() {
   return (
     <div className={s.list}>
       {players.map((user) => (
-        <div className={s.wrapper}>
+        <div key={user.id} className={s.wrapper}>
           <div
             key={user.id}
             className={classNames(s.user, {

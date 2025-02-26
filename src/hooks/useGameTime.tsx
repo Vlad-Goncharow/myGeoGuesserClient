@@ -3,6 +3,7 @@ import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSel
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useAppSelector } from './useAppSelector'
+import { GAMEMODS } from '@/config/constants'
 
 function useGameTime() {
   const wsRef = useContext(WebSocketContext)
@@ -41,8 +42,12 @@ function useGameTime() {
   }, [isRoundStart, isRoundEnd, settings.roundTime, timeElapsed, updateTime])
 
   useEffect(() => {
-    if (timeElapsed === settings.roundTime && wsRef && roomId) {
+    if (timeElapsed === settings.roundTime && wsRef && roomId && settings.gameMode === GAMEMODS.COUNTRYGUESSR) {
       wsRef.endCountryModeRound(roomId, roundsPlayed + 1)
+    }
+
+    if (timeElapsed === settings.roundTime && wsRef && roomId && settings.gameMode === GAMEMODS.POINPOINTING) {
+      wsRef.endPoinpointingModeRound(roomId, roundsPlayed + 1)
     }
   }, [timeElapsed, settings.roundTime, wsRef, roomId, roundsPlayed])
 

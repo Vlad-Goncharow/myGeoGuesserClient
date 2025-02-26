@@ -11,7 +11,7 @@ export type WebSocketEvent =
   | { event: 'roundsUpdate'; payload: RoundsUpdatePayloadType }
   | { event: 'gameStarted' }
   | { event: 'setedTargetCords'; payload: SetedTargetCordsPayloadType }
-  | { event: 'allPlayersFinished'; payload: AllPlayersFinishedPayloadType }
+  | { event: 'endedPoinpointingModeRound'; payload: AllPlayersFinishedPayloadType }
   | { event: 'gameEnded'; payload: GameEndedPayloadType }
   | { event: 'userLeaveSuccess'; payload: UserLeaveSuccessPayloadType }
   | { event: 'backUsersToRoom'; payload: BackUsersToRoomPayloadType }

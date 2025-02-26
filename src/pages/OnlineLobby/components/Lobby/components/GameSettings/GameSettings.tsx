@@ -8,13 +8,20 @@ import TimeRounds from '../TimeRounds/TimeRounds'
 import UseGameMods from '../../../../../../hooks/UseGameMods'
 import { useAppSelector } from '@/hooks/useAppSelector'
 import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
+import { getAuth } from '@/redux/slices/AuthSlice/selectors/authSelectors'
 
 function GameSettings() {
   const dispatch = useAppDispatch()
-
-  const { settings } = useAppSelector(getGameConfig)
+  
+  const {user} = useAppSelector(getAuth)
+  const { settings, roomAdminId } = useAppSelector(getGameConfig)
 
   const { changeMode } = UseGameMods()
+
+  if (user && user.id !== roomAdminId) {
+    return null
+  }
+
 
   return (
     <div className={s.wrapper}>

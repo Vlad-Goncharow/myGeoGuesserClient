@@ -86,7 +86,7 @@ export function handleWebSocketEvents(
       dispatch(gameConfigActions.setIsGameEnd(true))
       break
 
-    case 'allPlayersFinished':
+    case 'endedPoinpointingModeRound':
       dispatch(gameConfigActions.setIsRoundEnd(true))
       dispatch(gameConfigActions.setIsRoundStart(false))
       dispatch(gameConfigActions.setRoundsPlayed(data.payload.roundsPlayed))

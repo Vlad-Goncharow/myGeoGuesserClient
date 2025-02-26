@@ -6,12 +6,20 @@ import { faBars, faCompress, faExpand } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { animated, easings, useSpring } from '@react-spring/web'
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import s from './Sidebar.module.scss'
 import classNames from 'classnames'
+import { useAppSelector } from '@/hooks/useAppSelector'
+import { getAuth } from '@/redux/slices/AuthSlice/selectors/authSelectors'
+import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
 
 function Sidebar() {
   const wsRef = React.useContext(WebSocketContext)
+
+  const {user} = useAppSelector(getAuth)
+  const {roomAdminId} = useAppSelector(getGameConfig)
+
+  const navigate = useNavigate()
 
   const sidebarRef = React.useRef<HTMLDivElement | null>(null)
   UseClickOutside(sidebarRef, () => setIsOpen(false))
@@ -52,6 +60,13 @@ function Sidebar() {
     }
   }
 
+  const backToMainMenu = () => {
+    if (wsRef && wsRef.socket) {
+      wsRef.socket.close()
+      navigate('/')
+    }
+  }
+
   //animation init
   const { left } = useSpring({
     from: { left: '-100%' },
@@ -76,17 +91,20 @@ function Sidebar() {
             <PlateBtn
               plate='QM'
               text='Quit to Main Menu'
-              url={'/'}
-              handleClick={() => {}}
+              url={null}
+              handleClick={backToMainMenu}
               className={classNames(s.sidebar__btn, s.sidebar__btn_leave)}
             />
-            <PlateBtn
-              plate='BL'
-              text='Back to lobby'
-              url={null}
-              handleClick={backToRoom}
-              className={classNames(s.sidebar__btn, s.sidebar__btn_back)}
-            />
+            {
+              user && user.id === roomAdminId &&
+              <PlateBtn
+                plate='BL'
+                text='Back to lobby'
+                url={null}
+                handleClick={backToRoom}
+                className={classNames(s.sidebar__btn, s.sidebar__btn_back)}
+              />
+            }
           </animated.div>
         </>
       )}

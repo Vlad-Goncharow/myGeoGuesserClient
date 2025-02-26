@@ -13,22 +13,27 @@ function PoinpointingResults() {
   const { haversineDistance } = useDistance()
 
   const results = React.useMemo(() => {
+    if (!targetCoordinates || !players) return []
+
+    const guessesMap = new Map(
+      roundPlayersGuesses?.map((guess) => [guess.userId, guess.coordinates]) || []
+    )
+
     if (targetCoordinates && roundPlayersGuesses) {
-      return roundPlayersGuesses
-        .map((guess) => {
-          const distance = haversineDistance(
-            targetCoordinates,
-            guess.coordinates
-          )
-          const user = players.find((player) => player.id === guess.userId)
+      return players
+        .map((player) => {
+          const guessCoordinates = guessesMap.get(player.id)
+          const distance = guessCoordinates
+            ? haversineDistance(targetCoordinates, guessCoordinates).toFixed(2)
+            : null
           return {
-            user: user,
-            distance: distance.toFixed(2),
+            user: player,
+            distance,
           }
         })
         .sort((a, b) => Number(a.distance) - Number(b.distance))
     }
-  }, [targetCoordinates])
+  }, [targetCoordinates,roundPlayersGuesses, players])
 
   return (
     <div className={classNames(s.users)}>
@@ -40,8 +45,7 @@ function PoinpointingResults() {
           >
             {user.user && <FullUserItem user={user.user} />}
             <div className={s.stats}>
-              <span>{user.distance} km</span>
-              <span>12 s</span>
+              <span>{user.distance ? `${user.distance} km` : 'No guess'}</span>
             </div>
           </div>
         ))}

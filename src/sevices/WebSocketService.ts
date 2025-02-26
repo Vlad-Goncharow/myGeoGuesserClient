@@ -144,6 +144,19 @@ export class WebSocketService {
       )
     }
   }
+  endPoinpointingModeRound(roomId: string, round: number) {
+    if (this.socket && roomId) {
+      this.socket.send(
+        JSON.stringify({
+          event: 'endPoinpointingModeRound',
+          payload: {
+            roomId,
+            round,
+          },
+        })
+      )
+    }
+  }
   backToRoom(roomId: string) {
     if (this.socket && roomId) {
       this.socket.send(
