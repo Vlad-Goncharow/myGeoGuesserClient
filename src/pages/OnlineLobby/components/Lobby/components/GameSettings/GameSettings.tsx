@@ -12,8 +12,8 @@ import { getAuth } from '@/redux/slices/AuthSlice/selectors/authSelectors'
 
 function GameSettings() {
   const dispatch = useAppDispatch()
-  
-  const {user} = useAppSelector(getAuth)
+
+  const { user } = useAppSelector(getAuth)
   const { settings, roomAdminId } = useAppSelector(getGameConfig)
 
   const { changeMode } = UseGameMods()
@@ -21,7 +21,6 @@ function GameSettings() {
   if (user && user.id !== roomAdminId) {
     return null
   }
-
 
   return (
     <div className={s.wrapper}>

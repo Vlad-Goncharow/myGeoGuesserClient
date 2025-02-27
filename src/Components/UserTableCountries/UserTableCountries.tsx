@@ -3,25 +3,27 @@ import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSel
 import React from 'react'
 import FullUserItem from '../FullUserItem/FullUserItem'
 import s from './UserTableCountries.module.scss'
+import { getGame } from '@/redux/slices/Game/selectors/gameSelectors'
 
 interface UserTableCountriesProps {
   user: any
 }
 
 const UserTableCountries: React.FC<UserTableCountriesProps> = ({ user }) => {
-  const { countriesMode, settings, isGameEnd } = useAppSelector(getGameConfig)
+  const { countryMode } = useAppSelector(getGame)
+  const { settings, isGameEnd } = useAppSelector(getGameConfig)
 
   const rounds = React.useMemo(() => {
     if (isGameEnd) {
       return [
         ...new Set(
-          countriesMode.global.targetCountries.map((entry) => entry.round)
+          countryMode.global.targetCountries.map((entry) => entry.round)
         ),
       ]
     } else {
       return [
         ...new Set(
-          countriesMode.global.selectedCountries.map((entry) => entry.round)
+          countryMode.global.selectedCountries.map((entry) => entry.round)
         ),
       ]
     }
@@ -29,7 +31,7 @@ const UserTableCountries: React.FC<UserTableCountriesProps> = ({ user }) => {
 
   const userGuessTime = React.useCallback(
     (round: number) => {
-      const userGuesses = countriesMode.global.selectedCountries.filter(
+      const userGuesses = countryMode.global.selectedCountries.filter(
         (el) => el.userId === user.id && el.round === round
       )
       const timeLastGuess = userGuesses[userGuesses.length - 1]
@@ -40,7 +42,7 @@ const UserTableCountries: React.FC<UserTableCountriesProps> = ({ user }) => {
         return timeLastGuess.time.toFixed(2)
       }
     },
-    [countriesMode.global.selectedCountries, settings.roundTime]
+    [countryMode.global.selectedCountries, settings.roundTime]
   )
 
   return (
@@ -51,7 +53,7 @@ const UserTableCountries: React.FC<UserTableCountriesProps> = ({ user }) => {
         </div>
       </td>
       {rounds.map((round) => {
-        const userEntries = countriesMode.global.selectedCountries.filter(
+        const userEntries = countryMode.global.selectedCountries.filter(
           (entry) => entry.userId === user.id && entry.round === round
         )
 

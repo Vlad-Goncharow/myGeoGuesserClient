@@ -4,17 +4,19 @@ import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSel
 import classNames from 'classnames'
 import React from 'react'
 import s from './CountryPlayers.module.scss'
+import { getGame } from '@/redux/slices/Game/selectors/gameSelectors'
 
 function CountryPlayers() {
-  const { players, countriesMode } = useAppSelector(getGameConfig)
+  const { players } = useAppSelector(getGameConfig)
+  const { countryMode } = useAppSelector(getGame)
 
   const isUserGuess = (user: any) => {
-    const userGuesses = countriesMode.global.selectedCountries.filter(
+    const userGuesses = countryMode.global.selectedCountries.filter(
       (el) => el.userId === user.id
     )
-    if (countriesMode.global.targetCountry) {
+    if (countryMode.global.targetCountry) {
       const findTargetCountry = userGuesses.find(
-        (el) => el.country === countriesMode.global.targetCountry!.country
+        (el) => el.country === countryMode.global.targetCountry!.country
       )
       if (findTargetCountry) {
         return true
@@ -40,12 +42,12 @@ function CountryPlayers() {
             {user && <FullUserItem user={user} />}
 
             <div className={s.countries}>
-              {countriesMode.global.targetCountry !== null &&
-                countriesMode.global.selectedCountries
+              {countryMode.global.targetCountry !== null &&
+                countryMode.global.selectedCountries
                   .filter((el) => el.userId === user.id)
                   .filter(
                     (c) =>
-                      c.country !== countriesMode.global.targetCountry!.country
+                      c.country !== countryMode.global.targetCountry!.country
                   )
                   .map((el) => (
                     <div className={s.countries__country}>

@@ -12,9 +12,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
 import React from 'react'
 import s from './CountryMap.module.scss'
+import { getGame } from '@/redux/slices/Game/selectors/gameSelectors'
+import { gameActions } from '@/redux/slices/Game/slice/GameSlice'
 
 function CountryMap() {
-  const { targetCoordinates, countriesMode } = useAppSelector(getGameConfig)
+  const { countryMode } = useAppSelector(getGame)
+  const { targetCoordinates } = useAppSelector(getGameConfig)
 
   const isMediumtDiff = useAppSelector(checkIsPoinpointingMedium)
   const isHardtDiff = useAppSelector(checkIsPoinpointingHard)
@@ -71,7 +74,7 @@ function CountryMap() {
     )
     if (findCountry) {
       dispatch(
-        gameConfigActions.setCountryPlayerGuesses({
+        gameActions.setCountryPlayerGuesses({
           country: geoCodeCountryName,
           code: geoData.address_components[0].short_name,
         })
@@ -183,11 +186,11 @@ function CountryMap() {
 
   //clered guessed countries when user try guess country
   React.useEffect(() => {
-    if (countriesMode.local.playerGuesses !== null) {
+    if (countryMode.local.playerGuesses !== null) {
       const findCountry = countries50m.features.find(
         (el) =>
-          el.properties.NAME === countriesMode.local.playerGuesses?.country ||
-          el.properties.NAME_LONG === countriesMode.local.playerGuesses?.country
+          el.properties.NAME === countryMode.local.playerGuesses?.country ||
+          el.properties.NAME_LONG === countryMode.local.playerGuesses?.country
       )
 
       if (findCountry && map) {
@@ -199,12 +202,12 @@ function CountryMap() {
       }
     }
 
-    if (!countriesMode.local.playerGuesses && map) {
+    if (!countryMode.local.playerGuesses && map) {
       map.data.forEach((feature) => {
         map.data.remove(feature)
       })
     }
-  }, [countriesMode.local.playerGuesses])
+  }, [countryMode.local.playerGuesses])
 
   const handleZoomIn = () => {
     if (map) {

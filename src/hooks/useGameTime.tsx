@@ -42,11 +42,21 @@ function useGameTime() {
   }, [isRoundStart, isRoundEnd, settings.roundTime, timeElapsed, updateTime])
 
   useEffect(() => {
-    if (timeElapsed === settings.roundTime && wsRef && roomId && settings.gameMode === GAMEMODS.COUNTRYGUESSR) {
+    if (
+      timeElapsed === settings.roundTime &&
+      wsRef &&
+      roomId &&
+      settings.gameMode === GAMEMODS.COUNTRYGUESSR
+    ) {
       wsRef.endCountryModeRound(roomId, roundsPlayed + 1)
     }
 
-    if (timeElapsed === settings.roundTime && wsRef && roomId && settings.gameMode === GAMEMODS.POINPOINTING) {
+    if (
+      timeElapsed === settings.roundTime &&
+      wsRef &&
+      roomId &&
+      settings.gameMode === GAMEMODS.POINPOINTING
+    ) {
       wsRef.endPoinpointingModeRound(roomId, roundsPlayed + 1)
     }
   }, [timeElapsed, settings.roundTime, wsRef, roomId, roundsPlayed])

@@ -1,4 +1,5 @@
 import { AppDispatch } from '@/redux'
+import { gameActions } from '@/redux/slices/Game/slice/GameSlice'
 import { gameConfigActions } from '@/redux/slices/GameConfig/slice/GameConfigSlice'
 import { WebSocketEvent } from '@/types/webSocket'
 import { NavigateFunction } from 'react-router-dom'
@@ -54,34 +55,26 @@ export function handleWebSocketEvents(
       )
       break
     case 'setedTargetCountry':
-      dispatch(gameConfigActions.setTargetCountry(data.payload.targetCountries))
+      dispatch(gameActions.setTargetCountry(data.payload.targetCountries))
       break
     case 'addedCountryGuess':
-      dispatch(
-        gameConfigActions.setSelectedCountries(data.payload.selectedCountries)
-      )
+      dispatch(gameActions.setSelectedCountries(data.payload.selectedCountries))
       break
     case 'endCountryModeRound':
-      dispatch(
-        gameConfigActions.setSelectedCountries(data.payload.selectedCountries)
-      )
+      dispatch(gameActions.setSelectedCountries(data.payload.selectedCountries))
       dispatch(gameConfigActions.setRoundsPlayed(data.payload.roundsPlayed))
       dispatch(gameConfigActions.setIsRoundEnd(true))
       dispatch(gameConfigActions.setIsRoundStart(false))
       break
     case 'startedNewRound':
-      dispatch(gameConfigActions.setSelectedCountries([]))
-      dispatch(gameConfigActions.clearCountryPlayerGuesses())
+      dispatch(gameActions.setSelectedCountries([]))
+      dispatch(gameActions.clearCountryPlayerGuesses())
       dispatch(gameConfigActions.setIsRoundEnd(false))
       dispatch(gameConfigActions.setIsRoundStart(true))
       break
     case 'endedCountryModeGame':
-      dispatch(
-        gameConfigActions.setSelectedCountries(data.payload.selectedCountries)
-      )
-      dispatch(
-        gameConfigActions.setTargetCountries(data.payload.targetCountries)
-      )
+      dispatch(gameActions.setSelectedCountries(data.payload.selectedCountries))
+      dispatch(gameActions.setTargetCountries(data.payload.targetCountries))
 
       dispatch(gameConfigActions.setIsGameEnd(true))
       break
@@ -130,7 +123,8 @@ export function handleWebSocketEvents(
       dispatch(
         gameConfigActions.setRoundsPlayed(data.payload.room.roundsPlayed)
       )
-      dispatch(gameConfigActions.clearCountyMode())
+      dispatch(gameActions.clearCountyMode())
+      dispatch(gameActions.clearCountyMode())
       break
 
     case 'playerFinishGuess':

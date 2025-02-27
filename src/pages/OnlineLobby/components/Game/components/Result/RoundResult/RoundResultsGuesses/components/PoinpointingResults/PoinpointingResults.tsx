@@ -16,7 +16,8 @@ function PoinpointingResults() {
     if (!targetCoordinates || !players) return []
 
     const guessesMap = new Map(
-      roundPlayersGuesses?.map((guess) => [guess.userId, guess.coordinates]) || []
+      roundPlayersGuesses?.map((guess) => [guess.userId, guess.coordinates]) ||
+        []
     )
 
     if (targetCoordinates && roundPlayersGuesses) {
@@ -33,7 +34,7 @@ function PoinpointingResults() {
         })
         .sort((a, b) => Number(a.distance) - Number(b.distance))
     }
-  }, [targetCoordinates,roundPlayersGuesses, players])
+  }, [targetCoordinates, roundPlayersGuesses, players])
 
   return (
     <div className={classNames(s.users)}>

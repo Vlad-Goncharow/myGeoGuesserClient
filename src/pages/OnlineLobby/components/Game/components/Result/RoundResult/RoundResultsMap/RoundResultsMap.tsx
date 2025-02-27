@@ -1,13 +1,12 @@
-import React from 'react'
-import PoinpointingMapResult from './components/PoinpointingMapResult/PoinpointingMapResult'
-import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
-import { useAppSelector } from '@/hooks/useAppSelector'
 import { GAMEMODS } from '@/config/constants'
-import CountryMapResult from '@/Components/CountryMapResult/CountryMapResult'
+import { useAppSelector } from '@/hooks/useAppSelector'
+import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
+import React from 'react'
 import CountryMap from './components/CountryMap/CountryMap'
+import PoinpointingMapResult from './components/PoinpointingMapResult/PoinpointingMapResult'
 
 function RoundResultsMap() {
-  const { settings, countriesMode } = useAppSelector(getGameConfig)
+  const { settings } = useAppSelector(getGameConfig)
 
   switch (settings.gameMode) {
     case GAMEMODS.POINPOINTING:

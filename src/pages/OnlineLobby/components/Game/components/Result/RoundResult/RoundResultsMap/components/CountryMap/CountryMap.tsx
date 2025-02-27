@@ -1,19 +1,19 @@
 import CountryMapResult from '@/Components/CountryMapResult/CountryMapResult'
 import { useAppSelector } from '@/hooks/useAppSelector'
-import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
+import { getGame } from '@/redux/slices/Game/selectors/gameSelectors'
 import React from 'react'
 
 function CountryMap() {
-  const { countriesMode } = useAppSelector(getGameConfig)
+  const { countryMode } = useAppSelector(getGame)
 
-  if (!countriesMode.global.targetCountry) {
+  if (!countryMode.global.targetCountry) {
     return null
   }
 
   return (
     <CountryMapResult
-      selectedCountries={countriesMode.global.selectedCountries}
-      targetCountry={countriesMode.global.targetCountry}
+      selectedCountries={countryMode.global.selectedCountries}
+      targetCountry={countryMode.global.targetCountry}
     />
   )
 }

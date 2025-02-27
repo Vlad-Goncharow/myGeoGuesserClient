@@ -4,9 +4,11 @@ import { useAppSelector } from '@/hooks/useAppSelector'
 import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
 import React from 'react'
 import s from './CountryModeResult.module.scss'
+import { getGame } from '@/redux/slices/Game/selectors/gameSelectors'
 
 function CountryModeResult() {
-  const { players, countriesMode } = useAppSelector(getGameConfig)
+  const { players } = useAppSelector(getGameConfig)
+  const { countryMode } = useAppSelector(getGame)
 
   return (
     <div className={s.tableContainer}>
@@ -15,9 +17,9 @@ function CountryModeResult() {
           <thead>
             <tr>
               <th>Name</th>
-              {countriesMode.global.targetCountry && (
+              {countryMode.global.targetCountry && (
                 <TableTargetCountry
-                  country={countriesMode.global.targetCountry}
+                  country={countryMode.global.targetCountry}
                 />
               )}
             </tr>

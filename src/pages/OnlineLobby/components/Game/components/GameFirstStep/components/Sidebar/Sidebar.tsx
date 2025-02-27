@@ -16,8 +16,8 @@ import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSel
 function Sidebar() {
   const wsRef = React.useContext(WebSocketContext)
 
-  const {user} = useAppSelector(getAuth)
-  const {roomAdminId} = useAppSelector(getGameConfig)
+  const { user } = useAppSelector(getAuth)
+  const { roomAdminId } = useAppSelector(getGameConfig)
 
   const navigate = useNavigate()
 
@@ -95,8 +95,7 @@ function Sidebar() {
               handleClick={backToMainMenu}
               className={classNames(s.sidebar__btn, s.sidebar__btn_leave)}
             />
-            {
-              user && user.id === roomAdminId &&
+            {user && user.id === roomAdminId && (
               <PlateBtn
                 plate='BL'
                 text='Back to lobby'
@@ -104,7 +103,7 @@ function Sidebar() {
                 handleClick={backToRoom}
                 className={classNames(s.sidebar__btn, s.sidebar__btn_back)}
               />
-            }
+            )}
           </animated.div>
         </>
       )}

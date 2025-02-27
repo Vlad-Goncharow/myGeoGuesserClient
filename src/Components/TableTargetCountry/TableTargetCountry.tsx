@@ -1,11 +1,11 @@
-import { targetCountriesType } from '@/redux/slices/GameConfig/types'
-import s from './TableTargetCountry.module.scss'
-import React from 'react'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
 import { useAppSelector } from '@/hooks/useAppSelector'
-import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
-import { gameConfigActions } from '@/redux/slices/GameConfig/slice/GameConfigSlice'
+import { getGame } from '@/redux/slices/Game/selectors/gameSelectors'
+import { gameActions } from '@/redux/slices/Game/slice/GameSlice'
 import classNames from 'classnames'
+import React from 'react'
+import s from './TableTargetCountry.module.scss'
+import { targetCountriesType } from '@/types/countries'
 
 interface TableTargetCountryProps {
   country: targetCountriesType
@@ -17,15 +17,15 @@ const TableTargetCountry: React.FC<TableTargetCountryProps> = ({
   availableTempCountries,
 }) => {
   const dispatch = useAppDispatch()
-  const { countriesMode } = useAppSelector(getGameConfig)
+  const { countryMode } = useAppSelector(getGame)
   const handleTempCountries = () => {
     if (availableTempCountries) {
-      const selected = countriesMode.global.selectedCountries.filter(
+      const selected = countryMode.global.selectedCountries.filter(
         (el) => el.round === country.round
       )
 
-      dispatch(gameConfigActions.setTempTargetCountry(country))
-      dispatch(gameConfigActions.setTempSelectedCountries(selected))
+      dispatch(gameActions.setTempTargetCountry(country))
+      dispatch(gameActions.setTempSelectedCountries(selected))
     }
   }
 
