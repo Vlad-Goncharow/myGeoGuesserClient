@@ -5,12 +5,12 @@ import {
   checkIsPoinpointingHard,
   checkIsPoinpointingMedium,
 } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
-import { gameConfigActions } from '@/redux/slices/GameConfig/slice/GameConfigSlice'
 import { faMountainSun } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
 import React from 'react'
 import s from './PoinpointingMap.module.scss'
+import { gameActions } from '@/redux/slices/Game/slice/GameSlice'
 
 function PoinpointingMap() {
   const { targetCoordinates } = useAppSelector(getGameState)
@@ -70,7 +70,7 @@ function PoinpointingMap() {
       setMarker(newMarker)
     }
 
-    dispatch(gameConfigActions.setPlayerCoordinatesGuess(coordinates))
+    dispatch(gameActions.setPlayerCoordinatesGuess(coordinates))
   }
 
   React.useEffect(() => {

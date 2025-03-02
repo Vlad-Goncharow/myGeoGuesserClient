@@ -1,14 +1,16 @@
 import FullUserItem from '@/Components/FullUserItem/FullUserItem'
 import { useAppSelector } from '@/hooks/useAppSelector'
-import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
 import classNames from 'classnames'
 import React from 'react'
 import s from './PoinpointingPlayers.module.scss'
-import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
+import {
+  getGameState,
+  getPoinpointingMode,
+} from '@/redux/slices/Game/selectors/gameSelectors'
 
 function PoinpointingPlayers() {
   const { players } = useAppSelector(getGameState)
-  const { finishedGuessPlayersIds } = useAppSelector(getGameConfig)
+  const { finishedGuessPlayersIds } = useAppSelector(getPoinpointingMode)
 
   return (
     <div className={s.wrapper}>

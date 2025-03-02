@@ -2,15 +2,17 @@ import React from 'react'
 
 import s from './PoinpointingResults.module.scss'
 import { useAppSelector } from '@/hooks/useAppSelector'
-import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
 import classNames from 'classnames'
 import useDistance from '@/hooks/useDistance'
 import FullUserItem from '@/Components/FullUserItem/FullUserItem'
-import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
+import {
+  getGameState,
+  getPoinpointingMode,
+} from '@/redux/slices/Game/selectors/gameSelectors'
 
 function PoinpointingResults() {
   const { players, targetCoordinates } = useAppSelector(getGameState)
-  const { roundPlayersGuesses } = useAppSelector(getGameConfig)
+  const { roundPlayersGuesses } = useAppSelector(getPoinpointingMode)
   const { haversineDistance } = useDistance()
 
   const results = React.useMemo(() => {

@@ -80,17 +80,15 @@ export function handleWebSocketEvents(
     case 'endedPoinpointingModeRound':
       dispatch(gameActions.endRound())
       dispatch(gameActions.setRoundsPlayed(data.payload.roundsPlayed))
-      dispatch(gameConfigActions.setRoundPlayersGuesses(data.payload.guesses))
-      dispatch(gameConfigActions.setPlayerCoordinatesGuess([]))
-      dispatch(gameConfigActions.clearFinishedGuessPlayersIds())
+      dispatch(gameActions.setRoundPlayersGuesses(data.payload.guesses))
+      dispatch(gameActions.setPlayerCoordinatesGuess(null))
+      dispatch(gameActions.clearFinishedGuessPlayersIds())
       break
 
     case 'gameEnded':
-      dispatch(gameConfigActions.setPlayersGuesses(data.payload.guesses))
+      dispatch(gameActions.setPlayersGuesses(data.payload.guesses))
       dispatch(gameActions.endGame())
-      dispatch(
-        gameConfigActions.setRoundsTargets(data.payload.targetCoordinates)
-      )
+      dispatch(gameActions.setRoundsTargets(data.payload.targetCoordinates))
       break
 
     case 'userLeaveSuccess':
@@ -110,22 +108,17 @@ export function handleWebSocketEvents(
       break
 
     case 'backUsersToRoom':
-      dispatch(gameConfigActions.setPlayersGuesses([]))
-      dispatch(gameConfigActions.setRoundsTargets([]))
       dispatch(gameActions.backUsersToRoom())
       dispatch(gameActions.clearCountyMode())
+      dispatch(gameActions.resetPoinpointing())
       break
 
     case 'playerFinishGuess':
-      dispatch(
-        gameConfigActions.addFinishedGuessPlayersIds(data.payload.userId)
-      )
+      dispatch(gameActions.addFinishedGuessPlayersIds(data.payload.userId))
       break
 
     case 'playerUnFinishGuess':
-      dispatch(
-        gameConfigActions.deleteFinishedGuessPlayersIds(data.payload.userId)
-      )
+      dispatch(gameActions.deleteFinishedGuessPlayersIds(data.payload.userId))
       break
     case 'settingsUpdated':
       dispatch(gameConfigActions.updateSettings(data.payload.settings))

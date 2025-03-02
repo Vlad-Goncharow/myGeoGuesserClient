@@ -3,18 +3,20 @@ import s from './PoinpointingModeControls.module.scss'
 import { useAppSelector } from '@/hooks/useAppSelector'
 import { getAuth } from '@/redux/slices/AuthSlice/selectors/authSelectors'
 import { getTemporaryUser } from '@/redux/slices/TemporaryUserSlice/selectors/TemporaryUserSelectors'
-import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
 import { WebSocketContext } from '@/providers/WsProvider'
 import { useParams } from 'react-router-dom'
 import PlateBtn from '@/Components/PlateBtn/PlateBtn'
 import classNames from 'classnames'
-import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
+import {
+  getGameState,
+  getPoinpointingMode,
+} from '@/redux/slices/Game/selectors/gameSelectors'
 
 function PoinpointingModeControls() {
   const { user } = useAppSelector(getAuth)
   const { temporaryUser } = useAppSelector(getTemporaryUser)
   const { roundsPlayed } = useAppSelector(getGameState)
-  const { playerCoordinatesGuess } = useAppSelector(getGameConfig)
+  const { playerGuess } = useAppSelector(getPoinpointingMode)
   const wsRef = React.useContext(WebSocketContext)
 
   const { roomId } = useParams()
@@ -28,14 +30,14 @@ function PoinpointingModeControls() {
       wsRef.socket &&
       currentUser &&
       roomId &&
-      playerCoordinatesGuess?.lat &&
-      playerCoordinatesGuess.lng
+      playerGuess?.lat &&
+      playerGuess.lng
     ) {
       wsRef.handleGuess(
         roomId,
         type,
         currentUser.id,
-        playerCoordinatesGuess,
+        playerGuess,
         roundsPlayed + 1
       )
       if (type === 'finishGuess') setIsFinish(true)
@@ -60,8 +62,7 @@ function PoinpointingModeControls() {
           url={null}
           handleClick={() => handleGuess('finishGuess')}
           className={classNames(s.controls__btn, {
-            disable:
-              !playerCoordinatesGuess?.lat && !playerCoordinatesGuess?.lng,
+            disable: !playerGuess?.lat && !playerGuess?.lng,
           })}
         />
       )}

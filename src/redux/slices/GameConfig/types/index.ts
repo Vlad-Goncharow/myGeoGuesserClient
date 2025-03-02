@@ -2,11 +2,6 @@ import { IUser } from '../../AuthSlice/types'
 import { coordinatesType } from '@/types/coordinates'
 
 export interface GameConfigType {
-  playerCoordinatesGuess: coordinatesType | null
-  roundPlayersGuesses: playersCoordinatesGuessType[]
-  playersGuesses: playersCoordinatesGuessType[]
-  roundsTargets: playersCoordinatesGuessType[] | null
-  finishedGuessPlayersIds: number[]
   settings: GameSettingsType
 }
 

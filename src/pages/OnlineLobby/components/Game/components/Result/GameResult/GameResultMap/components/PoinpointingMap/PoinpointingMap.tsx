@@ -1,12 +1,14 @@
 import { useAppSelector } from '@/hooks/useAppSelector'
-import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
+import {
+  getGameState,
+  getPoinpointingMode,
+} from '@/redux/slices/Game/selectors/gameSelectors'
 import React from 'react'
 import MapComponent from '../../../../MapComponent/MapComponent'
-import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
 
 function PoinpointingMapResult() {
   const { players } = useAppSelector(getGameState)
-  const { roundsTargets, playersGuesses } = useAppSelector(getGameConfig)
+  const { roundsTargets, playersGuesses } = useAppSelector(getPoinpointingMode)
 
   const markers = React.useMemo(() => {
     return [

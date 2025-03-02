@@ -10,6 +10,7 @@ function Home() {
   React.useEffect(() => {
     dispatch(gameActions.resetState())
     dispatch(gameActions.clearCountyMode())
+    dispatch(gameActions.resetPoinpointing())
   }, [dispatch])
 
   return (
