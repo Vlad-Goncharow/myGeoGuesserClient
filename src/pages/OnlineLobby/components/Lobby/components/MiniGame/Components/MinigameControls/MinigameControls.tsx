@@ -36,7 +36,7 @@ function MinigameControls() {
     if (isMiniGameEnd) {
       setEndTime((performance.now() - startTime) / 1000)
     }
-  }, [isMiniGameEnd])
+  }, [isMiniGameEnd, startTime])
 
   return (
     <div className={s.wrapper}>

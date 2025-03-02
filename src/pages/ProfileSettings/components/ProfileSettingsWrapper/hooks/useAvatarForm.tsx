@@ -43,6 +43,7 @@ const useAvatarForm = () => {
     try {
       const { data } = await axios.post('/files/upload-avatar', formData)
       return data
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
       toast.error(e.response.data.message, {
         position: 'bottom-right',
@@ -82,7 +83,8 @@ const useAvatarForm = () => {
           })
         }
       }
-    } catch (e: any) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (e: unknown) {
       toast.error('Failed to update avatar', {
         position: 'bottom-right',
         autoClose: 5000,

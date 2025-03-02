@@ -5,11 +5,12 @@ import Countries from './Components/Countries/Countries'
 import GlobeComp from './Components/GlobeComp/GlobeComp'
 import MinigameControls from './Components/MinigameControls/MinigameControls'
 import s from './MiniGame.module.scss'
+import { GlobeMethods } from 'react-globe.gl'
 
 function MiniGame() {
   const { checkCountryGuess } = UseMiniGames()
 
-  const globeGlobeRed = React.useRef<any>()
+  const globeGlobeRef = React.useRef<GlobeMethods | undefined>(undefined)
 
   return (
     <div className={s.game}>
@@ -19,9 +20,9 @@ function MiniGame() {
           [s.answer_incorrect]: checkCountryGuess === false,
         })}
       ></div>
-      <GlobeComp globeGlobeRed={globeGlobeRed} />
+      <GlobeComp globeGlobeRef={globeGlobeRef} />
       <MinigameControls />
-      <Countries globeGlobeRed={globeGlobeRed} />
+      <Countries globeGlobeRef={globeGlobeRef} />
     </div>
   )
 }

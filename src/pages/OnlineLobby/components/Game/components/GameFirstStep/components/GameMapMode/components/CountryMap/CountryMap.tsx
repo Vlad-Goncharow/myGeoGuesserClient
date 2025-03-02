@@ -2,22 +2,23 @@ import countries50m from '@/config/countries50.json'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
 import { useAppSelector } from '@/hooks/useAppSelector'
 import {
+  getGame,
+  getGameState,
+} from '@/redux/slices/Game/selectors/gameSelectors'
+import { gameActions } from '@/redux/slices/Game/slice/GameSlice'
+import {
   checkIsPoinpointingHard,
   checkIsPoinpointingMedium,
-  getGameConfig,
 } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
-import { gameConfigActions } from '@/redux/slices/GameConfig/slice/GameConfigSlice'
 import { faMountainSun } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
 import React from 'react'
 import s from './CountryMap.module.scss'
-import { getGame } from '@/redux/slices/Game/selectors/gameSelectors'
-import { gameActions } from '@/redux/slices/Game/slice/GameSlice'
 
 function CountryMap() {
   const { countryMode } = useAppSelector(getGame)
-  const { targetCoordinates } = useAppSelector(getGameConfig)
+  const { targetCoordinates } = useAppSelector(getGameState)
 
   const isMediumtDiff = useAppSelector(checkIsPoinpointingMedium)
   const isHardtDiff = useAppSelector(checkIsPoinpointingHard)
@@ -50,7 +51,7 @@ function CountryMap() {
     }
 
     loadGoogleMaps()
-  }, [targetCoordinates])
+  }, [isHardtDiff, isMediumtDiff, targetCoordinates])
 
   const handleMapClick = async (event: google.maps.MapMouseEvent) => {
     if (!event.latLng) return
@@ -92,6 +93,7 @@ function CountryMap() {
         google.maps.event.clearListeners(map, 'click')
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [map])
 
   React.useEffect(() => {
@@ -182,7 +184,7 @@ function CountryMap() {
     }
 
     loadGoogleMaps()
-  }, [targetCoordinates])
+  }, [isHardtDiff, targetCoordinates])
 
   //clered guessed countries when user try guess country
   React.useEffect(() => {
@@ -207,7 +209,7 @@ function CountryMap() {
         map.data.remove(feature)
       })
     }
-  }, [countryMode.local.playerGuesses])
+  }, [countryMode.local.playerGuesses, map])
 
   const handleZoomIn = () => {
     if (map) {

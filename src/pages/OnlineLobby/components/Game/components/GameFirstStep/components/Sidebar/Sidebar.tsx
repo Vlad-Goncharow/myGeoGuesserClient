@@ -11,13 +11,13 @@ import s from './Sidebar.module.scss'
 import classNames from 'classnames'
 import { useAppSelector } from '@/hooks/useAppSelector'
 import { getAuth } from '@/redux/slices/AuthSlice/selectors/authSelectors'
-import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
+import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
 
 function Sidebar() {
   const wsRef = React.useContext(WebSocketContext)
 
   const { user } = useAppSelector(getAuth)
-  const { roomAdminId } = useAppSelector(getGameConfig)
+  const { roomAdminId } = useAppSelector(getGameState)
 
   const navigate = useNavigate()
 
@@ -30,7 +30,7 @@ function Sidebar() {
   const { roomId } = useParams()
 
   function toggleFullscreen() {
-    var isFullscreen = document.fullscreenElement || false
+    const isFullscreen = document.fullscreenElement || false
 
     if (isFullscreen) {
       exitFullscreen()

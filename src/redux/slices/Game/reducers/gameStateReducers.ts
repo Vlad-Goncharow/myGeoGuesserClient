@@ -1,5 +1,4 @@
 import { PayloadAction } from '@reduxjs/toolkit'
-import { gameStateType } from '../types/gameState/gameState'
 import { IUser } from '../../AuthSlice/types'
 import { coordinatesType } from '@/types/coordinates'
 import { GameInitialState } from '../types/GameTypes'
@@ -25,12 +24,10 @@ export const gameStateReducers = {
   },
 
   startGame: (state: GameInitialState) => {
-    state.gameState.isGameEnd = false
     state.gameState.isGameStart = true
+    state.gameState.isRoundStart = true
   },
-
   endGame: (state: GameInitialState) => {
-    state.gameState.isGameStart = false
     state.gameState.isGameEnd = true
   },
 
@@ -41,6 +38,35 @@ export const gameStateReducers = {
   endRound: (state: GameInitialState) => {
     state.gameState.isRoundStart = false
     state.gameState.isRoundEnd = true
+  },
+
+  setIsGameStarted: (
+    state: GameInitialState,
+    action: PayloadAction<boolean>
+  ) => {
+    state.gameState.isGameStart = action.payload
+  },
+
+  backUsersToRoom: (state: GameInitialState) => {
+    state.gameState.isRoundStart = false
+    state.gameState.isRoundEnd = false
+    state.gameState.isGameEnd = false
+    state.gameState.isGameStart = false
+    state.gameState.roundsPlayed = 0
+    state.gameState.targetCoordinates = null
+  },
+
+  resetState: (state: GameInitialState) => {
+    state.gameState.players = []
+    state.gameState.roomId = null
+    state.gameState.roomAdminId = null
+    state.gameState.isConnected = false
+    state.gameState.isGameStart = false
+    state.gameState.isGameEnd = false
+    state.gameState.isRoundEnd = false
+    state.gameState.isRoundStart = false
+    state.gameState.roundsPlayed = 0
+    state.gameState.targetCoordinates = null
   },
 
   setTargetCoortdinates: (

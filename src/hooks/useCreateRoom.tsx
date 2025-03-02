@@ -1,6 +1,6 @@
 import { WebSocketContext } from '@/providers/WsProvider'
 import { getAuth } from '@/redux/slices/AuthSlice/selectors/authSelectors'
-import { gameConfigActions } from '@/redux/slices/GameConfig/slice/GameConfigSlice'
+import { gameActions } from '@/redux/slices/Game/slice/GameSlice'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -21,7 +21,7 @@ function useCreateRoom() {
 
       if (wsRef.socket && user) {
         wsRef.socket.onopen = () => {
-          dispatch(gameConfigActions.setIsConnected(true))
+          dispatch(gameActions.setIsConnected(true))
           wsRef.createRoom(user.id)
         }
 

@@ -8,11 +8,13 @@ import { WebSocketContext } from '@/providers/WsProvider'
 import { useParams } from 'react-router-dom'
 import PlateBtn from '@/Components/PlateBtn/PlateBtn'
 import classNames from 'classnames'
+import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
 
 function PoinpointingModeControls() {
   const { user } = useAppSelector(getAuth)
   const { temporaryUser } = useAppSelector(getTemporaryUser)
-  const { roundsPlayed, playerCoordinatesGuess } = useAppSelector(getGameConfig)
+  const { roundsPlayed } = useAppSelector(getGameState)
+  const { playerCoordinatesGuess } = useAppSelector(getGameConfig)
   const wsRef = React.useContext(WebSocketContext)
 
   const { roomId } = useParams()

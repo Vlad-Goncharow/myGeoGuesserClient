@@ -1,20 +1,12 @@
 import { GAMEMODS } from '@/config/constants'
 import { IUser } from '@/redux/slices/AuthSlice/types'
-import {
-  coordinatesType,
-  GameSettingsType,
-  playersCoordinatesGuessType,
-} from '@/redux/slices/GameConfig/types'
+import { GameSettingsType } from '@/redux/slices/GameConfig/types'
 import { TemporaryUserType } from '@/redux/slices/TemporaryUserSlice/types/TemporaryUserTypes'
-
-type ServerMessage = {
-  event: string
-  payload: any
-}
-
+import { coordinatesType } from '@/types/coordinates'
+import { WebSocketEvent } from '@/types/webSocket'
 export class WebSocketService {
   socket: WebSocket | null = null
-  private messages: ServerMessage[] = []
+  private messages: WebSocketEvent[] = []
 
   constructor(private url: string) {}
 
@@ -26,7 +18,7 @@ export class WebSocketService {
     }
 
     this.socket.onmessage = (event: MessageEvent) => {
-      const data: ServerMessage = JSON.parse(event.data)
+      const data: WebSocketEvent = JSON.parse(event.data)
       console.log('Message from server:', data)
 
       this.messages.push(data)

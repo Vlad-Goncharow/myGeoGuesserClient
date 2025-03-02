@@ -21,6 +21,7 @@ export const fetchRegister = createAsyncThunk<
   try {
     const { data } = await axios.post('/auth/register', params)
     return data
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     if (!err.response) {
       throw err
@@ -37,6 +38,7 @@ export const fetchLogin = createAsyncThunk<
   try {
     const { data } = await axios.post('/auth/login', params)
     return data
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     if (!err.response) {
       throw err
@@ -46,45 +48,29 @@ export const fetchLogin = createAsyncThunk<
 })
 
 export const fetchLogout = createAsyncThunk('auth/fetchLogout', async () => {
-  try {
-    const { data } = await axios.post('/auth/logout')
-    localStorage.removeItem('token')
-    return data
-  } catch (e) {
-    throw e
-  }
+  const { data } = await axios.post('/auth/logout')
+  localStorage.removeItem('token')
+  return data
 })
 
 export const updatePatch = createAsyncThunk(
   'auth/updatePatch',
   async (params: { patch: string }) => {
-    try {
-      const { data } = await axios.put('/users/update-patch', params)
-      return data
-    } catch (e) {
-      throw e
-    }
+    const { data } = await axios.put('/users/update-patch', params)
+    return data
   }
 )
 export const updateNickname = createAsyncThunk(
   'auth/updateNickname',
   async (params: { nickname: string }) => {
-    try {
-      const { data } = await axios.put('/users/update-nickname', params)
-      return data
-    } catch (e) {
-      throw e
-    }
+    const { data } = await axios.put('/users/update-nickname', params)
+    return data
   }
 )
 export const updateAvatar = createAsyncThunk(
   'auth/updateAvatar',
   async (params: { avatar: string }) => {
-    try {
-      const { data } = await axios.put('/users/update-avatar', params)
-      return data
-    } catch (e) {
-      throw e
-    }
+    const { data } = await axios.put('/users/update-avatar', params)
+    return data
   }
 )

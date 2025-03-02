@@ -32,7 +32,7 @@ function AuthModals() {
         to: { scale: '100%' },
       })
     }
-  }, [registerModal, loginModaL])
+  }, [registerModal, loginModaL, api])
 
   //close modal
   const closeModal = () => {

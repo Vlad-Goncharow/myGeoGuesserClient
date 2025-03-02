@@ -1,16 +1,19 @@
 import FullUserItem from '@/Components/FullUserItem/FullUserItem'
 import { useAppSelector } from '@/hooks/useAppSelector'
-import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
+import {
+  getGame,
+  getGameState,
+} from '@/redux/slices/Game/selectors/gameSelectors'
 import classNames from 'classnames'
 import React from 'react'
 import s from './CountryPlayers.module.scss'
-import { getGame } from '@/redux/slices/Game/selectors/gameSelectors'
+import { IncludeTempUser } from '@/types/users'
 
 function CountryPlayers() {
-  const { players } = useAppSelector(getGameConfig)
+  const { players } = useAppSelector(getGameState)
   const { countryMode } = useAppSelector(getGame)
 
-  const isUserGuess = (user: any) => {
+  const isUserGuess = (user: IncludeTempUser) => {
     const userGuesses = countryMode.global.selectedCountries.filter(
       (el) => el.userId === user.id
     )

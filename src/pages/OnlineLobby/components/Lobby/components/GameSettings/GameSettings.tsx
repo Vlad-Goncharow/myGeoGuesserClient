@@ -9,12 +9,14 @@ import UseGameMods from '../../../../../../hooks/UseGameMods'
 import { useAppSelector } from '@/hooks/useAppSelector'
 import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
 import { getAuth } from '@/redux/slices/AuthSlice/selectors/authSelectors'
+import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
 
 function GameSettings() {
   const dispatch = useAppDispatch()
 
   const { user } = useAppSelector(getAuth)
-  const { settings, roomAdminId } = useAppSelector(getGameConfig)
+  const { settings } = useAppSelector(getGameConfig)
+  const { roomAdminId } = useAppSelector(getGameState)
 
   const { changeMode } = UseGameMods()
 

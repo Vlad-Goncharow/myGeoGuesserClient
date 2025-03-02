@@ -1,10 +1,10 @@
-import { IUser } from '@/redux/slices/AuthSlice/types'
+import AltPatch from '@/assets/img/alt_patch.jpg'
+import { IncludeTempUser } from '@/types/users'
 import classNames from 'classnames'
 import React from 'react'
-import AltPatch from '@/assets/img/alt_patch.jpg'
 
 interface FullUserItemProps {
-  user: IUser
+  user: IncludeTempUser
   className?: string
 }
 

@@ -10,8 +10,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PlateBtn from '@/Components/PlateBtn/PlateBtn'
 import useCreateRoom from '@/hooks/useCreateRoom'
 
-const NextArrow = (props: any) => {
-  const { onClick } = props
+// Тип для пропсов стрелок
+interface ArrowProps {
+  onClick?: () => void
+}
+
+const NextArrow: React.FC<ArrowProps> = ({ onClick }) => {
   return (
     <div className={classNames(s.arrow, s.arrow_next)} onClick={onClick}>
       <FontAwesomeIcon icon={faArrowRight} />
@@ -19,8 +23,7 @@ const NextArrow = (props: any) => {
   )
 }
 
-const PrevArrow = (props: any) => {
-  const { onClick } = props
+const PrevArrow: React.FC<ArrowProps> = ({ onClick }) => {
   return (
     <div className={classNames(s.arrow, s.arrow_prev)} onClick={onClick}>
       <FontAwesomeIcon icon={faArrowLeft} />

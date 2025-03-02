@@ -6,7 +6,7 @@ import { formatTime } from '@/utils/formatTime'
 import { faClock } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import debounce from 'lodash/debounce'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import s from './TimeRounds.module.scss'
 import { RoundTimeType } from '@/redux/slices/GameConfig/types'
@@ -24,15 +24,16 @@ function TimeRounds() {
     setLocalRoundTime(settings.roundTime)
   }, [settings.roundTime])
 
-  const sendRoundTimeUpdate = useCallback(
-    debounce((newTime: RoundTimeType) => {
-      if (wsRef && wsRef.socket && roomId) {
-        wsRef.updateRoomSetttings(roomId, {
-          ...settings,
-          roundTime: newTime,
-        })
-      }
-    }, 300),
+  const sendRoundTimeUpdate = React.useMemo(
+    () =>
+      debounce((newTime: RoundTimeType) => {
+        if (wsRef && wsRef.socket && roomId) {
+          wsRef.updateRoomSetttings(roomId, {
+            ...settings,
+            roundTime: newTime,
+          })
+        }
+      }, 300),
     [wsRef, roomId, settings]
   )
 

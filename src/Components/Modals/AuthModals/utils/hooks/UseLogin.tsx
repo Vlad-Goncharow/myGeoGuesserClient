@@ -7,6 +7,7 @@ import {
 } from '@/redux/slices/AuthSlice/types'
 import { unwrapResult } from '@reduxjs/toolkit'
 import React from 'react'
+import { toast } from 'react-toastify'
 
 function UseLogin() {
   const dispatch = useAppDispatch()
@@ -27,8 +28,19 @@ function UseLogin() {
         setError({ param: myError.param, message: myError.message })
         setIsSuccess(false)
       }
-    } catch (e) {
+    } catch (e: unknown) {
       setIsSuccess(false)
+      console.error(e)
+      toast.error('Login error', {
+        position: 'bottom-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      })
     }
   }
 

@@ -6,10 +6,11 @@ import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSel
 import classNames from 'classnames'
 import useDistance from '@/hooks/useDistance'
 import FullUserItem from '@/Components/FullUserItem/FullUserItem'
+import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
 
 function PoinpointingResults() {
-  const { targetCoordinates, roundPlayersGuesses, players } =
-    useAppSelector(getGameConfig)
+  const { players, targetCoordinates } = useAppSelector(getGameState)
+  const { roundPlayersGuesses } = useAppSelector(getGameConfig)
   const { haversineDistance } = useDistance()
 
   const results = React.useMemo(() => {
@@ -34,7 +35,7 @@ function PoinpointingResults() {
         })
         .sort((a, b) => Number(a.distance) - Number(b.distance))
     }
-  }, [targetCoordinates, roundPlayersGuesses, players])
+  }, [targetCoordinates, players, roundPlayersGuesses, haversineDistance])
 
   return (
     <div className={classNames(s.users)}>

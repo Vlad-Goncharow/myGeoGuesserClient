@@ -15,6 +15,7 @@ import React from 'react'
 import s from './HeaderUser.module.scss'
 import { modalsActions } from '@/redux/slices/Modals/slice/modalsSlice'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 interface HeaderUserProps {
   user: IUser
@@ -30,7 +31,19 @@ const HeaderUser: React.FC<HeaderUserProps> = ({ user }) => {
     try {
       dispatch(fetchLogout())
       navigate('/')
-    } catch (e) {}
+    } catch (e: unknown) {
+      console.error(e)
+      toast.error('Logout error', {
+        position: 'bottom-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      })
+    }
   }
 
   //animation init

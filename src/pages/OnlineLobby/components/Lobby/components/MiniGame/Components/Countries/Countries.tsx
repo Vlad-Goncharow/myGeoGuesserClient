@@ -10,12 +10,13 @@ import countries50 from '@/config/countries50.json'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
 import { miniGamegActions } from '@/redux/slices/MiniGame/slice/MiniGame'
 import { countriesListNamesType } from '@/config/subCountries'
+import { GlobeMethods } from 'react-globe.gl'
 
 interface CountriesPros {
-  globeGlobeRed: any
+  globeGlobeRef: React.MutableRefObject<GlobeMethods | undefined>
 }
 
-const Countries: React.FC<CountriesPros> = ({ globeGlobeRed }) => {
+const Countries: React.FC<CountriesPros> = ({ globeGlobeRef }) => {
   const { randomCountries, choosenCountries, isMiniGameEnd } =
     useAppSelector(getMiniGame)
   const [isOpen, setIsOpen] = React.useState(false)
@@ -45,6 +46,7 @@ const Countries: React.FC<CountriesPros> = ({ globeGlobeRed }) => {
       | 'LineString'
       | 'MultiPoint'
       | 'MultiLineString'
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const cords: any[] = country.geometry.coordinates
     const geometry = turf.geometry(type, cords)
     const area = Math.floor(turf.area(geometry) / 1000000)
@@ -59,8 +61,8 @@ const Countries: React.FC<CountriesPros> = ({ globeGlobeRed }) => {
 
     dispatch(miniGamegActions.setSelectedCounty(item))
 
-    if (globeGlobeRed.current) {
-      globeGlobeRed.current.pointOfView(
+    if (globeGlobeRef.current) {
+      globeGlobeRef.current.pointOfView(
         {
           lat: center.geometry.coordinates[1],
           lng: center.geometry.coordinates[0],
@@ -87,7 +89,7 @@ const Countries: React.FC<CountriesPros> = ({ globeGlobeRed }) => {
       </div>
       <animated.div style={{ ...animationProps }}>
         <div className={s.list}>
-          {randomCountries.map((el: any, i: number) => (
+          {randomCountries.map((el: countriesListNamesType, i: number) => (
             <div className={s.item}>
               Needed - <span onClick={() => goToCountry(el)}>{el.name}</span> _
               Choosen -{' '}

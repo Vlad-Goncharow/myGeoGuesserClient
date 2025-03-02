@@ -1,18 +1,18 @@
 import { WebSocketContext } from '@/providers/WsProvider'
+import { getAuth } from '@/redux/slices/AuthSlice/selectors/authSelectors'
+import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
+import { getTemporaryUser } from '@/redux/slices/TemporaryUserSlice/selectors/TemporaryUserSelectors'
 import { handleWebSocketEvents } from '@/utils/handleWebSocketEvents'
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useAppSelector } from './useAppSelector'
-import { getAuth } from '@/redux/slices/AuthSlice/selectors/authSelectors'
-import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
 import { useAppDispatch } from './useAppDispatch'
-import { getTemporaryUser } from '@/redux/slices/TemporaryUserSlice/selectors/TemporaryUserSelectors'
+import { useAppSelector } from './useAppSelector'
 
 function useWebSocketHandler() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const { isConnected, isGameEnd } = useAppSelector(getGameConfig)
+  const { isConnected, isGameEnd } = useAppSelector(getGameState)
   const { user } = useAppSelector(getAuth)
   const { temporaryUser } = useAppSelector(getTemporaryUser)
 
@@ -24,11 +24,20 @@ function useWebSocketHandler() {
     const currentUser = user || temporaryUser
 
     if (isConnected && roomId && wsRef && currentUser && wsRef.socket) {
-      wsRef.socket.onmessage = (e: any) => {
+      wsRef.socket.onmessage = (e: MessageEvent<string>) => {
         handleWebSocketEvents(e, dispatch, navigate, isGameEnd)
       }
     }
-  }, [wsRef, roomId, user, isConnected, temporaryUser])
+  }, [
+    wsRef,
+    roomId,
+    user,
+    isConnected,
+    temporaryUser,
+    dispatch,
+    navigate,
+    isGameEnd,
+  ])
 }
 
 export default useWebSocketHandler

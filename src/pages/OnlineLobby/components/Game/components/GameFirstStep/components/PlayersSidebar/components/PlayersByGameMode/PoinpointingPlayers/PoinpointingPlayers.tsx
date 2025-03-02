@@ -4,9 +4,11 @@ import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSel
 import classNames from 'classnames'
 import React from 'react'
 import s from './PoinpointingPlayers.module.scss'
+import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
 
 function PoinpointingPlayers() {
-  const { players, finishedGuessPlayersIds } = useAppSelector(getGameConfig)
+  const { players } = useAppSelector(getGameState)
+  const { finishedGuessPlayersIds } = useAppSelector(getGameConfig)
 
   return (
     <div className={s.wrapper}>

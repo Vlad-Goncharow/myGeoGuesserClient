@@ -36,7 +36,7 @@ const Login: React.FC<LoginProps> = ({ closeModal }) => {
 
       return
     }
-  }, [data, isSuccess, error])
+  }, [data, isSuccess, error, closeModal, setError])
 
   //animation init
   const [springs, loginApi] = useSpring(() => ({
@@ -52,7 +52,7 @@ const Login: React.FC<LoginProps> = ({ closeModal }) => {
         to: { x: '0%' },
       })
     }
-  }, [loginModaL])
+  }, [loginApi, loginModaL])
 
   return (
     <OverlayWrapper closeModal={closeModal}>
@@ -76,7 +76,7 @@ const Login: React.FC<LoginProps> = ({ closeModal }) => {
                 required: 'Required field',
                 pattern: {
                   value:
-                    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                    /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                   message: 'Enter a valid email address',
                 },
               })}

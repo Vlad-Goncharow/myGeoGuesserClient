@@ -1,11 +1,13 @@
 import CountryMapResult from '@/Components/CountryMapResult/CountryMapResult'
 import { useAppSelector } from '@/hooks/useAppSelector'
-import { getGame } from '@/redux/slices/Game/selectors/gameSelectors'
-import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
+import {
+  getGame,
+  getGameState,
+} from '@/redux/slices/Game/selectors/gameSelectors'
 import React from 'react'
 
 function GameResultCountryMap() {
-  const { roundsPlayed } = useAppSelector(getGameConfig)
+  const { roundsPlayed } = useAppSelector(getGameState)
   const { countryMode } = useAppSelector(getGame)
 
   const selectedCountries = React.useMemo(() => {
@@ -16,7 +18,11 @@ function GameResultCountryMap() {
         (el) => el.round === roundsPlayed
       )
     }
-  }, [countryMode])
+  }, [
+    countryMode.global.selectedCountries,
+    countryMode.local.tempSelectedCountries,
+    roundsPlayed,
+  ])
 
   const targetCountry = React.useMemo(() => {
     if (countryMode.local.tempTargetCountry !== null) {

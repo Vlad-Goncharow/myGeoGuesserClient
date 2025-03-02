@@ -1,6 +1,7 @@
 import { useAppDispatch } from '@/hooks/useAppDispatch'
 import { useAppSelector } from '@/hooks/useAppSelector'
 import { getAuth } from '@/redux/slices/AuthSlice/selectors/authSelectors'
+import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
 import { modalsActions } from '@/redux/slices/Modals/slice/modalsSlice'
 import { faEarthEurope } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -9,12 +10,11 @@ import { Link, useLocation } from 'react-router-dom'
 import PlateBtn from '../PlateBtn/PlateBtn'
 import HeaderUser from './components/HeaderUser/HeaderUser'
 import s from './Header.module.scss'
-import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
 
 function Header() {
   const dispatch = useAppDispatch()
   const { user } = useAppSelector(getAuth)
-  const { isGameStart } = useAppSelector(getGameConfig)
+  const { isGameStart } = useAppSelector(getGameState)
 
   const toggleLoginModal = () => {
     dispatch(modalsActions.toggleLoginModal())

@@ -1,17 +1,21 @@
 import { useAppSelector } from '@/hooks/useAppSelector'
+import {
+  getGame,
+  getGameState,
+} from '@/redux/slices/Game/selectors/gameSelectors'
 import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
+import { IncludeTempUser } from '@/types/users'
 import React from 'react'
 import FullUserItem from '../FullUserItem/FullUserItem'
 import s from './UserTableCountries.module.scss'
-import { getGame } from '@/redux/slices/Game/selectors/gameSelectors'
-
 interface UserTableCountriesProps {
-  user: any
+  user: IncludeTempUser
 }
 
 const UserTableCountries: React.FC<UserTableCountriesProps> = ({ user }) => {
   const { countryMode } = useAppSelector(getGame)
-  const { settings, isGameEnd } = useAppSelector(getGameConfig)
+  const { settings } = useAppSelector(getGameConfig)
+  const { isGameEnd } = useAppSelector(getGameState)
 
   const rounds = React.useMemo(() => {
     if (isGameEnd) {
@@ -27,7 +31,11 @@ const UserTableCountries: React.FC<UserTableCountriesProps> = ({ user }) => {
         ),
       ]
     }
-  }, [isGameEnd])
+  }, [
+    countryMode.global.selectedCountries,
+    countryMode.global.targetCountries,
+    isGameEnd,
+  ])
 
   const userGuessTime = React.useCallback(
     (round: number) => {
@@ -42,7 +50,7 @@ const UserTableCountries: React.FC<UserTableCountriesProps> = ({ user }) => {
         return timeLastGuess.time.toFixed(2)
       }
     },
-    [countryMode.global.selectedCountries, settings.roundTime]
+    [countryMode.global.selectedCountries, settings.roundTime, user.id]
   )
 
   return (

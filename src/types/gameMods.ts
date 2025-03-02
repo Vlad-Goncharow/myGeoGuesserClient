@@ -1,5 +1,3 @@
-export interface GameModesType {}
-
 export interface GameModeType {
   difficulties?: GameDificultType[]
   name: string

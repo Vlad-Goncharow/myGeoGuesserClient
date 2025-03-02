@@ -4,11 +4,13 @@ import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useAppSelector } from './useAppSelector'
 import { GAMEMODS } from '@/config/constants'
+import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
 
 function useGameTime() {
   const wsRef = useContext(WebSocketContext)
-  const { settings, isRoundEnd, isRoundStart, roundsPlayed } =
-    useAppSelector(getGameConfig)
+  const { settings } = useAppSelector(getGameConfig)
+  const { isRoundEnd, isRoundStart, roundsPlayed } =
+    useAppSelector(getGameState)
   const { roomId } = useParams()
 
   const [timeElapsed, setTimeElapsed] = useState(0)
@@ -59,7 +61,14 @@ function useGameTime() {
     ) {
       wsRef.endPoinpointingModeRound(roomId, roundsPlayed + 1)
     }
-  }, [timeElapsed, settings.roundTime, wsRef, roomId, roundsPlayed])
+  }, [
+    timeElapsed,
+    settings.roundTime,
+    wsRef,
+    roomId,
+    roundsPlayed,
+    settings.gameMode,
+  ])
 
   return { timeElapsed }
 }

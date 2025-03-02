@@ -1,19 +1,19 @@
-import React from 'react'
-import s from './PoinpointingMap.module.scss'
-import classNames from 'classnames'
-import { faMountainSun } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { gameConfigActions } from '@/redux/slices/GameConfig/slice/GameConfigSlice'
 import { useAppDispatch } from '@/hooks/useAppDispatch'
+import { useAppSelector } from '@/hooks/useAppSelector'
+import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
 import {
   checkIsPoinpointingHard,
   checkIsPoinpointingMedium,
-  getGameConfig,
 } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
-import { useAppSelector } from '@/hooks/useAppSelector'
+import { gameConfigActions } from '@/redux/slices/GameConfig/slice/GameConfigSlice'
+import { faMountainSun } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import classNames from 'classnames'
+import React from 'react'
+import s from './PoinpointingMap.module.scss'
 
 function PoinpointingMap() {
-  const { targetCoordinates } = useAppSelector(getGameConfig)
+  const { targetCoordinates } = useAppSelector(getGameState)
 
   const isMediumtDiff = useAppSelector(checkIsPoinpointingMedium)
   const isHardtDiff = useAppSelector(checkIsPoinpointingHard)
@@ -48,7 +48,7 @@ function PoinpointingMap() {
     }
 
     loadGoogleMaps()
-  }, [targetCoordinates])
+  }, [isHardtDiff, isMediumtDiff, targetCoordinates])
 
   const handleMapClick = (event: google.maps.MapMouseEvent) => {
     if (!event.latLng) return
@@ -83,6 +83,7 @@ function PoinpointingMap() {
         google.maps.event.clearListeners(map, 'click')
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [map, marker])
 
   React.useEffect(() => {
@@ -174,7 +175,7 @@ function PoinpointingMap() {
     }
 
     loadGoogleMaps()
-  }, [targetCoordinates])
+  }, [isHardtDiff, targetCoordinates])
 
   const handleZoomIn = () => {
     if (map) {

@@ -1,13 +1,15 @@
 import TableTargetCountry from '@/Components/TableTargetCountry/TableTargetCountry'
 import UserTableCountries from '@/Components/UserTableCountries/UserTableCountries'
 import { useAppSelector } from '@/hooks/useAppSelector'
-import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
+import {
+  getGame,
+  getGameState,
+} from '@/redux/slices/Game/selectors/gameSelectors'
 import React from 'react'
 import s from './CountryModeGameRes.module.scss'
-import { getGame } from '@/redux/slices/Game/selectors/gameSelectors'
 
 function CountryModeGameRes() {
-  const { players } = useAppSelector(getGameConfig)
+  const { players } = useAppSelector(getGameState)
   const { countryMode } = useAppSelector(getGame)
 
   return (

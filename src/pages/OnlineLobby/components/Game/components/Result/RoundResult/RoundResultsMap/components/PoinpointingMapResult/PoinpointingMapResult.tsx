@@ -2,15 +2,12 @@ import { useAppSelector } from '@/hooks/useAppSelector'
 import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
 import React from 'react'
 import MapComponent from '../../../../MapComponent/MapComponent'
+import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
 
 function PoinpointingMapResult() {
-  const {
-    targetCoordinates,
-    roundPlayersGuesses,
-    players,
-    roundsTargets,
-    playersGuesses,
-  } = useAppSelector(getGameConfig)
+  const { players, targetCoordinates } = useAppSelector(getGameState)
+
+  const { roundPlayersGuesses } = useAppSelector(getGameConfig)
 
   const markers = React.useMemo(() => {
     if (targetCoordinates) {
@@ -27,7 +24,7 @@ function PoinpointingMapResult() {
         })) || []),
       ]
     }
-  }, [roundsTargets, playersGuesses, targetCoordinates])
+  }, [targetCoordinates, roundPlayersGuesses, players])
 
   const lines = React.useMemo(() => {
     if (targetCoordinates) {

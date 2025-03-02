@@ -7,6 +7,7 @@ import {
 } from '@/redux/slices/AuthSlice/types'
 import { unwrapResult } from '@reduxjs/toolkit'
 import React from 'react'
+import { toast } from 'react-toastify'
 
 function useRegister() {
   const dispatch = useAppDispatch()
@@ -29,6 +30,17 @@ function useRegister() {
       }
     } catch (e) {
       setIsSuccess(false)
+      console.error(e)
+      toast.error('Register error', {
+        position: 'bottom-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      })
     }
   }
 

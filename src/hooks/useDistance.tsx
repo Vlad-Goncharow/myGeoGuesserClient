@@ -1,5 +1,3 @@
-import React from 'react'
-
 function useDistance() {
   function haversineDistance(
     coord1: { lat: number; lng: number },

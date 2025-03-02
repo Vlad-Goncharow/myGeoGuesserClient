@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from 'axios'
 
 export const API_URL = import.meta.env.VITE_SERVER_URL
@@ -36,7 +37,7 @@ instance.interceptors.response.use(
         localStorage.setItem('token', response.data.accessToken)
         return instance.request(originalRequest)
       } catch (e) {
-        console.log('НЕ АВТОРИЗОВАН')
+        console.log('НЕ АВТОРИЗОВАН', e)
       }
     }
     throw error

@@ -12,7 +12,7 @@ function Modals() {
 
   React.useEffect(() => {
     dispatch(modalsActions.closeAllModals())
-  }, [location])
+  }, [dispatch, location])
 
   return (
     <>

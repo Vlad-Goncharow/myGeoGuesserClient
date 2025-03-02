@@ -9,12 +9,13 @@ import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import s from './ResultsFooter.module.scss'
 import { GAMEMODS } from '@/config/constants'
+import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
 
 function ResultsFooter() {
   const { user } = useAppSelector(getAuth)
 
-  const { roomAdminId, settings, roundsPlayed, isGameEnd } =
-    useAppSelector(getGameConfig)
+  const { roomAdminId, roundsPlayed, isGameEnd } = useAppSelector(getGameState)
+  const { settings } = useAppSelector(getGameConfig)
 
   const navigate = useNavigate()
   const { roomId } = useParams()
@@ -54,7 +55,16 @@ function ResultsFooter() {
         targetCountry.code
       )
     }
-  }, [targetCords, randomLocation])
+  }, [
+    targetCords,
+    randomLocation,
+    isPanoActive,
+    wsRef,
+    roomId,
+    targetCountry,
+    checkStreetViewAvailability,
+    roundsPlayed,
+  ])
 
   const handleViewResults = () => {
     if (wsRef && wsRef.socket && roomId) {

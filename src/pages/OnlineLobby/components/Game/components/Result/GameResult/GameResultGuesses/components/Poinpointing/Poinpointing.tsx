@@ -5,10 +5,17 @@ import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSel
 import classNames from 'classnames'
 import React from 'react'
 import s from './Poinpointing.module.scss'
+import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
+import { IncludeTempUser } from '@/types/users'
+
+interface Result {
+  user: IncludeTempUser
+  distance: number
+}
 
 function PoinpointingResults() {
-  const { roundsTargets, playersGuesses, players } =
-    useAppSelector(getGameConfig)
+  const { players } = useAppSelector(getGameState)
+  const { roundsTargets, playersGuesses } = useAppSelector(getGameConfig)
   const { haversineDistance } = useDistance()
 
   const results = React.useMemo(() => {
@@ -19,7 +26,9 @@ function PoinpointingResults() {
         const roundTarget = roundsTargets.find(
           (target) => target.round === guess.round
         )
-        const user = players.find((player) => player.id === guess.userId)
+        const user = (players as IncludeTempUser[]).find(
+          (player) => player.id === guess.userId
+        )
 
         if (roundTarget && user) {
           const distance = haversineDistance(
@@ -33,8 +42,8 @@ function PoinpointingResults() {
         }
         return undefined
       })
-      .filter(Boolean)
-      .reduce((acc: any[], cur: any) => {
+      .filter((item): item is Result => Boolean(item))
+      .reduce((acc: Result[], cur: Result) => {
         const existingUser = acc.find((user) => user.user.id === cur.user.id)
 
         if (existingUser) {
@@ -51,7 +60,7 @@ function PoinpointingResults() {
         return acc
       }, [])
       .sort((a, b) => Number(a.distance) - Number(b.distance))
-  }, [playersGuesses, roundsTargets])
+  }, [haversineDistance, players, playersGuesses, roundsTargets])
 
   return (
     <div className={classNames(s.users)}>
@@ -63,7 +72,6 @@ function PoinpointingResults() {
           {user.user && <FullUserItem user={user.user} />}
           <div className={s.stats}>
             <span>{user.distance} km</span>
-            <span>12 s</span>
           </div>
         </div>
       ))}

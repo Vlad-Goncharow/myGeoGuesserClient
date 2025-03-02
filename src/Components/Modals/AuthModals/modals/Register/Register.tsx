@@ -45,7 +45,7 @@ const Register: React.FC<RegisterProps> = ({ closeModal }) => {
 
       return
     }
-  }, [data, isSuccess, error])
+  }, [data, isSuccess, error, closeModal, setError])
 
   //animation init
   const [springs, regApi] = useSpring(() => ({
@@ -61,7 +61,7 @@ const Register: React.FC<RegisterProps> = ({ closeModal }) => {
         to: { x: '0%' },
       })
     }
-  }, [registerModal])
+  }, [regApi, registerModal])
 
   return (
     <OverlayWrapper closeModal={closeModal}>
@@ -85,7 +85,7 @@ const Register: React.FC<RegisterProps> = ({ closeModal }) => {
                 required: 'Required field',
                 pattern: {
                   value:
-                    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                    /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                   message: 'Enter a valid email address',
                 },
               })}

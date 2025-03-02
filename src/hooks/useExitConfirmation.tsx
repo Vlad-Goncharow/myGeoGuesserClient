@@ -18,7 +18,7 @@ const useExitConfirmation = () => {
     return () => {
       window.removeEventListener('popstate', handlePopState)
     }
-  }, [])
+  }, [navigate, wsRef])
 }
 
 export default useExitConfirmation

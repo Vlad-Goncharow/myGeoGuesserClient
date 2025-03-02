@@ -1,13 +1,13 @@
-import React from 'react'
-import s from './Footer.module.scss'
 import { useAppSelector } from '@/hooks/useAppSelector'
-import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
-import { Link, useLocation } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
 import { faEarthEurope } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import s from './Footer.module.scss'
 
 function Footer() {
-  const { isGameStart } = useAppSelector(getGameConfig)
+  const { isGameStart } = useAppSelector(getGameState)
 
   const location = useLocation()
 

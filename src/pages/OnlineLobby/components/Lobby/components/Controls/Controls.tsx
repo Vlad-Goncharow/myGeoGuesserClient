@@ -3,16 +3,16 @@ import { useAppSelector } from '@/hooks/useAppSelector'
 import useRandomCords from '@/hooks/useRandomCords'
 import { WebSocketContext } from '@/providers/WsProvider'
 import { getAuth } from '@/redux/slices/AuthSlice/selectors/authSelectors'
-import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import s from './Controls.module.scss'
+import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
 
 function Controls() {
   const { user } = useAppSelector(getAuth)
 
-  const { roomAdminId } = useAppSelector(getGameConfig)
+  const { roomAdminId } = useAppSelector(getGameState)
   const { roomId } = useParams()
   const wsRef = React.useContext(WebSocketContext)
 
@@ -50,7 +50,15 @@ function Controls() {
         targetCountry.code
       )
     }
-  }, [targetCords, randomLocation])
+  }, [
+    targetCords,
+    randomLocation,
+    isPanoActive,
+    wsRef,
+    roomId,
+    targetCountry,
+    checkStreetViewAvailability,
+  ])
 
   const waitHostHandle = () => {
     toast.info('Wait host start game', {

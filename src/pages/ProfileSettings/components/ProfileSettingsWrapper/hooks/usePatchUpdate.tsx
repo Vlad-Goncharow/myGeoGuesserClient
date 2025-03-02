@@ -3,7 +3,6 @@ import { useAppSelector } from '@/hooks/useAppSelector'
 import { getAuth } from '@/redux/slices/AuthSlice/selectors/authSelectors'
 import { updatePatch } from '@/redux/slices/AuthSlice/thunks'
 import { unwrapResult } from '@reduxjs/toolkit'
-import React from 'react'
 import { toast } from 'react-toastify'
 
 function usePatchUpdate(props: { patch: string }) {
@@ -31,6 +30,7 @@ function usePatchUpdate(props: { patch: string }) {
             })
           }
         }
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (e) {
         toast.error('Failed to update patch', {
           position: 'bottom-right',

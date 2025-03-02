@@ -1,11 +1,11 @@
 import { useAppSelector } from '@/hooks/useAppSelector'
-import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
 import React from 'react'
 import User from '../User/User'
 import s from './RoomUsers.module.scss'
+import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
 
 function RoomUsers() {
-  const { players } = useAppSelector(getGameConfig)
+  const { players } = useAppSelector(getGameState)
 
   const wrapperRef = React.useRef<HTMLDivElement>(null)
   return (

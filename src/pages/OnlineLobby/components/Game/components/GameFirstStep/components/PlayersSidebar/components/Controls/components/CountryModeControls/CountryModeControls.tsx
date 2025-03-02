@@ -3,14 +3,16 @@ import { useAppDispatch } from '@/hooks/useAppDispatch'
 import { useAppSelector } from '@/hooks/useAppSelector'
 import { WebSocketContext } from '@/providers/WsProvider'
 import { getAuth } from '@/redux/slices/AuthSlice/selectors/authSelectors'
-import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
-import { gameConfigActions } from '@/redux/slices/GameConfig/slice/GameConfigSlice'
+import {
+  getGame,
+  getGameState,
+} from '@/redux/slices/Game/selectors/gameSelectors'
+import { gameActions } from '@/redux/slices/Game/slice/GameSlice'
 import { getTemporaryUser } from '@/redux/slices/TemporaryUserSlice/selectors/TemporaryUserSelectors'
 import classNames from 'classnames'
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import s from './CountryModeControls.module.scss'
-import { getGame } from '@/redux/slices/Game/selectors/gameSelectors'
 
 function CountryModeControls() {
   const dispatch = useAppDispatch()
@@ -18,7 +20,7 @@ function CountryModeControls() {
   const { user } = useAppSelector(getAuth)
   const { temporaryUser } = useAppSelector(getTemporaryUser)
   const { isRoundStart, isRoundEnd, roundsPlayed } =
-    useAppSelector(getGameConfig)
+    useAppSelector(getGameState)
   const { countryMode } = useAppSelector(getGame)
   const { roomId } = useParams()
 
@@ -67,7 +69,7 @@ function CountryModeControls() {
     )
       return
 
-    let time = (performance.now() - guessTime) / 1000
+    const time = (performance.now() - guessTime) / 1000
 
     wsRef.addCountryGuess(
       roomId,
@@ -77,7 +79,7 @@ function CountryModeControls() {
       roundsPlayed + 1,
       time
     )
-    dispatch(gameConfigActions.clearCountryPlayerGuesses())
+    dispatch(gameActions.clearCountryPlayerGuesses())
   }
 
   return (

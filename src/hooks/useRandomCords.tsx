@@ -1,15 +1,13 @@
 import { isGameModeCountries } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
-import {
-  coordinatesType,
-  countryPlayerGuessesType,
-} from '@/redux/slices/GameConfig/types'
 import React from 'react'
 import { useAppSelector } from './useAppSelector'
-import countries50m from '@/config/countries50.json'
+import { countryPlayerGuessesType } from '@/redux/slices/Game/types/CountryModeTypes/CountryModeTypes'
+import { coordinatesType } from '@/types/coordinates'
 
 function useRandomCords() {
   const [isPanoActive, setIsPanoActive] = React.useState<boolean>(false)
-  const [randomLocation, setRandomLocation] = React.useState<any>(null)
+  const [randomLocation, setRandomLocation] =
+    React.useState<coordinatesType | null>(null)
 
   const getRandomCoordinates = (bounds: {
     north: number

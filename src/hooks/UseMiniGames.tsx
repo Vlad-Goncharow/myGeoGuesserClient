@@ -27,7 +27,13 @@ function UseMiniGames() {
         return null
       }
     }
-  }, [randomCountries, selectedCounty])
+  }, [
+    currentRound,
+    isMiniGameEnd,
+    isMiniGameStart,
+    randomCountries,
+    selectedCounty,
+  ])
 
   React.useEffect(() => {
     if (isMiniGameStart && !isMiniGameEnd && currentRound < 5) {
@@ -39,13 +45,13 @@ function UseMiniGames() {
         )
       )
     }
-  }, [currentRound, isMiniGameStart])
+  }, [currentRound, dispatch, isMiniGameEnd, isMiniGameStart])
 
   React.useEffect(() => {
     if (currentRound === 5) {
       dispatch(miniGamegActions.setIsMiniGameEnd(true))
     }
-  }, [currentRound])
+  }, [currentRound, dispatch])
 
   return {
     checkCountryGuess,

@@ -1,10 +1,8 @@
 import { IUser } from '@/redux/slices/AuthSlice/types'
-import {
-  countryModePlayersGuessesType,
-  countryPlayerGuessesType,
-  GameSettingsType,
-  targetCountriesType,
-} from '@/redux/slices/GameConfig/types'
+import { GameSettingsType } from '@/redux/slices/GameConfig/types'
+import { coordinatesType } from './coordinates'
+import { targetCountriesType } from './countries'
+import { countryModePlayersGuessesType } from '@/redux/slices/Game/types/CountryModeTypes/CountryModeTypes'
 
 export type WebSocketEvent =
   | { event: 'newUserJoined'; payload: NewUserJoinedPayloadType }
@@ -34,14 +32,14 @@ export type NewUserJoinedPayloadType = {
   roundsPlayed: number
   users: IUser[]
   user: IUser
-  targetCoordinates: Coordinates[]
+  targetCoordinates: coordinatesType | null
   settings: GameSettingsType
 }
 export type RoundsUpdatePayloadType = {
   rounds: number
 }
 export type SetedTargetCordsPayloadType = {
-  targetCoordinates: Coordinates[]
+  targetCoordinates: coordinatesType
 }
 export type SetedTargetCountryPayloadType = {
   targetCountries: targetCountriesType
@@ -64,7 +62,7 @@ export type AllPlayersFinishedPayloadType = {
 }
 export type GameEndedPayloadType = {
   guesses: Guess[]
-  targetCoordinates: Coordinates[]
+  targetCoordinates: coordinatesType[]
 }
 export type UserLeaveSuccessPayloadType = {
   userLeave: IUser
@@ -88,14 +86,9 @@ export type SettingsUpdatePayloadType = {
   settings: GameSettingsType
 }
 
-export type Coordinates = {
-  lat: number
-  lng: number
-}
-
 type Guess = {
   userId: number
-  coordinates: Coordinates
+  coordinates: coordinatesType
   distance: number
 }
 

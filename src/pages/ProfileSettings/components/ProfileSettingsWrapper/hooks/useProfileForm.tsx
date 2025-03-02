@@ -35,7 +35,7 @@ const useProfileForm = () => {
       }
     }
     return null
-  }, [user, watch('nickname')])
+  }, [user, watch])
 
   const onSubmit: SubmitHandler<ProfileInputs> = async (data) => {
     if (user && data.nickname !== user.nickname) {
@@ -58,7 +58,8 @@ const useProfileForm = () => {
             })
           }
         }
-      } catch (e: any) {
+      } catch (e: unknown) {
+        console.error(e)
         toast.error('Failed to update profile', {
           position: 'bottom-right',
           autoClose: 5000,

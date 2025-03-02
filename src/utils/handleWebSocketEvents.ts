@@ -6,7 +6,7 @@ import { NavigateFunction } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 export function handleWebSocketEvents(
-  e: any,
+  e: MessageEvent<string>,
   dispatch: AppDispatch,
   navigate: NavigateFunction,
   isGameEnd: boolean
@@ -15,13 +15,15 @@ export function handleWebSocketEvents(
 
   switch (data.event) {
     case 'newUserJoined':
-      dispatch(gameConfigActions.setIsGameStarted(data.payload.isGameStarted))
-      dispatch(gameConfigActions.setRoomAdminId(data.payload.admin))
-      dispatch(gameConfigActions.setPlayers(data.payload.users))
+      if (data.payload.isGameStarted) {
+        dispatch(gameActions.startGame())
+      }
+      dispatch(gameActions.setRoomAdminId(data.payload.admin))
+      dispatch(gameActions.setPlayers(data.payload.users))
       dispatch(
-        gameConfigActions.setTargetCoortdinates(data.payload.targetCoordinates)
+        gameActions.setTargetCoortdinates(data.payload.targetCoordinates)
       )
-      dispatch(gameConfigActions.setRoundsPlayed(data.payload.roundsPlayed))
+      dispatch(gameActions.setRoundsPlayed(data.payload.roundsPlayed))
 
       dispatch(gameConfigActions.updateSettings(data.payload.settings))
 
@@ -43,15 +45,13 @@ export function handleWebSocketEvents(
 
       break
     case 'gameStarted':
-      dispatch(gameConfigActions.setIsGameStarted(true))
-      dispatch(gameConfigActions.setIsRoundStart(true))
+      dispatch(gameActions.startGame())
       break
 
     case 'setedTargetCords':
-      dispatch(gameConfigActions.setIsRoundStart(true))
-      dispatch(gameConfigActions.setIsRoundEnd(false))
+      dispatch(gameActions.startRound())
       dispatch(
-        gameConfigActions.setTargetCoortdinates(data.payload.targetCoordinates)
+        gameActions.setTargetCoortdinates(data.payload.targetCoordinates)
       )
       break
     case 'setedTargetCountry':
@@ -62,27 +62,24 @@ export function handleWebSocketEvents(
       break
     case 'endCountryModeRound':
       dispatch(gameActions.setSelectedCountries(data.payload.selectedCountries))
-      dispatch(gameConfigActions.setRoundsPlayed(data.payload.roundsPlayed))
-      dispatch(gameConfigActions.setIsRoundEnd(true))
-      dispatch(gameConfigActions.setIsRoundStart(false))
+      dispatch(gameActions.setRoundsPlayed(data.payload.roundsPlayed))
+      dispatch(gameActions.endRound())
       break
     case 'startedNewRound':
       dispatch(gameActions.setSelectedCountries([]))
       dispatch(gameActions.clearCountryPlayerGuesses())
-      dispatch(gameConfigActions.setIsRoundEnd(false))
-      dispatch(gameConfigActions.setIsRoundStart(true))
+      dispatch(gameActions.startRound())
       break
     case 'endedCountryModeGame':
       dispatch(gameActions.setSelectedCountries(data.payload.selectedCountries))
       dispatch(gameActions.setTargetCountries(data.payload.targetCountries))
 
-      dispatch(gameConfigActions.setIsGameEnd(true))
+      dispatch(gameActions.endGame())
       break
 
     case 'endedPoinpointingModeRound':
-      dispatch(gameConfigActions.setIsRoundEnd(true))
-      dispatch(gameConfigActions.setIsRoundStart(false))
-      dispatch(gameConfigActions.setRoundsPlayed(data.payload.roundsPlayed))
+      dispatch(gameActions.endRound())
+      dispatch(gameActions.setRoundsPlayed(data.payload.roundsPlayed))
       dispatch(gameConfigActions.setRoundPlayersGuesses(data.payload.guesses))
       dispatch(gameConfigActions.setPlayerCoordinatesGuess([]))
       dispatch(gameConfigActions.clearFinishedGuessPlayersIds())
@@ -90,7 +87,7 @@ export function handleWebSocketEvents(
 
     case 'gameEnded':
       dispatch(gameConfigActions.setPlayersGuesses(data.payload.guesses))
-      dispatch(gameConfigActions.setIsGameEnd(true))
+      dispatch(gameActions.endGame())
       dispatch(
         gameConfigActions.setRoundsTargets(data.payload.targetCoordinates)
       )
@@ -98,7 +95,7 @@ export function handleWebSocketEvents(
 
     case 'userLeaveSuccess':
       if (!isGameEnd) {
-        dispatch(gameConfigActions.setPlayers(data.payload.users))
+        dispatch(gameActions.setPlayers(data.payload.users))
       }
       toast.info(`${data.payload.userLeave.nickname} - disconnect`, {
         position: 'bottom-right',
@@ -114,16 +111,8 @@ export function handleWebSocketEvents(
 
     case 'backUsersToRoom':
       dispatch(gameConfigActions.setPlayersGuesses([]))
-      dispatch(gameConfigActions.setTargetCoortdinates([]))
       dispatch(gameConfigActions.setRoundsTargets([]))
-      dispatch(gameConfigActions.setIsGameEnd(data.payload.room.isGameEnded))
-      dispatch(
-        gameConfigActions.setIsGameStarted(data.payload.room.isGameStarted)
-      )
-      dispatch(
-        gameConfigActions.setRoundsPlayed(data.payload.room.roundsPlayed)
-      )
-      dispatch(gameActions.clearCountyMode())
+      dispatch(gameActions.backUsersToRoom())
       dispatch(gameActions.clearCountyMode())
       break
 
