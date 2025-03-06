@@ -7,8 +7,8 @@ import {
 } from '@/redux/slices/Game/selectors/gameSelectors'
 import { gameActions } from '@/redux/slices/Game/slice/GameSlice'
 import {
-  checkIsPoinpointingHard,
-  checkIsPoinpointingMedium,
+  checkIsPinpointingHard,
+  checkIsPinpointingMedium,
 } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
 import { faMountainSun } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -20,8 +20,8 @@ function CountryMap() {
   const { countryMode } = useAppSelector(getGame)
   const { targetCoordinates } = useAppSelector(getGameState)
 
-  const isMediumtDiff = useAppSelector(checkIsPoinpointingMedium)
-  const isHardtDiff = useAppSelector(checkIsPoinpointingHard)
+  const isMediumtDiff = useAppSelector(checkIsPinpointingMedium)
+  const isHardtDiff = useAppSelector(checkIsPinpointingHard)
 
   const dispatch = useAppDispatch()
 

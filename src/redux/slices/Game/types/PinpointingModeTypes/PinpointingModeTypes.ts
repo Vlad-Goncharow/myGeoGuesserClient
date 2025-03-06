@@ -1,6 +1,6 @@
 import { coordinatesType } from '@/types/coordinates'
 
-export interface poinpointingType {
+export interface pinpointingType {
   playerGuess: coordinatesType | null
   roundPlayersGuesses: playersCoordinatesGuessType[]
   roundsTargets: roundTargetsType[] | null

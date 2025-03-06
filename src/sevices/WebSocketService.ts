@@ -100,7 +100,7 @@ export class WebSocketService {
       )
     }
   }
-  
+
   handleGuessCountry(
     roomId: string,
     userId: number | string,
@@ -139,7 +139,7 @@ export class WebSocketService {
       )
     }
   }
-  
+
   backToRoom(roomId: string) {
     if (this.socket && roomId) {
       this.socket.send(
@@ -168,10 +168,7 @@ export class WebSocketService {
     }
   }
 
-  setTargetPoinpointing(
-    roomId: string,
-    round: number,
-  ) {
+  setTargetPinpointing(roomId: string, round: number) {
     if (this.socket && roomId) {
       this.socket.send(
         JSON.stringify({

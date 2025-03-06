@@ -3,13 +3,13 @@ import React from 'react'
 import MapComponent from '../../../../MapComponent/MapComponent'
 import {
   getGameState,
-  getPoinpointingMode,
+  getPinpointingMode,
 } from '@/redux/slices/Game/selectors/gameSelectors'
 
-function PoinpointingMapResult() {
+export function PinpointingMapResult() {
   const { players, targetCoordinates } = useAppSelector(getGameState)
 
-  const { roundPlayersGuesses } = useAppSelector(getPoinpointingMode)
+  const { roundPlayersGuesses } = useAppSelector(getPinpointingMode)
 
   const markers = React.useMemo(() => {
     if (targetCoordinates) {
@@ -49,5 +49,3 @@ function PoinpointingMapResult() {
     </>
   )
 }
-
-export default PoinpointingMapResult

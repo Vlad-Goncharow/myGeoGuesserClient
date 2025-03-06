@@ -43,11 +43,7 @@ function useGameTime() {
   }, [isRoundStart, isRoundEnd, settings.roundTime, timeElapsed, updateTime])
 
   useEffect(() => {
-    if (
-      timeElapsed === settings.roundTime &&
-      wsRef &&
-      roomId
-    ) {
+    if (timeElapsed === settings.roundTime && wsRef && roomId) {
       wsRef.endRound(roomId, roundsPlayed + 1)
     }
   }, [roomId, roundsPlayed, settings.roundTime, timeElapsed, wsRef])

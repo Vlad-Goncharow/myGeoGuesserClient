@@ -2,39 +2,39 @@ import { PayloadAction } from '@reduxjs/toolkit'
 import { GameInitialState } from '../types/GameTypes'
 import { coordinatesType } from '@/types/coordinates'
 import { playersCoordinatesGuessType } from '../../GameConfig/types'
-import { roundTargetsType } from '../types/PoinpointingModeTypes/PoinpointingModeTypes'
+import { roundTargetsType } from '../types/PinpointingModeTypes/PinpointingModeTypes'
 
-export const poinpointingReducers = {
+export const pinpointingReducers = {
   setPlayerCoordinatesGuess: (
     state: GameInitialState,
     action: PayloadAction<coordinatesType | null>
   ) => {
-    state.poinpointingMode.playerGuess = action.payload
+    state.pinpointingMode.playerGuess = action.payload
   },
   setRoundPlayersGuesses: (
     state: GameInitialState,
     action: PayloadAction<playersCoordinatesGuessType[]>
   ) => {
-    state.poinpointingMode.roundPlayersGuesses = action.payload
+    state.pinpointingMode.roundPlayersGuesses = action.payload
   },
   setPlayersGuesses: (
     state: GameInitialState,
     action: PayloadAction<playersCoordinatesGuessType[]>
   ) => {
-    state.poinpointingMode.playersGuesses = action.payload
+    state.pinpointingMode.playersGuesses = action.payload
   },
   setRoundsTargets: (
     state: GameInitialState,
     action: PayloadAction<roundTargetsType[] | null>
   ) => {
-    state.poinpointingMode.roundsTargets = action.payload
+    state.pinpointingMode.roundsTargets = action.payload
   },
   addFinishedGuessPlayersIds: (
     state: GameInitialState,
     action: PayloadAction<number>
   ) => {
-    state.poinpointingMode.finishedGuessPlayersIds = [
-      ...state.poinpointingMode.finishedGuessPlayersIds,
+    state.pinpointingMode.finishedGuessPlayersIds = [
+      ...state.pinpointingMode.finishedGuessPlayersIds,
       action.payload,
     ]
   },
@@ -42,20 +42,20 @@ export const poinpointingReducers = {
     state: GameInitialState,
     action: PayloadAction<number>
   ) => {
-    state.poinpointingMode.finishedGuessPlayersIds =
-      state.poinpointingMode.finishedGuessPlayersIds.filter(
+    state.pinpointingMode.finishedGuessPlayersIds =
+      state.pinpointingMode.finishedGuessPlayersIds.filter(
         (el) => el !== action.payload
       )
   },
   clearFinishedGuessPlayersIds: (state: GameInitialState) => {
-    state.poinpointingMode.finishedGuessPlayersIds = []
+    state.pinpointingMode.finishedGuessPlayersIds = []
   },
 
-  resetPoinpointing: (state: GameInitialState) => {
-    state.poinpointingMode.playerGuess = null
-    state.poinpointingMode.finishedGuessPlayersIds = []
-    state.poinpointingMode.playersGuesses = []
-    state.poinpointingMode.roundPlayersGuesses = []
-    state.poinpointingMode.roundsTargets = []
+  resetPinpointing: (state: GameInitialState) => {
+    state.pinpointingMode.playerGuess = null
+    state.pinpointingMode.finishedGuessPlayersIds = []
+    state.pinpointingMode.playersGuesses = []
+    state.pinpointingMode.roundPlayersGuesses = []
+    state.pinpointingMode.roundsTargets = []
   },
 }

@@ -3,7 +3,10 @@ import { useAppSelector } from '@/hooks/useAppSelector'
 import useRandomCords from '@/hooks/useRandomCords'
 import { WebSocketContext } from '@/providers/WsProvider'
 import { getAuth } from '@/redux/slices/AuthSlice/selectors/authSelectors'
-import { getGameConfig, isGameModePoinpointing } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
+import {
+  getGameConfig,
+  isGameModePinpointing,
+} from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
 import classNames from 'classnames'
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -21,7 +24,7 @@ function ResultsFooter() {
   const { roomId } = useParams()
 
   const wsRef = React.useContext(WebSocketContext)
-  const isModePoinpointing = useAppSelector(isGameModePoinpointing)
+  const isModePinpointing = useAppSelector(isGameModePinpointing)
   const {
     getRandomCoordinates,
     checkStreetViewAvailability,
@@ -46,11 +49,8 @@ function ResultsFooter() {
         wsRef.setTargetCords(roomId, roundsPlayed + 1, targetCords)
       }
 
-      if(isModePoinpointing && wsRef && wsRef.socket && roomId) {
-        wsRef.setTargetPoinpointing(
-          roomId,
-          roundsPlayed + 1
-        )
+      if (isModePinpointing && wsRef && wsRef.socket && roomId) {
+        wsRef.setTargetPinpointing(roomId, roundsPlayed + 1)
       }
 
       if (wsRef && wsRef.socket && roomId && targetCountry) {
@@ -62,7 +62,17 @@ function ResultsFooter() {
         )
       }
     }
-  }, [targetCords, randomLocation, isPanoActive, wsRef, roomId, targetCountry, checkStreetViewAvailability, roundsPlayed, isModePoinpointing])
+  }, [
+    targetCords,
+    randomLocation,
+    isPanoActive,
+    wsRef,
+    roomId,
+    targetCountry,
+    checkStreetViewAvailability,
+    roundsPlayed,
+    isModePinpointing,
+  ])
 
   const handleViewResults = () => {
     if (wsRef && wsRef.socket && roomId) {

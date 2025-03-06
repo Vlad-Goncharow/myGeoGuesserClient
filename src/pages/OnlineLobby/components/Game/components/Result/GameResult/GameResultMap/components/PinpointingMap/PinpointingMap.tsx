@@ -1,14 +1,14 @@
 import { useAppSelector } from '@/hooks/useAppSelector'
 import {
   getGameState,
-  getPoinpointingMode,
+  getPinpointingMode,
 } from '@/redux/slices/Game/selectors/gameSelectors'
 import React from 'react'
 import MapComponent from '../../../../MapComponent/MapComponent'
 
-function PoinpointingMapResult() {
+export function PinpointingMap() {
   const { players } = useAppSelector(getGameState)
-  const { roundsTargets, playersGuesses } = useAppSelector(getPoinpointingMode)
+  const { roundsTargets, playersGuesses } = useAppSelector(getPinpointingMode)
 
   const markers = React.useMemo(() => {
     return [
@@ -44,5 +44,3 @@ function PoinpointingMapResult() {
 
   return <MapComponent markers={markers} lines={lines} />
 }
-
-export default PoinpointingMapResult

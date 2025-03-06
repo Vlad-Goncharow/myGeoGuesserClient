@@ -13,14 +13,14 @@ export enum USERFIELDSCONSTS {
 }
 
 export enum GAMEMODS {
-  POINPOINTING = 'Pinpointing',
+  PINPOINTING = 'Pinpointing',
   CITYGUESSER = 'City Guesser',
   COUNTRYGUESSR = 'Country guessr',
   FLAGS = 'Flags',
   STATES = 'States',
 }
 
-export enum POINPOINTINGDIFFICULTIES {
+export enum PINPOINTINGDIFFICULTIES {
   STANDART = 'Standard Pinpointing',
   MEDIUM = 'Advanced Pinpointing',
   HARD = 'Ultra Instinct Pinpointing',

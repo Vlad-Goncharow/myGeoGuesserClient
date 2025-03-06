@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { GameInitialState } from '../types/GameTypes'
 import { gameStateReducers } from '../reducers/gameStateReducers'
 import { countryModeReducers } from '../reducers/countryModeReducers'
-import { poinpointingReducers } from '../reducers/poinpointingReducers'
+import { pinpointingReducers } from '../reducers/pinpointingReducers'
 
 const initialState: GameInitialState = {
   countryMode: {
@@ -29,7 +29,7 @@ const initialState: GameInitialState = {
     roundsPlayed: 0,
     targetCoordinates: null,
   },
-  poinpointingMode: {
+  pinpointingMode: {
     playerGuess: null,
     finishedGuessPlayersIds: [],
     playersGuesses: [],
@@ -44,7 +44,7 @@ const GameSlice = createSlice({
   reducers: {
     ...countryModeReducers,
     ...gameStateReducers,
-    ...poinpointingReducers,
+    ...pinpointingReducers,
   },
 })
 

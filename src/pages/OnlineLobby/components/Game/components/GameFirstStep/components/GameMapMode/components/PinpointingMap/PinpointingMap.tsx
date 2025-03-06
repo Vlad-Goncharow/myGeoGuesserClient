@@ -2,21 +2,21 @@ import { useAppDispatch } from '@/hooks/useAppDispatch'
 import { useAppSelector } from '@/hooks/useAppSelector'
 import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
 import {
-  checkIsPoinpointingHard,
-  checkIsPoinpointingMedium,
+  checkIsPinpointingHard,
+  checkIsPinpointingMedium,
 } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
 import { faMountainSun } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
 import React from 'react'
-import s from './PoinpointingMap.module.scss'
+import s from './PinpointingMap.module.scss'
 import { gameActions } from '@/redux/slices/Game/slice/GameSlice'
 
-function PoinpointingMap() {
+export function PinpointingMap() {
   const { targetCoordinates } = useAppSelector(getGameState)
 
-  const isMediumtDiff = useAppSelector(checkIsPoinpointingMedium)
-  const isHardtDiff = useAppSelector(checkIsPoinpointingHard)
+  const isMediumtDiff = useAppSelector(checkIsPinpointingMedium)
+  const isHardtDiff = useAppSelector(checkIsPinpointingHard)
 
   const dispatch = useAppDispatch()
 
@@ -226,5 +226,3 @@ function PoinpointingMap() {
     </div>
   )
 }
-
-export default PoinpointingMap

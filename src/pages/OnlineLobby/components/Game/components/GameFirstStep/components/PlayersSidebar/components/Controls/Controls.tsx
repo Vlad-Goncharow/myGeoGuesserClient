@@ -3,9 +3,9 @@ import { useAppSelector } from '@/hooks/useAppSelector'
 import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
 import React from 'react'
 import CountryModeControls from './components/CountryModeControls/CountryModeControls'
-import PoinpointingModeControls from './components/PoinpointingModeControls/PoinpointingModeControls'
 import s from './Controls.module.scss'
 import useGameTime from '@/hooks/useGameTime'
+import { PinpointingModeControls } from './components/PinpointingModeControls/PinpointingModeControls'
 
 function Controls() {
   const { settings } = useAppSelector(getGameConfig)
@@ -13,8 +13,8 @@ function Controls() {
 
   const returnByMode = () => {
     switch (settings.gameMode) {
-      case GAMEMODS.POINPOINTING:
-        return <PoinpointingModeControls />
+      case GAMEMODS.PINPOINTING:
+        return <PinpointingModeControls />
       case GAMEMODS.COUNTRYGUESSR:
         return <CountryModeControls />
     }

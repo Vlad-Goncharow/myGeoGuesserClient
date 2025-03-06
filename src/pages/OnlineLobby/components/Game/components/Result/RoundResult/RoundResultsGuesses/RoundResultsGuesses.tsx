@@ -1,5 +1,5 @@
 import React from 'react'
-import PoinpointingResults from './components/PoinpointingResults/PoinpointingResults'
+import { PinpointingResults } from './components/PinpointingResults/PinpointingResults'
 import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
 import { useAppSelector } from '@/hooks/useAppSelector'
 import { GAMEMODS } from '@/config/constants'
@@ -9,8 +9,8 @@ function RoundResultsGuesses() {
   const { settings } = useAppSelector(getGameConfig)
 
   switch (settings.gameMode) {
-    case GAMEMODS.POINPOINTING:
-      return <PoinpointingResults />
+    case GAMEMODS.PINPOINTING:
+      return <PinpointingResults />
     case GAMEMODS.COUNTRYGUESSR:
       return <CountryModeResult />
   }

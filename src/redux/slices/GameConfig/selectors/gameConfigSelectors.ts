@@ -1,4 +1,4 @@
-import { GAMEMODS, POINPOINTINGDIFFICULTIES } from '@/config/constants'
+import { GAMEMODS, PINPOINTINGDIFFICULTIES } from '@/config/constants'
 import { RootState } from '@/redux'
 import { createSelector } from '@reduxjs/toolkit'
 
@@ -8,20 +8,20 @@ export const isGameModeCountries = createSelector(
   [getGameConfig],
   (config) => config.settings.gameMode === GAMEMODS.COUNTRYGUESSR
 )
-export const isGameModePoinpointing = createSelector(
+export const isGameModePinpointing = createSelector(
   [getGameConfig],
-  (config) => config.settings.gameMode === GAMEMODS.POINPOINTING
+  (config) => config.settings.gameMode === GAMEMODS.PINPOINTING
 )
 
-export const checkIsPoinpointingMedium = createSelector(
+export const checkIsPinpointingMedium = createSelector(
   [getGameConfig],
   (config) =>
-    config.settings.gameMode === GAMEMODS.POINPOINTING &&
-    config.settings.gameDiffcult === POINPOINTINGDIFFICULTIES.MEDIUM
+    config.settings.gameMode === GAMEMODS.PINPOINTING &&
+    config.settings.gameDiffcult === PINPOINTINGDIFFICULTIES.MEDIUM
 )
-export const checkIsPoinpointingHard = createSelector(
+export const checkIsPinpointingHard = createSelector(
   [getGameConfig],
   (config) =>
-    config.settings.gameMode === GAMEMODS.POINPOINTING &&
-    config.settings.gameDiffcult === POINPOINTINGDIFFICULTIES.HARD
+    config.settings.gameMode === GAMEMODS.PINPOINTING &&
+    config.settings.gameDiffcult === PINPOINTINGDIFFICULTIES.HARD
 )

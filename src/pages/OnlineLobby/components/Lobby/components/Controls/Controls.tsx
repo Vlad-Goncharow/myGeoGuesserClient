@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import s from './Controls.module.scss'
 import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
-import { isGameModePoinpointing } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
+import { isGameModePinpointing } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
 
 function Controls() {
   const { user } = useAppSelector(getAuth)
@@ -16,7 +16,7 @@ function Controls() {
   const { roomAdminId } = useAppSelector(getGameState)
   const { roomId } = useParams()
   const wsRef = React.useContext(WebSocketContext)
-  const isModePoinpointing = useAppSelector(isGameModePoinpointing)
+  const isModePinpointing = useAppSelector(isGameModePinpointing)
 
   const {
     getRandomCoordinates,
@@ -42,14 +42,11 @@ function Controls() {
         wsRef.startGame(roomId)
         wsRef.setTargetCords(roomId, 1, targetCords)
       }
-      console.log(isModePoinpointing);
-      console.log(targetCountry);
-      
-      if(isModePoinpointing && wsRef && wsRef.socket && roomId) {
-        wsRef.setTargetPoinpointing(
-          roomId,
-          1
-        )
+      console.log(isModePinpointing)
+      console.log(targetCountry)
+
+      if (isModePinpointing && wsRef && wsRef.socket && roomId) {
+        wsRef.setTargetPinpointing(roomId, 1)
       }
 
       if (wsRef && wsRef.socket && roomId && targetCountry) {
@@ -61,7 +58,16 @@ function Controls() {
         )
       }
     }
-  }, [targetCords, randomLocation, isPanoActive, wsRef, roomId, targetCountry, checkStreetViewAvailability, isModePoinpointing])
+  }, [
+    targetCords,
+    randomLocation,
+    isPanoActive,
+    wsRef,
+    roomId,
+    targetCountry,
+    checkStreetViewAvailability,
+    isModePinpointing,
+  ])
 
   const waitHostHandle = () => {
     toast.info('Wait host start game', {

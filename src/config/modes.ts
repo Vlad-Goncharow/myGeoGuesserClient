@@ -1,41 +1,41 @@
-import AdvancedPointpointing from '@/assets/svgs/advancedPointpointing.svg'
-import StandartPointpointing from '@/assets/svgs/standartPoinpoining.svg'
-import UltraPoinpointing from '@/assets/svgs/ultraPoinpointing.svg'
+import AdvancedPintpointing from '@/assets/svgs/AdvancedPintpointing.svg'
+import StandartPinpointing from '@/assets/svgs/standartPinpointing.svg'
+import UltraPinpointing from '@/assets/svgs/ultraPinpointing.svg'
 import Sityguessr from '@/assets/svgs/sityguessr.svg'
 import CountryBattle from '@/assets/svgs/countryBattle.svg'
 import Flags from '@/assets/svgs/flags.svg'
 import { GameModeType } from '../types/gameMods'
-import { GAMEMODS, POINPOINTINGDIFFICULTIES } from './constants'
+import { GAMEMODS, PINPOINTINGDIFFICULTIES } from './constants'
 
 export const modes: GameModeType[] = [
   {
     difficulties: [
       {
-        name: POINPOINTINGDIFFICULTIES.STANDART,
+        name: PINPOINTINGDIFFICULTIES.STANDART,
         description:
           'Try to pinpoint the exact drop location as close as possible to earn points.',
-        icon: StandartPointpointing,
+        icon: StandartPinpointing,
         difficulty: 'Standard Pinpointing Casual',
       },
       {
-        name: POINPOINTINGDIFFICULTIES.MEDIUM,
+        name: PINPOINTINGDIFFICULTIES.MEDIUM,
         description:
           'A more challenging level with limited moves. Test your skills!',
-        icon: AdvancedPointpointing,
+        icon: AdvancedPintpointing,
         difficulty: 'Advanced Pinpointing Demanding',
       },
       {
-        name: POINPOINTINGDIFFICULTIES.HARD,
+        name: PINPOINTINGDIFFICULTIES.HARD,
         description:
           'The ultimate challenge! Pinpoint your location from a still image with neither borders nor labels on the map.',
-        icon: UltraPoinpointing,
+        icon: UltraPinpointing,
         difficulty: 'Ultra Unstinct Pinpointing Challenging',
       },
     ],
-    name: GAMEMODS.POINPOINTING,
+    name: GAMEMODS.PINPOINTING,
     description:
       'Try to pinpoint the exact drop location as close as possible to earn points.',
-    icon: StandartPointpointing,
+    icon: StandartPinpointing,
   },
   {
     name: GAMEMODS.CITYGUESSER,

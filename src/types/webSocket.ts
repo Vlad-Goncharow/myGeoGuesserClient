@@ -6,15 +6,15 @@ import { countryModePlayersGuessesType } from '@/redux/slices/Game/types/Country
 import {
   playersCoordinatesGuessType,
   roundTargetsType,
-} from '@/redux/slices/Game/types/PoinpointingModeTypes/PoinpointingModeTypes'
+} from '../redux/slices/Game/types/PinpointingModeTypes/PinpointingModeTypes'
 
 export type WebSocketEvent =
   | { event: 'newUserJoined'; payload: NewUserJoinedPayloadType }
   | { event: 'roundsUpdate'; payload: RoundsUpdatePayloadType }
-  | { event: 'gameStarted', }
+  | { event: 'gameStarted' }
   | { event: 'setedTargetCords'; payload: SetedTargetCordsPayloadType }
   | {
-      event: 'endedPoinpointingModeRound'
+      event: 'endedPinpointingModeRound'
       payload: AllPlayersFinishedPayloadType
     }
   | { event: 'gameEnded'; payload: GameEndedPayloadType }
@@ -25,10 +25,9 @@ export type WebSocketEvent =
   | { event: 'settingsUpdated'; payload: SettingsUpdatePayloadType }
   | { event: 'roomClosed'; payload: RoomClosedPayload }
   | { event: 'setedTargetCountry'; payload: SetedTargetCountryPayloadType }
-  | { event: 'setedTargetPoinpointing'; payload: SetedTargetPoinointingPayloadType }
   | { event: 'addedCountryGuess'; payload: AddedCountryGuessPayloadType }
   | { event: 'endCountryModeRound'; payload: EndCountryModeRoundPayloadType }
-  | { event: 'startedNewRound', }
+  | { event: 'startedNewRound' }
   | { event: 'endedCountryModeGame'; payload: EndedCountryModeGamePayloadType }
 
 export type NewUserJoinedPayloadType = {
@@ -50,9 +49,6 @@ export type SetedTargetCordsPayloadType = {
 }
 export type SetedTargetCountryPayloadType = {
   target: targetCountriesType
-}
-export type SetedTargetPoinointingPayloadType = {
-  target: roundTargetsType | null
 }
 export type AddedCountryGuessPayloadType = {
   guesses: countryModePlayersGuessesType[]

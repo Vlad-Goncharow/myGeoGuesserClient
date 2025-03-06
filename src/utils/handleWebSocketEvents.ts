@@ -21,7 +21,9 @@ export function handleWebSocketEvents(
       dispatch(gameActions.setRoomAdminId(data.payload.gameState.adminId))
       dispatch(gameActions.setPlayers(data.payload.users))
       dispatch(
-        gameActions.setTargetCoortdinates(data.payload.gameState.targetCoordinates)
+        gameActions.setTargetCoortdinates(
+          data.payload.gameState.targetCoordinates
+        )
       )
       dispatch(gameActions.setRoundsPlayed(data.payload.gameState.roundsPlayed))
 
@@ -77,7 +79,7 @@ export function handleWebSocketEvents(
       dispatch(gameActions.endGame())
       break
 
-    case 'endedPoinpointingModeRound':
+    case 'endedPinpointingModeRound':
       dispatch(gameActions.endRound())
       dispatch(gameActions.setRoundsPlayed(data.payload.roundsPlayed))
       dispatch(gameActions.setRoundPlayersGuesses(data.payload.guesses))
@@ -110,7 +112,7 @@ export function handleWebSocketEvents(
     case 'backUsersToRoom':
       dispatch(gameActions.backUsersToRoom())
       dispatch(gameActions.clearCountyMode())
-      dispatch(gameActions.resetPoinpointing())
+      dispatch(gameActions.resetPinpointing())
       break
 
     case 'playerFinishGuess':

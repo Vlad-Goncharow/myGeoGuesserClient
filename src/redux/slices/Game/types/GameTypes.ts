@@ -1,9 +1,9 @@
 import { countryModeType } from './CountryModeTypes/CountryModeTypes'
 import { gameStateType } from './gameState/gameState'
-import { poinpointingType } from './PoinpointingModeTypes/PoinpointingModeTypes'
+import { pinpointingType } from './PinpointingModeTypes/PinpointingModeTypes'
 
 export interface GameInitialState {
   gameState: gameStateType
   countryMode: countryModeType
-  poinpointingMode: poinpointingType
+  pinpointingMode: pinpointingType
 }

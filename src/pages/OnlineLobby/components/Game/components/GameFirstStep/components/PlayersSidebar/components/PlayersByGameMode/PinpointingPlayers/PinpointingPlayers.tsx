@@ -2,15 +2,15 @@ import FullUserItem from '@/Components/FullUserItem/FullUserItem'
 import { useAppSelector } from '@/hooks/useAppSelector'
 import classNames from 'classnames'
 import React from 'react'
-import s from './PoinpointingPlayers.module.scss'
+import s from './PinpointingPlayers.module.scss'
 import {
   getGameState,
-  getPoinpointingMode,
+  getPinpointingMode,
 } from '@/redux/slices/Game/selectors/gameSelectors'
 
-function PoinpointingPlayers() {
+export function PinpointingPlayers() {
   const { players } = useAppSelector(getGameState)
-  const { finishedGuessPlayersIds } = useAppSelector(getPoinpointingMode)
+  const { finishedGuessPlayersIds } = useAppSelector(getPinpointingMode)
 
   return (
     <div className={s.wrapper}>
@@ -29,5 +29,3 @@ function PoinpointingPlayers() {
     </div>
   )
 }
-
-export default PoinpointingPlayers
