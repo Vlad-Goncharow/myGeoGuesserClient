@@ -15,21 +15,21 @@ export function handleWebSocketEvents(
 
   switch (data.event) {
     case 'newUserJoined':
-      if (data.payload.isGameStarted) {
+      if (data.payload.gameState.isGameStarted) {
         dispatch(gameActions.startGame())
       }
-      dispatch(gameActions.setRoomAdminId(data.payload.admin))
+      dispatch(gameActions.setRoomAdminId(data.payload.gameState.adminId))
       dispatch(gameActions.setPlayers(data.payload.users))
       dispatch(
-        gameActions.setTargetCoortdinates(data.payload.targetCoordinates)
+        gameActions.setTargetCoortdinates(data.payload.gameState.targetCoordinates)
       )
-      dispatch(gameActions.setRoundsPlayed(data.payload.roundsPlayed))
+      dispatch(gameActions.setRoundsPlayed(data.payload.gameState.roundsPlayed))
 
       dispatch(gameConfigActions.updateSettings(data.payload.settings))
 
       if (
-        data.payload.user.id !== data.payload.admin &&
-        data.payload.isGameStarted
+        data.payload.user.id !== data.payload.gameState.adminId &&
+        data.payload.gameState.isGameStarted
       ) {
         toast.success(`${data.payload.user.nickname} - connect`, {
           position: 'bottom-right',
@@ -55,13 +55,13 @@ export function handleWebSocketEvents(
       )
       break
     case 'setedTargetCountry':
-      dispatch(gameActions.setTargetCountry(data.payload.targetCountries))
+      dispatch(gameActions.setTargetCountry(data.payload.target))
       break
     case 'addedCountryGuess':
-      dispatch(gameActions.setSelectedCountries(data.payload.selectedCountries))
+      dispatch(gameActions.setSelectedCountries(data.payload.guesses))
       break
     case 'endCountryModeRound':
-      dispatch(gameActions.setSelectedCountries(data.payload.selectedCountries))
+      dispatch(gameActions.setSelectedCountries(data.payload.guesses))
       dispatch(gameActions.setRoundsPlayed(data.payload.roundsPlayed))
       dispatch(gameActions.endRound())
       break
@@ -71,8 +71,8 @@ export function handleWebSocketEvents(
       dispatch(gameActions.startRound())
       break
     case 'endedCountryModeGame':
-      dispatch(gameActions.setSelectedCountries(data.payload.selectedCountries))
-      dispatch(gameActions.setTargetCountries(data.payload.targetCountries))
+      dispatch(gameActions.setSelectedCountries(data.payload.guesses))
+      dispatch(gameActions.setTargetCountries(data.payload.targets))
 
       dispatch(gameActions.endGame())
       break
@@ -88,7 +88,7 @@ export function handleWebSocketEvents(
     case 'gameEnded':
       dispatch(gameActions.setPlayersGuesses(data.payload.guesses))
       dispatch(gameActions.endGame())
-      dispatch(gameActions.setRoundsTargets(data.payload.targetCoordinates))
+      dispatch(gameActions.setRoundsTargets(data.payload.targets))
       break
 
     case 'userLeaveSuccess':

@@ -3,7 +3,6 @@ import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSel
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useAppSelector } from './useAppSelector'
-import { GAMEMODS } from '@/config/constants'
 import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
 
 function useGameTime() {
@@ -47,28 +46,11 @@ function useGameTime() {
     if (
       timeElapsed === settings.roundTime &&
       wsRef &&
-      roomId &&
-      settings.gameMode === GAMEMODS.COUNTRYGUESSR
+      roomId
     ) {
-      wsRef.endCountryModeRound(roomId, roundsPlayed + 1)
+      wsRef.endRound(roomId, roundsPlayed + 1)
     }
-
-    if (
-      timeElapsed === settings.roundTime &&
-      wsRef &&
-      roomId &&
-      settings.gameMode === GAMEMODS.POINPOINTING
-    ) {
-      wsRef.endPoinpointingModeRound(roomId, roundsPlayed + 1)
-    }
-  }, [
-    timeElapsed,
-    settings.roundTime,
-    wsRef,
-    roomId,
-    roundsPlayed,
-    settings.gameMode,
-  ])
+  }, [roomId, roundsPlayed, settings.roundTime, timeElapsed, wsRef])
 
   return { timeElapsed }
 }

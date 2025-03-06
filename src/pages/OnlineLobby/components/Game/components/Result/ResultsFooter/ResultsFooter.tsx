@@ -3,7 +3,7 @@ import { useAppSelector } from '@/hooks/useAppSelector'
 import useRandomCords from '@/hooks/useRandomCords'
 import { WebSocketContext } from '@/providers/WsProvider'
 import { getAuth } from '@/redux/slices/AuthSlice/selectors/authSelectors'
-import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
+import { getGameConfig, isGameModePoinpointing } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
 import classNames from 'classnames'
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -21,7 +21,7 @@ function ResultsFooter() {
   const { roomId } = useParams()
 
   const wsRef = React.useContext(WebSocketContext)
-
+  const isModePoinpointing = useAppSelector(isGameModePoinpointing)
   const {
     getRandomCoordinates,
     checkStreetViewAvailability,
@@ -45,30 +45,28 @@ function ResultsFooter() {
       if (wsRef && wsRef.socket && roomId && targetCords) {
         wsRef.setTargetCords(roomId, roundsPlayed + 1, targetCords)
       }
-    }
 
-    if (wsRef && wsRef.socket && roomId && targetCountry) {
-      wsRef.setTargetCountry(
-        roomId,
-        roundsPlayed + 1,
-        targetCountry.country,
-        targetCountry.code
-      )
+      if(isModePoinpointing && wsRef && wsRef.socket && roomId) {
+        wsRef.setTargetPoinpointing(
+          roomId,
+          roundsPlayed + 1
+        )
+      }
+
+      if (wsRef && wsRef.socket && roomId && targetCountry) {
+        wsRef.setTargetCountry(
+          roomId,
+          roundsPlayed + 1,
+          targetCountry.country,
+          targetCountry.code
+        )
+      }
     }
-  }, [
-    targetCords,
-    randomLocation,
-    isPanoActive,
-    wsRef,
-    roomId,
-    targetCountry,
-    checkStreetViewAvailability,
-    roundsPlayed,
-  ])
+  }, [targetCords, randomLocation, isPanoActive, wsRef, roomId, targetCountry, checkStreetViewAvailability, roundsPlayed, isModePoinpointing])
 
   const handleViewResults = () => {
     if (wsRef && wsRef.socket && roomId) {
-      wsRef.gameEnd(roomId, settings.gameMode)
+      wsRef.gameEnd(roomId)
     }
   }
 

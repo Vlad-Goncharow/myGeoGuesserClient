@@ -33,7 +33,7 @@ function PoinpointingModeControls() {
       playerGuess?.lat &&
       playerGuess.lng
     ) {
-      wsRef.handleGuess(
+      wsRef.handleGuessPinpointing(
         roomId,
         type,
         currentUser.id,

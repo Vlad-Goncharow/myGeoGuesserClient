@@ -1,4 +1,3 @@
-import { GAMEMODS } from '@/config/constants'
 import { IUser } from '@/redux/slices/AuthSlice/types'
 import { GameSettingsType } from '@/redux/slices/GameConfig/types'
 import { TemporaryUserType } from '@/redux/slices/TemporaryUserSlice/types/TemporaryUserTypes'
@@ -64,6 +63,7 @@ export class WebSocketService {
       )
     }
   }
+
   updateRoomSetttings(roomId: string, settings: GameSettingsType) {
     if (this.socket && roomId) {
       this.socket.send(
@@ -77,7 +77,8 @@ export class WebSocketService {
       )
     }
   }
-  handleGuess(
+
+  handleGuessPinpointing(
     roomId: string,
     type: string,
     userId: number | string,
@@ -87,7 +88,7 @@ export class WebSocketService {
     if (this.socket && roomId) {
       this.socket.send(
         JSON.stringify({
-          event: 'finishGuess',
+          event: 'handleGuess',
           payload: {
             roomId,
             type,
@@ -99,7 +100,8 @@ export class WebSocketService {
       )
     }
   }
-  addCountryGuess(
+  
+  handleGuessCountry(
     roomId: string,
     userId: number | string,
     country: string,
@@ -110,7 +112,7 @@ export class WebSocketService {
     if (this.socket && roomId) {
       this.socket.send(
         JSON.stringify({
-          event: 'addCountryGuess',
+          event: 'handleGuess',
           payload: {
             roomId,
             userId,
@@ -123,11 +125,12 @@ export class WebSocketService {
       )
     }
   }
-  endCountryModeRound(roomId: string, round: number) {
+
+  endRound(roomId: string, round: number) {
     if (this.socket && roomId) {
       this.socket.send(
         JSON.stringify({
-          event: 'endCountryModeRound',
+          event: 'endRound',
           payload: {
             roomId,
             round,
@@ -136,19 +139,7 @@ export class WebSocketService {
       )
     }
   }
-  endPoinpointingModeRound(roomId: string, round: number) {
-    if (this.socket && roomId) {
-      this.socket.send(
-        JSON.stringify({
-          event: 'endPoinpointingModeRound',
-          payload: {
-            roomId,
-            round,
-          },
-        })
-      )
-    }
-  }
+  
   backToRoom(roomId: string) {
     if (this.socket && roomId) {
       this.socket.send(
@@ -161,6 +152,7 @@ export class WebSocketService {
       )
     }
   }
+
   setTargetCords(roomId: string, round: number, cords: coordinatesType) {
     if (this.socket && roomId) {
       this.socket.send(
@@ -175,6 +167,24 @@ export class WebSocketService {
       )
     }
   }
+
+  setTargetPoinpointing(
+    roomId: string,
+    round: number,
+  ) {
+    if (this.socket && roomId) {
+      this.socket.send(
+        JSON.stringify({
+          event: 'setTarget',
+          payload: {
+            roomId,
+            round,
+          },
+        })
+      )
+    }
+  }
+
   setTargetCountry(
     roomId: string,
     round: number,
@@ -184,7 +194,7 @@ export class WebSocketService {
     if (this.socket && roomId) {
       this.socket.send(
         JSON.stringify({
-          event: 'setTargetCountry',
+          event: 'setTarget',
           payload: {
             roomId,
             round,
@@ -195,25 +205,12 @@ export class WebSocketService {
       )
     }
   }
-  gameEnd(roomId: string, mode: string) {
-    if (mode === GAMEMODS.COUNTRYGUESSR) {
-      if (this.socket && roomId) {
-        this.socket.send(
-          JSON.stringify({
-            event: 'endCountyModeGame',
-            payload: {
-              roomId,
-            },
-          })
-        )
-      }
 
-      return
-    }
+  gameEnd(roomId: string) {
     if (this.socket && roomId) {
       this.socket.send(
         JSON.stringify({
-          event: 'gameEnd',
+          event: 'endGame',
           payload: {
             roomId,
           },

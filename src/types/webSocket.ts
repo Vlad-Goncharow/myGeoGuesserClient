@@ -11,7 +11,7 @@ import {
 export type WebSocketEvent =
   | { event: 'newUserJoined'; payload: NewUserJoinedPayloadType }
   | { event: 'roundsUpdate'; payload: RoundsUpdatePayloadType }
-  | { event: 'gameStarted' }
+  | { event: 'gameStarted', }
   | { event: 'setedTargetCords'; payload: SetedTargetCordsPayloadType }
   | {
       event: 'endedPoinpointingModeRound'
@@ -25,18 +25,21 @@ export type WebSocketEvent =
   | { event: 'settingsUpdated'; payload: SettingsUpdatePayloadType }
   | { event: 'roomClosed'; payload: RoomClosedPayload }
   | { event: 'setedTargetCountry'; payload: SetedTargetCountryPayloadType }
+  | { event: 'setedTargetPoinpointing'; payload: SetedTargetPoinointingPayloadType }
   | { event: 'addedCountryGuess'; payload: AddedCountryGuessPayloadType }
   | { event: 'endCountryModeRound'; payload: EndCountryModeRoundPayloadType }
-  | { event: 'startedNewRound' }
+  | { event: 'startedNewRound', }
   | { event: 'endedCountryModeGame'; payload: EndedCountryModeGamePayloadType }
 
 export type NewUserJoinedPayloadType = {
-  isGameStarted: boolean
-  admin: number
-  roundsPlayed: number
+  gameState: {
+    isGameStarted: boolean
+    adminId: number
+    roundsPlayed: number
+    targetCoordinates: coordinatesType | null
+  }
   users: IUser[]
   user: IUser
-  targetCoordinates: coordinatesType | null
   settings: GameSettingsType
 }
 export type RoundsUpdatePayloadType = {
@@ -46,18 +49,21 @@ export type SetedTargetCordsPayloadType = {
   targetCoordinates: coordinatesType
 }
 export type SetedTargetCountryPayloadType = {
-  targetCountries: targetCountriesType
+  target: targetCountriesType
+}
+export type SetedTargetPoinointingPayloadType = {
+  target: roundTargetsType | null
 }
 export type AddedCountryGuessPayloadType = {
-  selectedCountries: countryModePlayersGuessesType[]
+  guesses: countryModePlayersGuessesType[]
 }
 export type EndCountryModeRoundPayloadType = {
-  selectedCountries: countryModePlayersGuessesType[]
+  guesses: countryModePlayersGuessesType[]
   roundsPlayed: number
 }
 export type EndedCountryModeGamePayloadType = {
-  selectedCountries: countryModePlayersGuessesType[]
-  targetCountries: targetCountriesType[]
+  guesses: countryModePlayersGuessesType[]
+  targets: targetCountriesType[]
 }
 
 export type AllPlayersFinishedPayloadType = {
@@ -66,7 +72,7 @@ export type AllPlayersFinishedPayloadType = {
 }
 export type GameEndedPayloadType = {
   guesses: playersCoordinatesGuessType[]
-  targetCoordinates: roundTargetsType[]
+  targets: roundTargetsType[]
 }
 export type UserLeaveSuccessPayloadType = {
   userLeave: IUser

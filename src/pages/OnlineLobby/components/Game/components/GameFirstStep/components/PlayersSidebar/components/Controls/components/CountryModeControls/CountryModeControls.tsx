@@ -71,7 +71,7 @@ function CountryModeControls() {
 
     const time = (performance.now() - guessTime) / 1000
 
-    wsRef.addCountryGuess(
+    wsRef.handleGuessCountry(
       roomId,
       currentUser.id,
       countryMode.local.playerGuesses.country,

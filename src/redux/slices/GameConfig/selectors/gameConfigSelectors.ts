@@ -8,6 +8,10 @@ export const isGameModeCountries = createSelector(
   [getGameConfig],
   (config) => config.settings.gameMode === GAMEMODS.COUNTRYGUESSR
 )
+export const isGameModePoinpointing = createSelector(
+  [getGameConfig],
+  (config) => config.settings.gameMode === GAMEMODS.POINPOINTING
+)
 
 export const checkIsPoinpointingMedium = createSelector(
   [getGameConfig],
