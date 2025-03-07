@@ -37,7 +37,7 @@ function useRandomCords() {
     const streetViewService = new window.google.maps.StreetViewService()
 
     streetViewService.getPanorama(
-      { location, radius: 500 },
+      { location, radius: 500, sources: [window.google.maps.StreetViewSource.GOOGLE]},
       async (result, status) => {
         if (status === 'OK') {
           if (result && result.location && result.location.latLng) {
