@@ -90,7 +90,7 @@ const Countries: React.FC<CountriesPros> = ({ globeGlobeRef }) => {
       <animated.div style={{ ...animationProps }}>
         <div className={s.list}>
           {randomCountries.map((el: countriesListNamesType, i: number) => (
-            <div className={s.item}>
+            <div key={`${i}-${el.name}`} className={s.item}>
               Needed - <span onClick={() => goToCountry(el)}>{el.name}</span> _
               Choosen -{' '}
               <span onClick={() => goToCountry(choosenCountries[i])}>

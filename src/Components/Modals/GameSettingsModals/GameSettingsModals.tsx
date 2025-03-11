@@ -22,7 +22,7 @@ function GameSettingsModals() {
       <GameSettingsWrapper>
         <>
           <GameCountries isOpen={gameCountriesModal} />
-          <GameSettings isOpen={gameSettingsModal} />
+          <GameSettings />
         </>
       </GameSettingsWrapper>
     </div>

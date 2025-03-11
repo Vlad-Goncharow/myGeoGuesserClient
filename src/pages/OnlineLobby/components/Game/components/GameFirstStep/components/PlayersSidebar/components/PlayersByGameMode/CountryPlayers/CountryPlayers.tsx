@@ -53,7 +53,7 @@ function CountryPlayers() {
                       c.country !== countryMode.global.targetCountry!.country
                   )
                   .map((el) => (
-                    <div className={s.countries__country}>
+                    <div key={el.code} className={s.countries__country}>
                       <img
                         src={`http://purecatamphetamine.github.io/country-flag-icons/3x2/${el.code}.svg`}
                       />

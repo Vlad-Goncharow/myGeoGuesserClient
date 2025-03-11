@@ -1,6 +1,5 @@
 declare module 'axios'
 declare module 'classNames'
 declare module 'dotenv'
-declare module 'countries-list'
 declare module 'd3-scale'
 declare module 'd3-scale-chromatic'

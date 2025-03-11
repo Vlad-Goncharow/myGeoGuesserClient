@@ -1,0 +1,27 @@
+.wrapper {
+  min-width: 220px;
+}
+
+.continent {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  cursor: pointer;
+
+  &__checkbox {
+    margin-right: 5px;
+  }
+
+  span {
+    display: block;
+    color: #fff;
+    font-weight: 500;
+    position: relative;
+  }
+
+  &:hover {
+    transition: all 0.3s ease-in;
+    background: #000;
+  }
+}

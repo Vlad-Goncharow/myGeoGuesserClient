@@ -1,6 +1,6 @@
 import { useAppSelector } from '@/hooks/useAppSelector'
 import { getModals } from '@/redux/slices/Modals/selectors/modalsSelectors'
-import { animated, easings, useSpring } from '@react-spring/web'
+import { animated, useSpring } from '@react-spring/web'
 import React from 'react'
 import s from './GameSettingsWrapper.module.scss'
 
@@ -13,13 +13,21 @@ const GameSettingsWrapper: React.FC<GameSettingsWrapperProps> = ({
 }) => {
   const { gameCountriesModal, gameSettingsModal } = useAppSelector(getModals)
   const springStyles = useSpring({
-    from: { scale: 0, y: '-50%', x: '-50%' },
-    to: {
-      scale: gameCountriesModal || gameSettingsModal ? 1 : 0,
+    from: {
+      scale: 0.5,
       y: '-50%',
       x: '-50%',
+      zIndex: -1,
+      opacity: 0,
     },
-    config: { duration: 300, easing: easings.easeInOutQuad },
+    to: {
+      scale: gameCountriesModal || gameSettingsModal ? 1 : 0.5,
+      y: '-50%',
+      x: '-50%',
+      zIndex: gameCountriesModal || gameSettingsModal ? 11 : -1,
+      opacity: gameCountriesModal || gameSettingsModal ? 1 : 0,
+    },
+    config: { duration: 100 },
   })
   return (
     <>

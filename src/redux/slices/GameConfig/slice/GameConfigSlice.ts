@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { countries, CountryMap } from '@/config/countries_bounds'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { GameConfigType } from '../types'
 
 const initialState: GameConfigType = {
@@ -8,6 +9,9 @@ const initialState: GameConfigType = {
     gameDiffcult: '',
     roundTime: 0,
     maxPlayers: 10,
+  },
+  countriesSettings: {
+    countries: countries,
   },
 }
 
@@ -19,12 +23,17 @@ const gameConfigSlice = createSlice({
       state.settings = action.payload
     },
 
+    setCounties: (state, action: PayloadAction<CountryMap>) => {
+      state.countriesSettings.countries = action.payload
+    },
+
     clearAll: (state) => {
       state.settings.rounds = 0
       state.settings.gameDiffcult = null
       state.settings.gameMode = ''
       state.settings.maxPlayers = 10
       state.settings.roundTime = 180
+      state.countriesSettings.countries = countries
     },
   },
 })

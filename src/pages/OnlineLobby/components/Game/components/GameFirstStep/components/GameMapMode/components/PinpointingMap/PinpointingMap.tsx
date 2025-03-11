@@ -96,7 +96,7 @@ export function PinpointingMap() {
       const mapInstance = new window.google.maps.Map(
         mapRef.current as HTMLDivElement,
         {
-          center: targetCoordinates,
+          center: { lat: 0, lng: 0 },
           zoom: 0.4,
           zoomControl: false,
           streetViewControl: false,

@@ -42,8 +42,6 @@ function Controls() {
         wsRef.startGame(roomId)
         wsRef.setTargetCords(roomId, 1, targetCords)
       }
-      console.log(isModePinpointing)
-      console.log(targetCountry)
 
       if (isModePinpointing && wsRef && wsRef.socket && roomId) {
         wsRef.setTargetPinpointing(roomId, 1)
