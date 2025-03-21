@@ -2,19 +2,19 @@ import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import s from './LobbyId.module.scss'
+import s from './RoomId.module.scss'
 
-function LobbyId() {
+export const RoomId = () => {
   const { roomId } = useParams()
 
-  const copyLobbyId = () => {
+  const copyRoomId = () => {
     navigator.clipboard.writeText(
       `${import.meta.env.VITE_CLIENT_URL}/join/${roomId}`
     )
   }
 
   return (
-    <div onClick={copyLobbyId} className={s.id}>
+    <div onClick={copyRoomId} className={s.id}>
       <div className={s.id__wrapper}>
         <label htmlFor=''>Join URL</label>
         <input type='text' readOnly value={roomId} className={s.id__value} />
@@ -26,5 +26,3 @@ function LobbyId() {
     </div>
   )
 }
-
-export default LobbyId

@@ -1,25 +1,20 @@
 import PlateBtn from '@/Components/PlateBtn/PlateBtn'
-import { UseClickOutside } from '../../../../../../../../hooks/UseClickOutside'
-import LobbyId from '../../../../../Lobby/components/LobbyId/LobbyId'
-import { WebSocketContext } from '@/providers/WsProvider'
+import { RoomId } from '@/Components/RoomId/RoomId'
+import { useAppSelector } from '@/hooks/useAppSelector'
+import { UseClickOutside } from '@/hooks/UseClickOutside'
+import useGameControls from '@/hooks/useGameControls'
+import { getAuth } from '@/redux/slices/AuthSlice/selectors/authSelectors'
+import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
 import { faBars, faCompress, faExpand } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { animated, easings, useSpring } from '@react-spring/web'
-import React from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import s from './Sidebar.module.scss'
 import classNames from 'classnames'
-import { useAppSelector } from '@/hooks/useAppSelector'
-import { getAuth } from '@/redux/slices/AuthSlice/selectors/authSelectors'
-import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
+import React from 'react'
+import s from './Sidebar.module.scss'
 
 function Sidebar() {
-  const wsRef = React.useContext(WebSocketContext)
-
   const { user } = useAppSelector(getAuth)
   const { roomAdminId } = useAppSelector(getGameState)
-
-  const navigate = useNavigate()
 
   const sidebarRef = React.useRef<HTMLDivElement | null>(null)
   UseClickOutside(sidebarRef, () => setIsOpen(false))
@@ -27,7 +22,7 @@ function Sidebar() {
   const [isOpen, setIsOpen] = React.useState(false)
   const [isFullScreen, setIsFullScreen] = React.useState(false)
 
-  const { roomId } = useParams()
+  const { backToMenu, backToRoom } = useGameControls()
 
   function toggleFullscreen() {
     const isFullscreen = document.fullscreenElement || false
@@ -54,19 +49,6 @@ function Sidebar() {
     }
   }
 
-  const backToRoom = () => {
-    if (wsRef && wsRef.socket && roomId) {
-      wsRef.backToRoom(roomId)
-    }
-  }
-
-  const backToMainMenu = () => {
-    if (wsRef && wsRef.socket) {
-      wsRef.socket.close()
-      navigate('/')
-    }
-  }
-
   //animation init
   const { left } = useSpring({
     from: { left: '-100%' },
@@ -87,12 +69,12 @@ function Sidebar() {
               left: left,
             }}
           >
-            <LobbyId />
+            <RoomId />
             <PlateBtn
               plate='QM'
               text='Quit to Main Menu'
               url={null}
-              handleClick={backToMainMenu}
+              handleClick={backToMenu}
               className={classNames(s.sidebar__btn, s.sidebar__btn_leave)}
             />
             {user && user.id === roomAdminId && (

@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useAppDispatch } from './useAppDispatch'
 import { useAppSelector } from './useAppSelector'
-
+import { GameType } from '@/types/roomTypes'
 function useCreateRoom() {
   const dispatch = useAppDispatch()
 
@@ -15,21 +15,22 @@ function useCreateRoom() {
 
   const navigate = useNavigate()
 
-  const createOnlineLobby = () => {
+  //create room by type | quick-match | online-lobby
+  const createRoomByType = (type: GameType) => {
     if (wsRef) {
       wsRef.connect()
 
       if (wsRef.socket && user) {
         wsRef.socket.onopen = () => {
           dispatch(gameActions.setIsConnected(true))
-          wsRef.createRoom(user.id)
+          wsRef.createRoom(user.id, type)
         }
 
         wsRef.socket.onmessage = (e) => {
           const data = JSON.parse(e.data)
 
-          if (data.event === 'roomCreated') {
-            navigate(`/online-lobby/${data.payload.roomId}`)
+          if (data.event === `${type}-created`) {
+            navigate(`/${type}/${data.payload.roomId}`)
 
             toast.success('Room created', {
               position: 'bottom-right',
@@ -47,7 +48,7 @@ function useCreateRoom() {
     }
   }
 
-  return { createOnlineLobby }
+  return { createRoomByType }
 }
 
 export default useCreateRoom

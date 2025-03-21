@@ -11,7 +11,11 @@ function Footer() {
 
   const location = useLocation()
 
-  if (isGameStart || location.pathname.includes('/online-lobby/')) {
+  if (
+    isGameStart ||
+    location.pathname.includes('/online-lobby/') ||
+    location.pathname.includes('/quick-match/')
+  ) {
     return <div></div>
   }
 

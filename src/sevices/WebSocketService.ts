@@ -2,6 +2,7 @@ import { IUser } from '@/redux/slices/AuthSlice/types'
 import { GameSettingsType } from '@/redux/slices/GameConfig/types'
 import { TemporaryUserType } from '@/redux/slices/TemporaryUserSlice/types/TemporaryUserTypes'
 import { coordinatesType } from '@/types/coordinates'
+import { GameType } from '@/types/roomTypes'
 import { WebSocketEvent } from '@/types/webSocket'
 export class WebSocketService {
   socket: WebSocket | null = null
@@ -34,9 +35,14 @@ export class WebSocketService {
     }
   }
 
-  createRoom(userId: number) {
+  createRoom(userId: number, type: GameType) {
     if (this.socket) {
-      this.socket.send(JSON.stringify({ event: 'createRoom', admin: userId }))
+      this.socket.send(
+        JSON.stringify({
+          event: 'createRoom',
+          payload: { admin: userId, type },
+        })
+      )
     }
   }
 

@@ -10,7 +10,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import PlateBtn from '@/Components/PlateBtn/PlateBtn'
 import useCreateRoom from '@/hooks/useCreateRoom'
 
-// Тип для пропсов стрелок
 interface ArrowProps {
   onClick?: () => void
 }
@@ -42,7 +41,7 @@ function Carousel() {
     prevArrow: <PrevArrow />,
   }
 
-  const { createOnlineLobby } = useCreateRoom()
+  const { createRoomByType } = useCreateRoom()
 
   return (
     <div className={s.wrapper}>
@@ -55,7 +54,7 @@ function Carousel() {
                 plate='OL'
                 text='online lobby'
                 url={null}
-                handleClick={createOnlineLobby}
+                handleClick={() => createRoomByType('online-lobby')}
                 className={s.btn}
               />
             </div>
@@ -64,10 +63,10 @@ function Carousel() {
             <div className={s.item}>
               <img src={Slider1} alt='' />
               <PlateBtn
-                plate='OL'
-                text='online lobby'
+                plate='QM'
+                text='Quick match'
                 url={null}
-                handleClick={createOnlineLobby}
+                handleClick={() => createRoomByType('quick-match')}
                 className={s.btn}
               />
             </div>

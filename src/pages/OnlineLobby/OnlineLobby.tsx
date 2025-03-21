@@ -4,9 +4,9 @@ import useWebSocketHandler from '@/hooks/useWebSocketHandler'
 import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
 import React from 'react'
 import UseJoinRoom from '../../hooks/UseJoinRoom'
-import Game from './components/Game/Game'
 import Lobby from './components/Lobby/Lobby'
 import s from './OnlineLobby.module.scss'
+import Game from '@/Components/Game/Game'
 
 function OnlineLobby() {
   const { isGameStart } = useAppSelector(getGameState)
