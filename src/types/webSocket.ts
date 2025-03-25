@@ -29,6 +29,7 @@ export type WebSocketEvent =
   | { event: 'endCountryModeRound'; payload: EndCountryModeRoundPayloadType }
   | { event: 'startedNewRound' }
   | { event: 'endedCountryModeGame'; payload: EndedCountryModeGamePayloadType }
+  | { event: 'updatedRoundTimeElapsed'; payload: updatedRoundTimeElapsed }
 
 export type NewUserJoinedPayloadType = {
   gameState: {
@@ -90,6 +91,9 @@ export type RoomClosedPayload = {
 
 export type SettingsUpdatePayloadType = {
   settings: GameSettingsType
+}
+export type updatedRoundTimeElapsed = {
+  roundTimeElapsed: number
 }
 
 type Room = {

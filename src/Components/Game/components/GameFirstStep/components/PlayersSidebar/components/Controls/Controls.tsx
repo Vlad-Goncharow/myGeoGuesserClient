@@ -4,12 +4,12 @@ import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSel
 import React from 'react'
 import CountryModeControls from './components/CountryModeControls/CountryModeControls'
 import s from './Controls.module.scss'
-import useGameTime from '@/hooks/useGameTime'
 import { PinpointingModeControls } from './components/PinpointingModeControls/PinpointingModeControls'
+import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
 
 function Controls() {
   const { settings } = useAppSelector(getGameConfig)
-  const { timeElapsed } = useGameTime()
+  const {roundTimeElapsed} = useAppSelector(getGameState)
 
   const returnByMode = () => {
     switch (settings.gameMode) {
@@ -26,7 +26,7 @@ function Controls() {
       <div className={s.timer}>
         <span>time</span>
         <span>
-          {timeElapsed} / {settings.roundTime}
+          {roundTimeElapsed} / {settings.roundTime}
         </span>
       </div>
     </div>

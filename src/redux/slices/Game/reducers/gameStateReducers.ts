@@ -47,6 +47,13 @@ export const gameStateReducers = {
     state.gameState.isGameStart = action.payload
   },
 
+  setRoundTimeElapsed: (
+    state: GameInitialState,
+    action: PayloadAction<number>
+  ) => {
+    state.gameState.roundTimeElapsed = action.payload
+  },
+
   backUsersToRoom: (state: GameInitialState) => {
     state.gameState.isRoundStart = false
     state.gameState.isRoundEnd = false

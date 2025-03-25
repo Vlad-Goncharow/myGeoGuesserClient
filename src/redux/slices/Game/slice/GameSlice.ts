@@ -28,6 +28,7 @@ const initialState: GameInitialState = {
     isRoundStart: false,
     roundsPlayed: 0,
     targetCoordinates: null,
+    roundTimeElapsed: 0,
   },
   pinpointingMode: {
     playerGuess: null,

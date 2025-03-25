@@ -125,6 +125,9 @@ export function handleWebSocketEvents(
     case 'settingsUpdated':
       dispatch(gameConfigActions.updateSettings(data.payload.settings))
       break
+    case 'updatedRoundTimeElapsed':
+      dispatch(gameActions.setRoundTimeElapsed(data.payload.roundTimeElapsed))
+      break
 
     case 'roomClosed':
       toast.info(data.payload.message, {

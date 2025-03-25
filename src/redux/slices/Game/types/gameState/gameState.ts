@@ -12,4 +12,5 @@ export interface gameStateType {
   isRoundEnd: boolean
   isRoundStart: boolean
   targetCoordinates: coordinatesType | null
+  roundTimeElapsed: number
 }
