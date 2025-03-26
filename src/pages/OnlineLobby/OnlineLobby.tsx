@@ -9,13 +9,17 @@ import s from './OnlineLobby.module.scss'
 import Game from '@/Components/Game/Game'
 
 function OnlineLobby() {
-  const { isGameStart } = useAppSelector(getGameState)
+  const { isGameStart, isRoomFull } = useAppSelector(getGameState)
 
   useExitConfirmation()
   useWebSocketHandler()
   UseJoinRoom()
 
-  return <div className={s.wrapper}>{isGameStart ? <Game /> : <Lobby />}</div>
+  return (
+    <div className={s.wrapper}>
+      {!isRoomFull && (isGameStart ? <Game /> : <Lobby />)}
+    </div>
+  )
 }
 
 export default OnlineLobby

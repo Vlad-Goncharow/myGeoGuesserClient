@@ -7,6 +7,9 @@ export const gameStateReducers = {
   setIsConnected: (state: GameInitialState, action: PayloadAction<boolean>) => {
     state.gameState.isConnected = action.payload
   },
+  setIsRoomFull: (state: GameInitialState, action: PayloadAction<boolean>) => {
+    state.gameState.isRoomFull = action.payload
+  },
 
   setRoomAdminId: (
     state: GameInitialState,

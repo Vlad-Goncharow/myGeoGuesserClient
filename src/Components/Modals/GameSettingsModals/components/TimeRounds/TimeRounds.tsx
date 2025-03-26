@@ -3,15 +3,17 @@ import { WebSocketContext } from '@/providers/WsProvider'
 import { getGameConfig } from '@/redux/slices/GameConfig/selectors/gameConfigSelectors'
 import { GAMESETTINGS } from '../../../../../config/constants'
 import { formatTime } from '@/utils/formatTime'
-import { faClock } from '@fortawesome/free-solid-svg-icons'
+import { faClock, faUsers } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import debounce from 'lodash/debounce'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import s from './TimeRounds.module.scss'
 import { RoundTimeType } from '@/redux/slices/GameConfig/types'
+import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
 
 function TimeRounds() {
+  const {players} = useAppSelector(getGameState)
   const { settings } = useAppSelector(getGameConfig)
   const wsRef = React.useContext(WebSocketContext)
   const { roomId } = useParams()
@@ -87,6 +89,20 @@ function TimeRounds() {
     }
   }
 
+  const onChangeMaxPlayers = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const targetPlayers = Number(e.target.value)
+    if (
+      wsRef?.socket &&
+      roomId &&
+      targetPlayers >= players.length &&
+      targetPlayers <= GAMESETTINGS.MAXPLAYERS
+    ) {
+      wsRef.updateRoomSetttings(roomId, {
+        ...settings,
+        maxPlayers: targetPlayers,
+      })
+    }
+  }
   return (
     <div className={s.wrapper}>
       <div className={s.rounds}>
@@ -134,6 +150,17 @@ function TimeRounds() {
           </button>
           <button onClick={handleInfinityTime}>♾️</button>
         </div>
+      </div>
+      <div className={s.players}>
+        <FontAwesomeIcon icon={faUsers} />
+        <input 
+          type="number" 
+          onChange={onChangeMaxPlayers} 
+          min={players.length} 
+          max={10} 
+          value={settings.maxPlayers} 
+          className={s.players__input}
+        />
       </div>
     </div>
   )

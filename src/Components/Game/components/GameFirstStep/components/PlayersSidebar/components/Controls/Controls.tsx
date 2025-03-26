@@ -9,7 +9,7 @@ import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
 
 function Controls() {
   const { settings } = useAppSelector(getGameConfig)
-  const {roundTimeElapsed} = useAppSelector(getGameState)
+  const { roundTimeElapsed } = useAppSelector(getGameState)
 
   const returnByMode = () => {
     switch (settings.gameMode) {

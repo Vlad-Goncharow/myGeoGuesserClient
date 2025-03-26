@@ -29,7 +29,7 @@ function GameSettings() {
       <TimeRounds />
       <div className={s.header}>
         <span onClick={() => dispatch(modalsActions.toggleGameSettingsModal())}>
-          Open Full Setings
+          Open Full Settings
         </span>
       </div>
       <div className={s.items}>

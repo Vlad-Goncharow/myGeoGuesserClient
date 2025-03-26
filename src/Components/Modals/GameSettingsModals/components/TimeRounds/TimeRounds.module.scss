@@ -8,7 +8,7 @@
 .rounds {
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 45%;
 
   &__input {
     margin-right: 15px;
@@ -39,7 +39,7 @@
 .time {
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 45%;
 
   &__icon {
     width: 20px;
@@ -78,5 +78,26 @@
       font-size: 18px;
       font-weight: 700;
     }
+  }
+}
+
+.players {
+  display: flex;
+  align-items: center;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  padding: 0 10px;
+  width: 10%;
+
+  svg {
+    margin-right: 10px;
+  }
+
+  &__input {
+    padding: 10px 0;
+    background: transparent;
+    color: #fff;
+    width: 100%;
   }
 }

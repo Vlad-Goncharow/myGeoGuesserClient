@@ -18,6 +18,7 @@ export function handleWebSocketEvents(
       if (data.payload.gameState.isGameStarted) {
         dispatch(gameActions.startGame())
       }
+      dispatch(gameActions.setIsRoomFull(false))
       dispatch(gameActions.setRoomAdminId(data.payload.gameState.adminId))
       dispatch(gameActions.setPlayers(data.payload.users))
       dispatch(
@@ -127,6 +128,20 @@ export function handleWebSocketEvents(
       break
     case 'updatedRoundTimeElapsed':
       dispatch(gameActions.setRoundTimeElapsed(data.payload.roundTimeElapsed))
+      break
+    case 'RoomIsFull':
+      toast.error('Room is full', {
+        position: 'bottom-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+      })
+
+      navigate('/')
       break
 
     case 'roomClosed':
