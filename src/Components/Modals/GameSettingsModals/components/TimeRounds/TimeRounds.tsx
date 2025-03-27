@@ -13,7 +13,7 @@ import { RoundTimeType } from '@/redux/slices/GameConfig/types'
 import { getGameState } from '@/redux/slices/Game/selectors/gameSelectors'
 
 function TimeRounds() {
-  const {players} = useAppSelector(getGameState)
+  const { players } = useAppSelector(getGameState)
   const { settings } = useAppSelector(getGameConfig)
   const wsRef = React.useContext(WebSocketContext)
   const { roomId } = useParams()
@@ -153,12 +153,12 @@ function TimeRounds() {
       </div>
       <div className={s.players}>
         <FontAwesomeIcon icon={faUsers} />
-        <input 
-          type="number" 
-          onChange={onChangeMaxPlayers} 
-          min={players.length} 
-          max={10} 
-          value={settings.maxPlayers} 
+        <input
+          type='number'
+          onChange={onChangeMaxPlayers}
+          min={players.length}
+          max={10}
+          value={settings.maxPlayers}
           className={s.players__input}
         />
       </div>

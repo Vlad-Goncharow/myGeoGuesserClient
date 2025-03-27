@@ -31,17 +31,15 @@ export type WebSocketEvent =
   | { event: 'endedCountryModeGame'; payload: EndedCountryModeGamePayloadType }
   | { event: 'updatedRoundTimeElapsed'; payload: updatedRoundTimeElapsed }
   | { event: 'RoomIsFull' }
+  | { event: 'connected'; payload: connectedPayload }
 
 export type NewUserJoinedPayloadType = {
   gameState: {
     isGameStarted: boolean
     adminId: number
-    roundsPlayed: number
-    targetCoordinates: coordinatesType | null
   }
   users: IUser[]
   user: IUser
-  settings: GameSettingsType
 }
 export type RoundsUpdatePayloadType = {
   rounds: number
@@ -95,6 +93,17 @@ export type SettingsUpdatePayloadType = {
 }
 export type updatedRoundTimeElapsed = {
   roundTimeElapsed: number
+}
+export type connectedPayload = {
+  targetCoordinates: coordinatesType
+  targetCountry: targetCountriesType
+
+  gameState: {
+    isGameStarted: boolean
+    adminId: number
+    roundsPlayed: number
+  }
+  settings: GameSettingsType
 }
 
 type Room = {

@@ -93,7 +93,7 @@ function CountryModeControls() {
           [s.controls__btn_avaible]: countryMode.local.playerGuesses !== null,
           [s.controls__btn_disable]: !countryMode.local.playerGuesses,
           [s.controls__btn_correct]: isUserGuess === true,
-          [s.controls__btn_unCorrect]: userGuessesCount === 3,
+          [s.controls__btn_unCorrect]: userGuessesCount === 3 && !isUserGuess,
         })}
       />
     </div>

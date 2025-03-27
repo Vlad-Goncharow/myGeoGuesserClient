@@ -15,20 +15,8 @@ export function handleWebSocketEvents(
 
   switch (data.event) {
     case 'newUserJoined':
-      if (data.payload.gameState.isGameStarted) {
-        dispatch(gameActions.startGame())
-      }
       dispatch(gameActions.setIsRoomFull(false))
-      dispatch(gameActions.setRoomAdminId(data.payload.gameState.adminId))
       dispatch(gameActions.setPlayers(data.payload.users))
-      dispatch(
-        gameActions.setTargetCoortdinates(
-          data.payload.gameState.targetCoordinates
-        )
-      )
-      dispatch(gameActions.setRoundsPlayed(data.payload.gameState.roundsPlayed))
-
-      dispatch(gameConfigActions.updateSettings(data.payload.settings))
 
       if (
         data.payload.user.id !== data.payload.gameState.adminId &&
@@ -45,10 +33,29 @@ export function handleWebSocketEvents(
           theme: 'light',
         })
       }
-
       break
     case 'gameStarted':
       dispatch(gameActions.startGame())
+      break
+    case 'connected':
+      if (data.payload.gameState.isGameStarted) {
+        dispatch(gameActions.startGame())
+      }
+
+      dispatch(gameActions.setRoomAdminId(data.payload.gameState.adminId))
+      dispatch(gameActions.setRoundsPlayed(data.payload.gameState.roundsPlayed))
+      dispatch(gameConfigActions.updateSettings(data.payload.settings))
+
+      //targets
+      if (data.payload.targetCoordinates) {
+        dispatch(
+          gameActions.setTargetCoortdinates(data.payload.targetCoordinates)
+        )
+      }
+      if (data.payload.targetCountry) {
+        dispatch(gameActions.setTargetCountry(data.payload.targetCountry))
+      }
+
       break
 
     case 'setedTargetCords':
